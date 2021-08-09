@@ -31,21 +31,24 @@ namespace AntaresUtilsNetFramework
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
-            this.RecipePage = new System.Windows.Forms.TabPage();
-            this.CitiesBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ConnectButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.GetRecipeButton = new System.Windows.Forms.Button();
+            this.SendButton = new System.Windows.Forms.Button();
+            this.GeometryGridView = new System.Windows.Forms.DataGridView();
+            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecipesBox = new System.Windows.Forms.ComboBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.TypeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.XHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.YHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ZHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TotalHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GetGeometryButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.GetRecipesButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CitiesBox = new System.Windows.Forms.ComboBox();
+            this.RecipePage = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.GeometriesPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -56,44 +59,124 @@ namespace AntaresUtilsNetFramework
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(776, 426);
+            this.tabControl1.Size = new System.Drawing.Size(751, 426);
             this.tabControl1.TabIndex = 0;
             // 
             // GeometriesPage
             // 
-            this.GeometriesPage.Controls.Add(this.listView1);
+            this.GeometriesPage.Controls.Add(this.SendButton);
+            this.GeometriesPage.Controls.Add(this.GeometryGridView);
             this.GeometriesPage.Controls.Add(this.RecipesBox);
-            this.GeometriesPage.Controls.Add(this.GetRecipeButton);
+            this.GeometriesPage.Controls.Add(this.GetGeometryButton);
             this.GeometriesPage.Controls.Add(this.label2);
-            this.GeometriesPage.Controls.Add(this.ConnectButton);
+            this.GeometriesPage.Controls.Add(this.GetRecipesButton);
             this.GeometriesPage.Controls.Add(this.label1);
             this.GeometriesPage.Controls.Add(this.CitiesBox);
             this.GeometriesPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GeometriesPage.Location = new System.Drawing.Point(4, 29);
             this.GeometriesPage.Name = "GeometriesPage";
             this.GeometriesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.GeometriesPage.Size = new System.Drawing.Size(768, 393);
+            this.GeometriesPage.Size = new System.Drawing.Size(743, 393);
             this.GeometriesPage.TabIndex = 0;
             this.GeometriesPage.Text = "Aggregation Geometries";
             this.GeometriesPage.UseVisualStyleBackColor = true;
             // 
-            // RecipePage
+            // SendButton
             // 
-            this.RecipePage.Location = new System.Drawing.Point(4, 29);
-            this.RecipePage.Name = "RecipePage";
-            this.RecipePage.Padding = new System.Windows.Forms.Padding(3);
-            this.RecipePage.Size = new System.Drawing.Size(768, 393);
-            this.RecipePage.TabIndex = 1;
-            this.RecipePage.Text = "Recipes";
-            this.RecipePage.UseVisualStyleBackColor = true;
+            this.SendButton.Location = new System.Drawing.Point(674, 107);
+            this.SendButton.Name = "SendButton";
+            this.SendButton.Size = new System.Drawing.Size(63, 258);
+            this.SendButton.TabIndex = 8;
+            this.SendButton.Text = "Send to DB";
+            this.SendButton.UseVisualStyleBackColor = true;
+            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
-            // CitiesBox
+            // GeometryGridView
             // 
-            this.CitiesBox.FormattingEnabled = true;
-            this.CitiesBox.Location = new System.Drawing.Point(77, 6);
-            this.CitiesBox.Name = "CitiesBox";
-            this.CitiesBox.Size = new System.Drawing.Size(121, 28);
-            this.CitiesBox.TabIndex = 0;
+            this.GeometryGridView.AllowUserToAddRows = false;
+            this.GeometryGridView.AllowUserToDeleteRows = false;
+            this.GeometryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GeometryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LineId,
+            this.ItemType,
+            this.X,
+            this.Y,
+            this.Z,
+            this.Total});
+            this.GeometryGridView.Location = new System.Drawing.Point(10, 107);
+            this.GeometryGridView.Name = "GeometryGridView";
+            this.GeometryGridView.Size = new System.Drawing.Size(644, 258);
+            this.GeometryGridView.TabIndex = 7;
+            // 
+            // LineId
+            // 
+            this.LineId.HeaderText = "LineId";
+            this.LineId.Name = "LineId";
+            this.LineId.ReadOnly = true;
+            // 
+            // ItemType
+            // 
+            this.ItemType.HeaderText = "ItemType";
+            this.ItemType.Name = "ItemType";
+            this.ItemType.ReadOnly = true;
+            // 
+            // X
+            // 
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            // 
+            // Y
+            // 
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // RecipesBox
+            // 
+            this.RecipesBox.FormattingEnabled = true;
+            this.RecipesBox.Location = new System.Drawing.Point(76, 50);
+            this.RecipesBox.Name = "RecipesBox";
+            this.RecipesBox.Size = new System.Drawing.Size(121, 28);
+            this.RecipesBox.TabIndex = 5;
+            // 
+            // GetGeometryButton
+            // 
+            this.GetGeometryButton.Location = new System.Drawing.Point(217, 50);
+            this.GetGeometryButton.Name = "GetGeometryButton";
+            this.GetGeometryButton.Size = new System.Drawing.Size(119, 28);
+            this.GetGeometryButton.TabIndex = 4;
+            this.GetGeometryButton.Text = "Get Geometry";
+            this.GetGeometryButton.UseVisualStyleBackColor = true;
+            this.GetGeometryButton.Click += new System.EventHandler(this.GetGeometryButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Recipe";
+            // 
+            // GetRecipesButton
+            // 
+            this.GetRecipesButton.Location = new System.Drawing.Point(217, 6);
+            this.GetRecipesButton.Name = "GetRecipesButton";
+            this.GetRecipesButton.Size = new System.Drawing.Size(119, 28);
+            this.GetRecipesButton.TabIndex = 2;
+            this.GetRecipesButton.Text = "Get recipes";
+            this.GetRecipesButton.UseVisualStyleBackColor = true;
+            this.GetRecipesButton.Click += new System.EventHandler(this.GetRecipesButton_Click);
             // 
             // label1
             // 
@@ -104,87 +187,36 @@ namespace AntaresUtilsNetFramework
             this.label1.TabIndex = 1;
             this.label1.Text = "City";
             // 
-            // ConnectButton
+            // CitiesBox
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(217, 6);
-            this.ConnectButton.Name = "ConnectButton";
-            this.ConnectButton.Size = new System.Drawing.Size(107, 28);
-            this.ConnectButton.TabIndex = 2;
-            this.ConnectButton.Text = "Connect";
-            this.ConnectButton.UseVisualStyleBackColor = true;
+            this.CitiesBox.FormattingEnabled = true;
+            this.CitiesBox.Location = new System.Drawing.Point(77, 6);
+            this.CitiesBox.Name = "CitiesBox";
+            this.CitiesBox.Size = new System.Drawing.Size(121, 28);
+            this.CitiesBox.TabIndex = 0;
             // 
-            // label2
+            // RecipePage
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Recipe";
-            // 
-            // GetRecipeButton
-            // 
-            this.GetRecipeButton.Location = new System.Drawing.Point(217, 50);
-            this.GetRecipeButton.Name = "GetRecipeButton";
-            this.GetRecipeButton.Size = new System.Drawing.Size(107, 28);
-            this.GetRecipeButton.TabIndex = 4;
-            this.GetRecipeButton.Text = "GetRecipe";
-            this.GetRecipeButton.UseVisualStyleBackColor = true;
-            // 
-            // RecipesBox
-            // 
-            this.RecipesBox.FormattingEnabled = true;
-            this.RecipesBox.Location = new System.Drawing.Point(76, 50);
-            this.RecipesBox.Name = "RecipesBox";
-            this.RecipesBox.Size = new System.Drawing.Size(121, 28);
-            this.RecipesBox.TabIndex = 5;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.TypeHeader,
-            this.XHeader,
-            this.YHeader,
-            this.ZHeader,
-            this.TotalHeader});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(10, 125);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(314, 249);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // TypeHeader
-            // 
-            this.TypeHeader.Text = "Type";
-            // 
-            // XHeader
-            // 
-            this.XHeader.Text = "X";
-            // 
-            // YHeader
-            // 
-            this.YHeader.Text = "Y";
-            // 
-            // ZHeader
-            // 
-            this.ZHeader.Text = "Z";
-            // 
-            // TotalHeader
-            // 
-            this.TotalHeader.Text = "Total";
+            this.RecipePage.Location = new System.Drawing.Point(4, 29);
+            this.RecipePage.Name = "RecipePage";
+            this.RecipePage.Padding = new System.Windows.Forms.Padding(3);
+            this.RecipePage.Size = new System.Drawing.Size(743, 393);
+            this.RecipePage.TabIndex = 1;
+            this.RecipePage.Text = "Recipes";
+            this.RecipePage.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(766, 450);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.GeometriesPage.ResumeLayout(false);
             this.GeometriesPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,18 +226,20 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage GeometriesPage;
         private System.Windows.Forms.TabPage RecipePage;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader TypeHeader;
-        private System.Windows.Forms.ColumnHeader XHeader;
-        private System.Windows.Forms.ColumnHeader YHeader;
-        private System.Windows.Forms.ColumnHeader ZHeader;
-        private System.Windows.Forms.ColumnHeader TotalHeader;
         private System.Windows.Forms.ComboBox RecipesBox;
-        private System.Windows.Forms.Button GetRecipeButton;
+        private System.Windows.Forms.Button GetGeometryButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button ConnectButton;
+        private System.Windows.Forms.Button GetRecipesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CitiesBox;
+        private System.Windows.Forms.DataGridView GeometryGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn X;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Y;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Z;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.Button SendButton;
     }
 }
 
