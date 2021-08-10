@@ -10,18 +10,21 @@ namespace AntaresUtilsNetFramework
     public class AntaresUtils
     {
         private SqlConnection connection;
+        private string _DBname;
         public bool IsConnected { get; private set; }
 
         /// <summary>
-        ////Соединение с БД 
+        /// Соединение с БД 
         /// </summary>
-        /// <param name="servername"></param>
-        public void Connect(string servername)
+        /// <param name="serverAdress"></param>
+        /// <param name="dBname"></param>
+        public void Connect(string serverAdress, string dBname)
         {
             Disconnect();
-            string connectionString = "Data Source=" + servername + ";Initial Catalog=AntaresTracking_QA;Persist Security Info=True;User ID=tav;Password=tav";
+            string connectionString = "Data Source=" + serverAdress + ";Initial Catalog=" + dBname+ ";Persist Security Info=True;User ID=tav;Password=tav";
             connection = new SqlConnection(connectionString);
             connection.Open();
+            _DBname = dBname;
             IsConnected = true;
         }
 
@@ -45,7 +48,7 @@ namespace AntaresUtilsNetFramework
             List<string> results = new List<string>();
             
             //Создаем запрос к БД
-            string cmdString = "SELECT [Id] FROM [AntaresTracking_QA].[dbo].[Recipe]";
+            string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[Recipe]";
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
@@ -68,7 +71,7 @@ namespace AntaresUtilsNetFramework
             List<RecipeGeometry> results = new List<RecipeGeometry>();
 
             //Создаем запрос к БД
-            string cmdString = string.Format("SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [AntaresTracking_QA].[dbo].[ItemTypeGeometry] where RecipeId = '{0}'",recipeId);
+            string cmdString = string.Format("SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{0}].[dbo].[ItemTypeGeometry] where RecipeId = '{1}'",_DBname, recipeId);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
@@ -97,10 +100,10 @@ namespace AntaresUtilsNetFramework
             foreach (RecipeGeometry r in recipeGeometries)
             {
                 //Создаем запрос к БД
-                string cmdString = string.Format("update [AntaresTracking_QA].[dbo].[ItemTypeGeometry] set X = {0}, Y = {1}, Z = {2} where RecipeId = '{3}' and LineID = {4} and ItemType = {5}",
-                    r.X,r.Y,r.Z,recipeId,r.LineId,r.ItemType);
+                string cmdString = string.Format("update [{0}].[dbo].[ItemTypeGeometry] set X = {1}, Y = {2}, Z = {3} where RecipeId = '{4}' and LineID = {5} and ItemType = {6}",
+                    _DBname, r.X,r.Y,r.Z,recipeId,r.LineId,r.ItemType);
                 SqlCommand cmd = new SqlCommand(cmdString, connection);
-                //cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 cmd.Dispose();
             }
         }

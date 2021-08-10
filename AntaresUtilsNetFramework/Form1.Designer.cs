@@ -33,12 +33,6 @@ namespace AntaresUtilsNetFramework
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.SendButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
-            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecipesBox = new System.Windows.Forms.ComboBox();
             this.GetGeometryButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,6 +40,12 @@ namespace AntaresUtilsNetFramework
             this.label1 = new System.Windows.Forms.Label();
             this.CitiesBox = new System.Windows.Forms.ComboBox();
             this.RecipePage = new System.Windows.Forms.TabPage();
+            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.GeometriesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
@@ -95,6 +95,9 @@ namespace AntaresUtilsNetFramework
             // 
             this.GeometryGridView.AllowUserToAddRows = false;
             this.GeometryGridView.AllowUserToDeleteRows = false;
+            this.GeometryGridView.AllowUserToResizeColumns = false;
+            this.GeometryGridView.AllowUserToResizeRows = false;
+            this.GeometryGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GeometryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GeometryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LineId,
@@ -105,41 +108,9 @@ namespace AntaresUtilsNetFramework
             this.Total});
             this.GeometryGridView.Location = new System.Drawing.Point(10, 107);
             this.GeometryGridView.Name = "GeometryGridView";
-            this.GeometryGridView.Size = new System.Drawing.Size(644, 258);
+            this.GeometryGridView.Size = new System.Drawing.Size(643, 258);
             this.GeometryGridView.TabIndex = 7;
-            // 
-            // LineId
-            // 
-            this.LineId.HeaderText = "LineId";
-            this.LineId.Name = "LineId";
-            this.LineId.ReadOnly = true;
-            // 
-            // ItemType
-            // 
-            this.ItemType.HeaderText = "ItemType";
-            this.ItemType.Name = "ItemType";
-            this.ItemType.ReadOnly = true;
-            // 
-            // X
-            // 
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            // 
-            // Y
-            // 
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            // 
-            // Z
-            // 
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
+            this.GeometryGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
             // 
             // RecipesBox
             // 
@@ -183,9 +154,9 @@ namespace AntaresUtilsNetFramework
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 20);
+            this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "City";
+            this.label1.Text = "Server";
             // 
             // CitiesBox
             // 
@@ -205,14 +176,55 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.Text = "Recipes";
             this.RecipePage.UseVisualStyleBackColor = true;
             // 
+            // LineId
+            // 
+            this.LineId.HeaderText = "LineId";
+            this.LineId.Name = "LineId";
+            this.LineId.ReadOnly = true;
+            this.LineId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ItemType
+            // 
+            this.ItemType.HeaderText = "ItemType";
+            this.ItemType.Name = "ItemType";
+            this.ItemType.ReadOnly = true;
+            this.ItemType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // X
+            // 
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Y
+            // 
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            this.Y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
+            this.Z.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 450);
+            this.ClientSize = new System.Drawing.Size(773, 450);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Antares utility by S.M.S.";
             this.tabControl1.ResumeLayout(false);
             this.GeometriesPage.ResumeLayout(false);
             this.GeometriesPage.PerformLayout();
@@ -233,13 +245,13 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CitiesBox;
         private System.Windows.Forms.DataGridView GeometryGridView;
+        private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemType;
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
-        private System.Windows.Forms.Button SendButton;
     }
 }
 
