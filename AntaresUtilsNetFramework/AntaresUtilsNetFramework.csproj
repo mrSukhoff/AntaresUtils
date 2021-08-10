@@ -7,7 +7,7 @@
     <ProjectGuid>{0B003F61-63BA-4BA6-B82E-BD51F598C063}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>AntaresUtilsNetFramework</RootNamespace>
-    <AssemblyName>AntaresUtilsNetFramework</AssemblyName>
+    <AssemblyName>AVUtility</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

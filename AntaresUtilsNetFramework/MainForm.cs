@@ -120,6 +120,8 @@ namespace AntaresUtilsNetFramework
         {
             if (GeometryGridView.Rows.Count == 0) return;
             List<RecipeGeometry> list = new List<RecipeGeometry>();
+            DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
+            if (result != DialogResult.OK) return;
             for (int i=0; i<GeometryGridView.Rows.Count; i++)
             {
                 var cells = GeometryGridView.Rows[i].Cells;
