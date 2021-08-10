@@ -38,6 +38,7 @@ namespace AntaresUtilsNetFramework
                 if (connection != null)
                 {
                     connection.Close();
+                    _DBname = null;
                     IsConnected = false;
                 }
             }
