@@ -29,7 +29,7 @@ namespace AntaresUtilsNetFramework
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.MainTabControl = new System.Windows.Forms.TabControl();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.SendButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
@@ -44,23 +44,37 @@ namespace AntaresUtilsNetFramework
             this.label2 = new System.Windows.Forms.Label();
             this.GetRecipesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.CitiesBox = new System.Windows.Forms.ComboBox();
+            this.GeometryServerBox = new System.Windows.Forms.ComboBox();
             this.RecipePage = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.RecipeGridView = new System.Windows.Forms.DataGridView();
+            this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GMIDBox = new System.Windows.Forms.ComboBox();
+            this.GetRecipeListButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.GetGMIDsButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.RecipesServerBox = new System.Windows.Forms.ComboBox();
+            this.MainTabControl.SuspendLayout();
             this.GeometriesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
+            this.RecipePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RecipeGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // MainTabControl
             // 
-            this.tabControl1.Controls.Add(this.GeometriesPage);
-            this.tabControl1.Controls.Add(this.RecipePage);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(751, 426);
-            this.tabControl1.TabIndex = 0;
+            this.MainTabControl.Controls.Add(this.GeometriesPage);
+            this.MainTabControl.Controls.Add(this.RecipePage);
+            this.MainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MainTabControl.Location = new System.Drawing.Point(12, 12);
+            this.MainTabControl.Name = "MainTabControl";
+            this.MainTabControl.SelectedIndex = 0;
+            this.MainTabControl.Size = new System.Drawing.Size(751, 426);
+            this.MainTabControl.TabIndex = 0;
             // 
             // GeometriesPage
             // 
@@ -71,7 +85,7 @@ namespace AntaresUtilsNetFramework
             this.GeometriesPage.Controls.Add(this.label2);
             this.GeometriesPage.Controls.Add(this.GetRecipesButton);
             this.GeometriesPage.Controls.Add(this.label1);
-            this.GeometriesPage.Controls.Add(this.CitiesBox);
+            this.GeometriesPage.Controls.Add(this.GeometryServerBox);
             this.GeometriesPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GeometriesPage.Location = new System.Drawing.Point(4, 29);
             this.GeometriesPage.Name = "GeometriesPage";
@@ -184,7 +198,7 @@ namespace AntaresUtilsNetFramework
             this.GetRecipesButton.Name = "GetRecipesButton";
             this.GetRecipesButton.Size = new System.Drawing.Size(119, 28);
             this.GetRecipesButton.TabIndex = 2;
-            this.GetRecipesButton.Text = "Get recipes";
+            this.GetRecipesButton.Text = "Get Recipes";
             this.GetRecipesButton.UseVisualStyleBackColor = true;
             this.GetRecipesButton.Click += new System.EventHandler(this.GetRecipesButton_Click);
             // 
@@ -197,16 +211,23 @@ namespace AntaresUtilsNetFramework
             this.label1.TabIndex = 1;
             this.label1.Text = "Server";
             // 
-            // CitiesBox
+            // GeometryServerBox
             // 
-            this.CitiesBox.FormattingEnabled = true;
-            this.CitiesBox.Location = new System.Drawing.Point(77, 6);
-            this.CitiesBox.Name = "CitiesBox";
-            this.CitiesBox.Size = new System.Drawing.Size(121, 28);
-            this.CitiesBox.TabIndex = 0;
+            this.GeometryServerBox.FormattingEnabled = true;
+            this.GeometryServerBox.Location = new System.Drawing.Point(77, 6);
+            this.GeometryServerBox.Name = "GeometryServerBox";
+            this.GeometryServerBox.Size = new System.Drawing.Size(121, 28);
+            this.GeometryServerBox.TabIndex = 0;
             // 
             // RecipePage
             // 
+            this.RecipePage.Controls.Add(this.RecipeGridView);
+            this.RecipePage.Controls.Add(this.GMIDBox);
+            this.RecipePage.Controls.Add(this.GetRecipeListButton);
+            this.RecipePage.Controls.Add(this.label4);
+            this.RecipePage.Controls.Add(this.GetGMIDsButton);
+            this.RecipePage.Controls.Add(this.label3);
+            this.RecipePage.Controls.Add(this.RecipesServerBox);
             this.RecipePage.Location = new System.Drawing.Point(4, 29);
             this.RecipePage.Name = "RecipePage";
             this.RecipePage.Padding = new System.Windows.Forms.Padding(3);
@@ -215,27 +236,129 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.Text = "Recipes";
             this.RecipePage.UseVisualStyleBackColor = true;
             // 
+            // RecipeGridView
+            // 
+            this.RecipeGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RecipeGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.RecipeID,
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.RecipeGridView.Location = new System.Drawing.Point(10, 87);
+            this.RecipeGridView.Name = "RecipeGridView";
+            this.RecipeGridView.Size = new System.Drawing.Size(727, 196);
+            this.RecipeGridView.TabIndex = 9;
+            // 
+            // RecipeID
+            // 
+            this.RecipeID.HeaderText = "RecipeID";
+            this.RecipeID.Name = "RecipeID";
+            this.RecipeID.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "LideID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "LineName";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 200;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Pakages in Case";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Cases on Pallet";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // GMIDBox
+            // 
+            this.GMIDBox.FormattingEnabled = true;
+            this.GMIDBox.Location = new System.Drawing.Point(76, 50);
+            this.GMIDBox.Name = "GMIDBox";
+            this.GMIDBox.Size = new System.Drawing.Size(121, 28);
+            this.GMIDBox.TabIndex = 8;
+            // 
+            // GetRecipeListButton
+            // 
+            this.GetRecipeListButton.Location = new System.Drawing.Point(217, 50);
+            this.GetRecipeListButton.Name = "GetRecipeListButton";
+            this.GetRecipeListButton.Size = new System.Drawing.Size(119, 28);
+            this.GetRecipeListButton.TabIndex = 7;
+            this.GetRecipeListButton.Text = "Get Recipes";
+            this.GetRecipeListButton.UseVisualStyleBackColor = true;
+            this.GetRecipeListButton.Click += new System.EventHandler(this.GetRecipeListButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "GMID";
+            // 
+            // GetGMIDsButton
+            // 
+            this.GetGMIDsButton.Location = new System.Drawing.Point(217, 6);
+            this.GetGMIDsButton.Name = "GetGMIDsButton";
+            this.GetGMIDsButton.Size = new System.Drawing.Size(119, 28);
+            this.GetGMIDsButton.TabIndex = 5;
+            this.GetGMIDsButton.Text = "Get GMIDs";
+            this.GetGMIDsButton.UseVisualStyleBackColor = true;
+            this.GetGMIDsButton.Click += new System.EventHandler(this.GetGMIDsButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Server";
+            // 
+            // RecipesServerBox
+            // 
+            this.RecipesServerBox.FormattingEnabled = true;
+            this.RecipesServerBox.Location = new System.Drawing.Point(77, 6);
+            this.RecipesServerBox.Name = "RecipesServerBox";
+            this.RecipesServerBox.Size = new System.Drawing.Size(121, 28);
+            this.RecipesServerBox.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 450);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.MainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Antares Vision utility by S.M.S.";
-            this.tabControl1.ResumeLayout(false);
+            this.MainTabControl.ResumeLayout(false);
             this.GeometriesPage.ResumeLayout(false);
             this.GeometriesPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).EndInit();
+            this.RecipePage.ResumeLayout(false);
+            this.RecipePage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RecipeGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.TabPage GeometriesPage;
         private System.Windows.Forms.TabPage RecipePage;
         private System.Windows.Forms.ComboBox RecipesBox;
@@ -243,7 +366,7 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button GetRecipesButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CitiesBox;
+        private System.Windows.Forms.ComboBox GeometryServerBox;
         private System.Windows.Forms.DataGridView GeometryGridView;
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
@@ -252,6 +375,18 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridView RecipeGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecipeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ComboBox GMIDBox;
+        private System.Windows.Forms.Button GetRecipeListButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button GetGMIDsButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox RecipesServerBox;
     }
 }
 

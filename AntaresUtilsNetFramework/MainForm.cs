@@ -24,9 +24,11 @@ namespace AntaresUtilsNetFramework
             //заполняем список серверов
             foreach (var s in Servers)
             {
-                CitiesBox.Items.Add(s.Name);
+                GeometryServerBox.Items.Add(s.Name);
+                RecipesServerBox.Items.Add(s.Name);
             }
-            CitiesBox.SelectedIndex = 0;
+            GeometryServerBox.SelectedIndex = 0;
+            RecipesServerBox.SelectedIndex = 0;
         }
 
         private void LoadServerList()
@@ -80,7 +82,7 @@ namespace AntaresUtilsNetFramework
             RecipesBox.Items.Clear();
             try
             {
-                string servername = CitiesBox.SelectedItem.ToString();
+                string servername = GeometryServerBox.SelectedItem.ToString();
                 Server server = Servers.First(s => s.Name == servername);
 
                 au.Connect(server.FQN, server.DBName);
@@ -164,6 +166,49 @@ namespace AntaresUtilsNetFramework
                     y = 1;
                 }
                 GeometryGridView[5, i].Value = x * y * z;
+            }
+        }
+
+        private void GetGMIDsButton_Click(object sender, EventArgs e)
+        {
+            GeometryGridView.Rows.Clear();
+            RecipesBox.Items.Clear();
+            try
+            {
+                string servername = RecipesServerBox.SelectedItem.ToString();
+                Server server = Servers.First(s => s.Name == servername);
+
+                au.Connect(server.FQN, server.DBName);
+
+                foreach (string material in au.GetGMIDList())
+                {
+                    GMIDBox.Items.Add(material);
+                }
+                GMIDBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void GetRecipeListButton_Click(object sender, EventArgs e)
+        {
+            RecipeGridView.Rows.Clear();
+            if (GMIDBox.SelectedItem is null) return;
+            string gmid = GMIDBox.SelectedItem.ToString();
+            try
+            {
+
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListByGMID(GMIDBox.SelectedItem.ToString());
+                foreach (RecipeGeometry r in recipeGeometryList)
+                {
+                    RecipeGridView.Rows.Add(gmid,r.LineId, r.ItemType, r.Total);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
