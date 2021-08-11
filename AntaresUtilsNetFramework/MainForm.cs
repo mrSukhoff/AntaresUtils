@@ -256,7 +256,7 @@ namespace AntaresUtilsNetFramework
             GMIDBox.SelectedItem = r.GMID;
             if (GMIDBox.SelectedItem.ToString() != r.GMID) 
             {
-                MessageBox.Show("Не тот город!");
+                MessageBox.Show("Check the Server!");
                 MainTabControl_SelectedIndexChanged(null, null);
                 return;
             }
@@ -283,12 +283,9 @@ namespace AntaresUtilsNetFramework
 
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
-            GMIDGeometry r = new GMIDGeometry()
-            {
-                GMID = GMIDBox.SelectedItem.ToString(),
-                ListOfrecipeGeometries = _recipeGeometries
-            };
-            au.SetRecipesGeometry(r);
+            DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
+            if (result != DialogResult.OK) return;
+            au.SetRecipesGeometry(_recipeGeometries);
         }
     }
     class Server
