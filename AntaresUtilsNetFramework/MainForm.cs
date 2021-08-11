@@ -9,13 +9,17 @@ namespace AntaresUtilsNetFramework
 {
     public partial class MainForm : Form
     {
+        //Список используемых серверов
         List<Server> Servers;
+        
         readonly AntaresUtils au = new AntaresUtils();
-        List<RecipeGeometry> _recipeGeometries;
+        
+        //текущая информаци о геометрии рецепта
+        private List<RecipeGeometry> _recipeGeometries;
         public MainForm()
         {
             InitializeComponent();
-            //Создаем список объектов городов
+            //Создаем список серверов
             LoadServerList();
             //заполняем список серверов
             foreach (var s in Servers)
@@ -27,6 +31,7 @@ namespace AntaresUtilsNetFramework
             RecipesServerBox.SelectedIndex = 0;
         }
 
+        //Загрузка списка серверов либо из файла либо, если файл не найден, только тестового
         private void LoadServerList()
         {
             string path = @"server.ini";
@@ -72,6 +77,7 @@ namespace AntaresUtilsNetFramework
             
         }
 
+        //Получаем список рецептов с выбраного сервера
         private void GetRecipesButton_Click(object sender, EventArgs e)
         {
             GeometryGridView.Rows.Clear();
@@ -95,6 +101,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Получаем с сервера геометрию выбраного рецепта
         private void GetGeometryButton_Click(object sender, EventArgs e)
         {
             GeometryGridView.Rows.Clear();
@@ -114,6 +121,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Записывает новую геометрию в БД из таблицы
         private void SendButton_Click(object sender, EventArgs e)
         {
             if (GeometryGridView.Rows.Count == 0) return;
@@ -165,6 +173,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Получает список материалов с выбранного сервера
         private void GetGMIDsButton_Click(object sender, EventArgs e)
         {
             RecipesGridView.Rows.Clear();
@@ -188,6 +197,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Получает список рецептов связанных с выбранным материалом
         private void GetRecipeListButton_Click(object sender, EventArgs e)
         {
             RecipesGridView.Rows.Clear();
@@ -209,6 +219,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Сохраняет список рецептов с геометрией в файл
         private void SaveToFileButton_Click(object sender, EventArgs e)
         {
             if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
@@ -231,7 +242,8 @@ namespace AntaresUtilsNetFramework
                 formatter.Serialize(fs, r);
             }
         }
-
+        
+        //Загружает список рецептов с геометрией из файла
         private void LoadFromFileButton_Click(object sender, EventArgs e)
         {
             if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
@@ -281,6 +293,7 @@ namespace AntaresUtilsNetFramework
             _recipeGeometries = null;
         }
 
+        //Сохраняет текущий список рецептов с геометрией в БД
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
@@ -288,14 +301,14 @@ namespace AntaresUtilsNetFramework
             au.SetRecipesGeometry(_recipeGeometries);
         }
     }
-    class Server
+    public class Server
     {
         public string Name { get; set; }
         public string FQN { get; set; }
         public string DBName { get; set; }
     }
 
-    public class GMIDGeometry
+    class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;
