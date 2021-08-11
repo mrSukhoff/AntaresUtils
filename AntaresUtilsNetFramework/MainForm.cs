@@ -221,10 +221,10 @@ namespace AntaresUtilsNetFramework
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             string filename = dialog.FileName;
 
-            RecepiesForSerialization r = new RecepiesForSerialization();
+            GMIDGeometry r = new GMIDGeometry();
             r.GMID = GMIDBox.SelectedItem.ToString();
             r.ListOfrecipeGeometries = _recipeGeometries;
-            XmlSerializer formatter = new XmlSerializer(typeof(RecepiesForSerialization));
+            XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
             // получаем поток, куда будем записывать сериализованный объект
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
             {
@@ -245,11 +245,11 @@ namespace AntaresUtilsNetFramework
 
             RecipesGridView.Rows.Clear();
 
-            XmlSerializer deserializer = new XmlSerializer(typeof(RecepiesForSerialization));
-            RecepiesForSerialization r = new RecepiesForSerialization();
+            XmlSerializer deserializer = new XmlSerializer(typeof(GMIDGeometry));
+            GMIDGeometry r = new GMIDGeometry();
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
-                r=(RecepiesForSerialization)deserializer.Deserialize(fs);
+                r=(GMIDGeometry)deserializer.Deserialize(fs);
             }
 
             _recipeGeometries = r.ListOfrecipeGeometries;
@@ -278,6 +278,17 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
             au.Disconnect();
+            _recipeGeometries = null;
+        }
+
+        private void UpdateDbButton_Click(object sender, EventArgs e)
+        {
+            GMIDGeometry r = new GMIDGeometry()
+            {
+                GMID = GMIDBox.SelectedItem.ToString(),
+                ListOfrecipeGeometries = _recipeGeometries
+            };
+            au.SetRecipesGeometry(r);
         }
     }
     class Server
@@ -287,7 +298,7 @@ namespace AntaresUtilsNetFramework
         public string DBName { get; set; }
     }
 
-    public class RecepiesForSerialization
+    public class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;

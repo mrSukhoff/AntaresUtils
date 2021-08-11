@@ -265,6 +265,7 @@ namespace AntaresUtilsNetFramework
             this.UpdateDbButton.TabIndex = 12;
             this.UpdateDbButton.Text = "Update DB";
             this.UpdateDbButton.UseVisualStyleBackColor = true;
+            this.UpdateDbButton.Click += new System.EventHandler(this.UpdateDbButton_Click);
             // 
             // LoadFromFileButton
             // 

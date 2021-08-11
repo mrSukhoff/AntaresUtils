@@ -159,5 +159,17 @@ namespace AntaresUtilsNetFramework
             cmd.Dispose();
             return results;
         }
+    
+        public void SetRecipesGeometry(GMIDGeometry recipes)
+        {
+            foreach (var r in recipes.ListOfrecipeGeometries)
+            {
+                string cmdString = string.Format("update [{0}].[dbo].[ItemTypeGeometry] set x={1},y={2},z={3] where RecipeId = '{4}' and LineId = {5} and ItemType = {6}",
+                    _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
+                SqlCommand cmd = new SqlCommand(cmdString, connection);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+        }
     }
 }
