@@ -136,7 +136,8 @@ namespace AntaresUtilsNetFramework
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
             //Создаем запрос к БД
-            string cmdString = string.Format("use [{0}]; SELECT m.Id,r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id where r.GMID = '{1}' order by r.Id, g.LineId", _DBname, material);
+            string cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id where r.GMID = '{1}' order by r.Id, g.LineId",
+                _DBname, material);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
@@ -151,35 +152,12 @@ namespace AntaresUtilsNetFramework
                 int.TryParse(reader.GetValue(4).ToString(), out r.Y);
                 int.TryParse(reader.GetValue(5).ToString(), out r.Z);
                 int.TryParse(reader.GetValue(6).ToString(), out r.Total);
+                results.Add(r);
             }
-
             //Всё закрываем
             reader.Close();
             cmd.Dispose();
-
             return results;
-            }
-    }
-
-    public class RecipeGeometry : IComparable<RecipeGeometry>
-    {
-        public string RecipeId;
-        public int LineId;
-        public int ItemType;
-        public int X;
-        public int Y;
-        public int Z;
-        public int Total;
-
-        public int CompareTo(RecipeGeometry other)
-        {
-            if (this.LineId > other.LineId) return 1;
-            else if (this.LineId > other.LineId) return -1;
-            
-            if (this.ItemType > other.ItemType) return 1;
-            else if (this.ItemType > other.ItemType) return -1;
-            return 0;
         }
     }
-
 }

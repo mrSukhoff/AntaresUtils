@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace AntaresUtilsNetFramework
 {
@@ -15,7 +11,7 @@ namespace AntaresUtilsNetFramework
     {
         List<Server> Servers;
         readonly AntaresUtils au = new AntaresUtils();
-
+        List<RecipeGeometry> _recipeGeometries;
         public MainForm()
         {
             InitializeComponent();
@@ -171,8 +167,8 @@ namespace AntaresUtilsNetFramework
 
         private void GetGMIDsButton_Click(object sender, EventArgs e)
         {
-            GeometryGridView.Rows.Clear();
-            RecipesBox.Items.Clear();
+            RecipesGridView.Rows.Clear();
+            GMIDBox.Items.Clear();
             try
             {
                 string servername = RecipesServerBox.SelectedItem.ToString();
@@ -194,7 +190,7 @@ namespace AntaresUtilsNetFramework
 
         private void GetRecipeListButton_Click(object sender, EventArgs e)
         {
-            RecipeGridView.Rows.Clear();
+            RecipesGridView.Rows.Clear();
             if (GMIDBox.SelectedItem is null) return;
             string gmid = GMIDBox.SelectedItem.ToString();
             try
@@ -203,13 +199,85 @@ namespace AntaresUtilsNetFramework
                 List<RecipeGeometry> recipeGeometryList = au.GetRecipesListByGMID(GMIDBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
-                    RecipeGridView.Rows.Add(gmid,r.LineId, r.ItemType, r.Total);
+                    RecipesGridView.Rows.Add(r.RecipeId, r.LineId, r.ItemType, r.Total);
                 }
+                _recipeGeometries = recipeGeometryList;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SaveToFileButton_Click(object sender, EventArgs e)
+        {
+            if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                FileName = GMIDBox.SelectedItem.ToString(),
+                DefaultExt = "xml",
+                InitialDirectory = Application.StartupPath
+            };
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
+            string filename = dialog.FileName;
+
+            RecepiesForSerialization r = new RecepiesForSerialization();
+            r.GMID = GMIDBox.SelectedItem.ToString();
+            r.ListOfrecipeGeometries = _recipeGeometries;
+            XmlSerializer formatter = new XmlSerializer(typeof(RecepiesForSerialization));
+            // получаем поток, куда будем записывать сериализованный объект
+            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, r);
+            }
+        }
+
+        private void LoadFromFileButton_Click(object sender, EventArgs e)
+        {
+            if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                DefaultExt = "xml",
+                InitialDirectory = Application.StartupPath
+            };
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
+            string filename = dialog.FileName;
+
+            RecipesGridView.Rows.Clear();
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(RecepiesForSerialization));
+            RecepiesForSerialization r = new RecepiesForSerialization();
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            {
+                r=(RecepiesForSerialization)deserializer.Deserialize(fs);
+            }
+
+            _recipeGeometries = r.ListOfrecipeGeometries;
+            GMIDBox.SelectedItem = r.GMID;
+            if (GMIDBox.SelectedItem.ToString() != r.GMID) 
+            {
+                MessageBox.Show("Не тот город!");
+                MainTabControl_SelectedIndexChanged(null, null);
+                return;
+            }
+            
+            foreach (var rg in _recipeGeometries)
+            {
+                RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
+            }
+              
+        }
+        
+        //очистка при переключении вкладок
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RecipesBox.Items.Clear();
+            RecipesBox.Text = "";
+            GeometryGridView.Rows.Clear();
+            GMIDBox.Items.Clear();
+            GMIDBox.Text = "";
+            RecipesGridView.Rows.Clear();
+            au.Disconnect();
         }
     }
     class Server
@@ -219,4 +287,30 @@ namespace AntaresUtilsNetFramework
         public string DBName { get; set; }
     }
 
+    public class RecepiesForSerialization
+    {
+        public string GMID;
+        public List<RecipeGeometry> ListOfrecipeGeometries;
+    }
+
+    public class RecipeGeometry : IComparable<RecipeGeometry>
+    {
+        public string RecipeId;
+        public int LineId;
+        public int ItemType;
+        public int X;
+        public int Y;
+        public int Z;
+        public int Total;
+
+        public int CompareTo(RecipeGeometry other)
+        {
+            if (this.LineId > other.LineId) return 1;
+            else if (this.LineId > other.LineId) return -1;
+
+            if (this.ItemType > other.ItemType) return 1;
+            else if (this.ItemType > other.ItemType) return -1;
+            return 0;
+        }
+    }
 }
