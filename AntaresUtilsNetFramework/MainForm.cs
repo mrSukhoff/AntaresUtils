@@ -119,7 +119,7 @@ namespace AntaresUtilsNetFramework
             if (GeometryGridView.Rows.Count == 0) return;
             List<RecipeGeometry> list = new List<RecipeGeometry>();
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
-            if (result != DialogResult.OK) return;
+            if (result != DialogResult.Yes) return;
             for (int i=0; i<GeometryGridView.Rows.Count; i++)
             {
                 var cells = GeometryGridView.Rows[i].Cells;
@@ -284,7 +284,7 @@ namespace AntaresUtilsNetFramework
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
-            if (result != DialogResult.OK) return;
+            if (result != DialogResult.Yes) return;
             au.SetRecipesGeometry(_recipeGeometries);
         }
     }
