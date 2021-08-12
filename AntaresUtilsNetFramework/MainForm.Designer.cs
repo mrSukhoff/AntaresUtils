@@ -30,6 +30,22 @@ namespace AntaresUtilsNetFramework
         private void InitializeComponent()
         {
             this.MainTabControl = new System.Windows.Forms.TabControl();
+            this.CryptoGetter = new System.Windows.Forms.TabPage();
+            this.CryptoCodeBox = new System.Windows.Forms.TextBox();
+            this.CryptoKeyBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.SaveImageButton = new System.Windows.Forms.Button();
+            this.DMPictureBox = new System.Windows.Forms.PictureBox();
+            this.SerialBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.GtinBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.SgtinBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.GetCryptocodeButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CryptoServerBox = new System.Windows.Forms.ComboBox();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.SendButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
@@ -60,22 +76,13 @@ namespace AntaresUtilsNetFramework
             this.GetGMIDsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
-            this.CryptoGetter = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
+            this.CryptoGetter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
             this.GeometriesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
             this.RecipePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
-            this.CryptoGetter.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -93,6 +100,163 @@ namespace AntaresUtilsNetFramework
             this.MainTabControl.Size = new System.Drawing.Size(763, 426);
             this.MainTabControl.TabIndex = 0;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
+            // 
+            // CryptoGetter
+            // 
+            this.CryptoGetter.Controls.Add(this.CryptoCodeBox);
+            this.CryptoGetter.Controls.Add(this.CryptoKeyBox);
+            this.CryptoGetter.Controls.Add(this.label10);
+            this.CryptoGetter.Controls.Add(this.label9);
+            this.CryptoGetter.Controls.Add(this.SaveImageButton);
+            this.CryptoGetter.Controls.Add(this.DMPictureBox);
+            this.CryptoGetter.Controls.Add(this.SerialBox);
+            this.CryptoGetter.Controls.Add(this.label8);
+            this.CryptoGetter.Controls.Add(this.GtinBox);
+            this.CryptoGetter.Controls.Add(this.label7);
+            this.CryptoGetter.Controls.Add(this.SgtinBox);
+            this.CryptoGetter.Controls.Add(this.label6);
+            this.CryptoGetter.Controls.Add(this.GetCryptocodeButton);
+            this.CryptoGetter.Controls.Add(this.label5);
+            this.CryptoGetter.Controls.Add(this.CryptoServerBox);
+            this.CryptoGetter.Location = new System.Drawing.Point(4, 29);
+            this.CryptoGetter.Margin = new System.Windows.Forms.Padding(3, 8, 8, 3);
+            this.CryptoGetter.Name = "CryptoGetter";
+            this.CryptoGetter.Padding = new System.Windows.Forms.Padding(3);
+            this.CryptoGetter.Size = new System.Drawing.Size(755, 393);
+            this.CryptoGetter.TabIndex = 2;
+            this.CryptoGetter.Text = "CryptoGetter";
+            this.CryptoGetter.UseVisualStyleBackColor = true;
+            // 
+            // CryptoCodeBox
+            // 
+            this.CryptoCodeBox.Location = new System.Drawing.Point(77, 233);
+            this.CryptoCodeBox.Name = "CryptoCodeBox";
+            this.CryptoCodeBox.Size = new System.Drawing.Size(455, 26);
+            this.CryptoCodeBox.TabIndex = 18;
+            // 
+            // CryptoKeyBox
+            // 
+            this.CryptoKeyBox.Location = new System.Drawing.Point(77, 201);
+            this.CryptoKeyBox.Name = "CryptoKeyBox";
+            this.CryptoKeyBox.Size = new System.Drawing.Size(59, 26);
+            this.CryptoKeyBox.TabIndex = 17;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 236);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 20);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Code";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 204);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 20);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Key";
+            // 
+            // SaveImageButton
+            // 
+            this.SaveImageButton.Location = new System.Drawing.Point(593, 200);
+            this.SaveImageButton.Name = "SaveImageButton";
+            this.SaveImageButton.Size = new System.Drawing.Size(134, 28);
+            this.SaveImageButton.TabIndex = 14;
+            this.SaveImageButton.Text = "Save";
+            this.SaveImageButton.UseVisualStyleBackColor = true;
+            // 
+            // DMPictureBox
+            // 
+            this.DMPictureBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.DMPictureBox.Location = new System.Drawing.Point(564, 9);
+            this.DMPictureBox.Name = "DMPictureBox";
+            this.DMPictureBox.Size = new System.Drawing.Size(185, 185);
+            this.DMPictureBox.TabIndex = 13;
+            this.DMPictureBox.TabStop = false;
+            // 
+            // SerialBox
+            // 
+            this.SerialBox.Location = new System.Drawing.Point(77, 104);
+            this.SerialBox.Name = "SerialBox";
+            this.SerialBox.Size = new System.Drawing.Size(124, 26);
+            this.SerialBox.TabIndex = 12;
+            this.SerialBox.Text = "1234567890123";
+            this.SerialBox.TextChanged += new System.EventHandler(this.SerialBox_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 107);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 20);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Serial";
+            // 
+            // GtinBox
+            // 
+            this.GtinBox.Location = new System.Drawing.Point(77, 72);
+            this.GtinBox.Name = "GtinBox";
+            this.GtinBox.Size = new System.Drawing.Size(134, 26);
+            this.GtinBox.TabIndex = 10;
+            this.GtinBox.Text = "04605310011236";
+            this.GtinBox.TextChanged += new System.EventHandler(this.GtinBox_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 20);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "GTIN";
+            // 
+            // SgtinBox
+            // 
+            this.SgtinBox.Location = new System.Drawing.Point(77, 40);
+            this.SgtinBox.Name = "SgtinBox";
+            this.SgtinBox.Size = new System.Drawing.Size(251, 26);
+            this.SgtinBox.TabIndex = 8;
+            this.SgtinBox.Text = "046053100112361234567890123";
+            this.SgtinBox.TextChanged += new System.EventHandler(this.SgtinBox_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 20);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "SGTIN";
+            // 
+            // GetCryptocodeButton
+            // 
+            this.GetCryptocodeButton.Location = new System.Drawing.Point(77, 136);
+            this.GetCryptocodeButton.Name = "GetCryptocodeButton";
+            this.GetCryptocodeButton.Size = new System.Drawing.Size(134, 28);
+            this.GetCryptocodeButton.TabIndex = 5;
+            this.GetCryptocodeButton.Text = "Get Cryptocode";
+            this.GetCryptocodeButton.UseVisualStyleBackColor = true;
+            this.GetCryptocodeButton.Click += new System.EventHandler(this.GetCryptocodeButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 20);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Server";
+            // 
+            // CryptoServerBox
+            // 
+            this.CryptoServerBox.FormattingEnabled = true;
+            this.CryptoServerBox.Location = new System.Drawing.Point(77, 6);
+            this.CryptoServerBox.Name = "CryptoServerBox";
+            this.CryptoServerBox.Size = new System.Drawing.Size(134, 28);
+            this.CryptoServerBox.TabIndex = 3;
             // 
             // GeometriesPage
             // 
@@ -403,102 +567,6 @@ namespace AntaresUtilsNetFramework
             this.RecipesServerBox.Size = new System.Drawing.Size(134, 28);
             this.RecipesServerBox.TabIndex = 3;
             // 
-            // CryptoGetter
-            // 
-            this.CryptoGetter.Controls.Add(this.textBox3);
-            this.CryptoGetter.Controls.Add(this.label8);
-            this.CryptoGetter.Controls.Add(this.textBox2);
-            this.CryptoGetter.Controls.Add(this.label7);
-            this.CryptoGetter.Controls.Add(this.textBox1);
-            this.CryptoGetter.Controls.Add(this.label6);
-            this.CryptoGetter.Controls.Add(this.button1);
-            this.CryptoGetter.Controls.Add(this.label5);
-            this.CryptoGetter.Controls.Add(this.comboBox1);
-            this.CryptoGetter.Location = new System.Drawing.Point(4, 29);
-            this.CryptoGetter.Name = "CryptoGetter";
-            this.CryptoGetter.Padding = new System.Windows.Forms.Padding(3);
-            this.CryptoGetter.Size = new System.Drawing.Size(755, 393);
-            this.CryptoGetter.TabIndex = 2;
-            this.CryptoGetter.Text = "CryptoGetter";
-            this.CryptoGetter.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(611, 359);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 28);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Get Recipes";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Server";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(77, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(134, 28);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 40);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 20);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "SGTIN";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(77, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 26);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "046053100112361234567890123";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(77, 72);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 26);
-            this.textBox2.TabIndex = 10;
-            this.textBox2.Text = "04605310011236";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 20);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "GTIN";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(77, 104);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(124, 26);
-            this.textBox3.TabIndex = 12;
-            this.textBox3.Text = "1234567890123";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 107);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 20);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Serial";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -508,16 +576,17 @@ namespace AntaresUtilsNetFramework
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Antares Vision utility by S.M.S.";
+            this.Text = "Antares Vision utilities by S.M.S.";
             this.MainTabControl.ResumeLayout(false);
+            this.CryptoGetter.ResumeLayout(false);
+            this.CryptoGetter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).EndInit();
             this.GeometriesPage.ResumeLayout(false);
             this.GeometriesPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).EndInit();
             this.RecipePage.ResumeLayout(false);
             this.RecipePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).EndInit();
-            this.CryptoGetter.ResumeLayout(false);
-            this.CryptoGetter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -556,15 +625,21 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.TabPage CryptoGetter;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox SerialBox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox GtinBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SgtinBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button GetCryptocodeButton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CryptoServerBox;
+        private System.Windows.Forms.TextBox CryptoCodeBox;
+        private System.Windows.Forms.TextBox CryptoKeyBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button SaveImageButton;
+        private System.Windows.Forms.PictureBox DMPictureBox;
     }
 }
 

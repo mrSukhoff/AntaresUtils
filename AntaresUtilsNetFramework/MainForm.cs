@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
 {
@@ -202,7 +204,6 @@ namespace AntaresUtilsNetFramework
         {
             RecipesGridView.Rows.Clear();
             if (GMIDBox.SelectedItem is null) return;
-            string gmid = GMIDBox.SelectedItem.ToString();
             try
             {
 
@@ -232,9 +233,11 @@ namespace AntaresUtilsNetFramework
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             string filename = dialog.FileName;
 
-            GMIDGeometry r = new GMIDGeometry();
-            r.GMID = GMIDBox.SelectedItem.ToString();
-            r.ListOfrecipeGeometries = _recipeGeometries;
+            GMIDGeometry r = new GMIDGeometry
+            {
+                GMID = GMIDBox.SelectedItem.ToString(),
+                ListOfrecipeGeometries = _recipeGeometries
+            };
             XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
             // получаем поток, куда будем записывать сериализованный объект
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
@@ -300,7 +303,85 @@ namespace AntaresUtilsNetFramework
             if (result != DialogResult.Yes) return;
             au.SetRecipesGeometry(_recipeGeometries);
         }
+
+        private void GetCryptocodeButton_Click(object sender, EventArgs e)
+        {
+            ClearCryptoResultFields();
+
+            string servername = CryptoServerBox.SelectedItem.ToString();
+            Server server = Servers.First(s => s.Name == servername);
+            au.Connect(server.FQN, server.DBName);
+            try
+            {
+                Package package = new Package()
+                {
+                    GTIN = GtinBox.Text,
+                    Serial = SerialBox.Text
+                };
+            
+                Package result = au.GetCrypto(package);
+                CryptoKeyBox.Text = package.CryptoKey;
+                CryptoCodeBox.Text = package.CryptoCode;
+                ShowDM("01" + package.GTIN + "21" + package.Serial + char.ConvertFromUtf32(29) + "91" + package.CryptoKey + char.ConvertFromUtf32(29) + "92" + package.CryptoCode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // По входной строке рисует DMC
+        private void ShowDM(string dataMatrixString)
+        {
+            DmtxImageEncoder encoder = new DmtxImageEncoder();
+            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions
+            {
+                ModuleSize = 5,
+                MarginSize = 4
+            };
+            Bitmap encodedBitmap = encoder.EncodeImage(dataMatrixString, options);
+            DMPictureBox.Image = encodedBitmap;
+        }
+
+        //Jxboftn gjkz dsdjlf rhbgnjlfyysq
+        private void ClearCryptoResultFields()
+        {
+            CryptoKeyBox.Text = "";
+            CryptoCodeBox.Text = "";
+            if (DMPictureBox.Image != null) DMPictureBox.Image.Dispose();
+            DMPictureBox.Image = null;
+        }
+        // Метод при изменении SGTIN меняет поля GTIN и серийного номера
+        private void SgtinBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SgtinBox.Text.Length == 27)
+            {
+                //странная переменная, но без неё не работает
+                string text = SgtinBox.Text;
+                GtinBox.Text = text.Substring(0, 14);
+                SerialBox.Text = text.Substring(14, 13);
+            }
+        }
+
+        // Метод при изменении поля GTIN меняет поле SGTIN
+        private void GtinBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // Метод при изменении поля мерийного номера меняет SGTIN
+        private void SerialBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SerialBox.Text.Length > 13) SerialBox.Text = SerialBox.Text.Substring(0, 13);
+            if (SerialBox.Text.Length == 13)
+            {
+                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+            }
+        }
+
     }
+
+    //Формат списка серверов
     public class Server
     {
         public string Name { get; set; }
@@ -308,7 +389,8 @@ namespace AntaresUtilsNetFramework
         public string DBName { get; set; }
     }
 
-    class GMIDGeometry
+    //Описывает структуру объектов для сериализации
+    public class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;
