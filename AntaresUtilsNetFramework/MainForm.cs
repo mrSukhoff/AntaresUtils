@@ -316,7 +316,7 @@ namespace AntaresUtilsNetFramework
             au.SetRecipesGeometry(_recipeGeometries);
         }
 
-        private void GetCryptocodeButton_Click(object sender, EventArgs e)
+        private void GetCryptoСodeButton_Click(object sender, EventArgs e)
         {
             ClearCryptoResultFields();
 
@@ -332,9 +332,10 @@ namespace AntaresUtilsNetFramework
                 };
             
                 Package result = au.GetCrypto(package);
-                CryptoKeyBox.Text = package.CryptoKey;
-                CryptoCodeBox.Text = package.CryptoCode;
-                ShowDM("01" + package.GTIN + "21" + package.Serial + char.ConvertFromUtf32(29) + "91" + package.CryptoKey + char.ConvertFromUtf32(29) + "92" + package.CryptoCode);
+                CryptoKeyBox.Text = result.CryptoKey;
+                CryptoCodeBox.Text = result.CryptoCode;
+                ShowDM("01" + result.GTIN + "21" + result.Serial + char.ConvertFromUtf32(29) + "91" + result.CryptoKey + 
+                    char.ConvertFromUtf32(29) + "92" + result.CryptoCode);
             }
             catch (Exception ex)
             {
@@ -403,6 +404,7 @@ namespace AntaresUtilsNetFramework
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.DefaultExt = "bmp";
+            saveFileDialog.FileName = SgtinBox.Text;
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string path = saveFileDialog.FileName;

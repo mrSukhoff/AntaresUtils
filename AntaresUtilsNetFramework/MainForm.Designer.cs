@@ -237,7 +237,7 @@ namespace AntaresUtilsNetFramework
             this.GetCryptocodeButton.TabIndex = 5;
             this.GetCryptocodeButton.Text = "Get Cryptocode";
             this.GetCryptocodeButton.UseVisualStyleBackColor = true;
-            this.GetCryptocodeButton.Click += new System.EventHandler(this.GetCryptocodeButton_Click);
+            this.GetCryptocodeButton.Click += new System.EventHandler(this.GetCryptoСodeButton_Click);
             // 
             // label5
             // 
