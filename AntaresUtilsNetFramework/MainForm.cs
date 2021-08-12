@@ -129,14 +129,18 @@ namespace AntaresUtilsNetFramework
         private void SendButton_Click(object sender, EventArgs e)
         {
             if (GeometryGridView.Rows.Count == 0) return;
-            List<RecipeGeometry> list = new List<RecipeGeometry>();
+
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
+
+            List<RecipeGeometry> list = new List<RecipeGeometry>();
+            
             for (int i=0; i<GeometryGridView.Rows.Count; i++)
             {
                 var cells = GeometryGridView.Rows[i].Cells;
                 RecipeGeometry r = new RecipeGeometry
                 {
+                    RecipeId = RecipesBox.SelectedItem.ToString(),
                     LineId = int.Parse(cells[0].Value.ToString()),
                     ItemType = int.Parse(cells[1].Value.ToString()),
                     X = int.Parse(cells[2].Value.ToString()),
@@ -145,8 +149,8 @@ namespace AntaresUtilsNetFramework
                 };
                 list.Add(r);
             }
-            string recipeId = RecipesBox.SelectedItem.ToString();
-            au.SetRecipeGeometry(list, recipeId);
+
+            au.SetRecipeGeometry(list);
         }
 
         //При изменении содержимого проверяет корректность и пересчитывает поля

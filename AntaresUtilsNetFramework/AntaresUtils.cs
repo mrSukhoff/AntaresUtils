@@ -41,6 +41,10 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        /// <summary>
+        /// Возвращает список рецептов из БД
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetRecipeList()
         {
             List<string> results = new List<string>();
@@ -64,12 +68,17 @@ namespace AntaresUtilsNetFramework
             return results;
         }
 
+        /// <summary>
+        /// Возвращает геометрию для всех линий конкретного рецепта
+        /// </summary>
+        /// <param name="recipeId">Идентификатора рецепта</param>
+        /// <returns></returns>
         public List<RecipeGeometry> GetRecipeGeometry(string recipeId)
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
 
             //Создаем запрос к БД
-            string cmdString = string.Format("SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{0}].[dbo].[ItemTypeGeometry] where RecipeId = '{1}'", _DBname, recipeId);
+            string cmdString = string.Format("SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{0}].[dbo].[ItemTypeGeometry] where RecipeId = '{1}' and LineId <> -1", _DBname, recipeId);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
@@ -93,19 +102,27 @@ namespace AntaresUtilsNetFramework
             return results;
         }
 
-        public void SetRecipeGeometry(List<RecipeGeometry> recipeGeometries, string recipeId)
+        /// <summary>
+        /// Записывает в БД геометрию из каждого рецепта из списка
+        /// </summary>
+        /// <param name="recipeGeometries">Список рецептов</param>
+        public void SetRecipeGeometry(List<RecipeGeometry> recipeGeometries)
         {
             foreach (RecipeGeometry r in recipeGeometries)
             {
                 //Создаем запрос к БД
                 string cmdString = string.Format("update [{0}].[dbo].[ItemTypeGeometry] set X = {1}, Y = {2}, Z = {3} where RecipeId = '{4}' and LineID = {5} and ItemType = {6}",
-                    _DBname, r.X, r.Y, r.Z, recipeId, r.LineId, r.ItemType);
+                    _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
                 SqlCommand cmd = new SqlCommand(cmdString, connection);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
             }
         }
 
+        /// <summary>
+        /// Возвращает список материалов из БД
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetGMIDList()
         {
             List<string> results = new List<string>();
@@ -129,11 +146,16 @@ namespace AntaresUtilsNetFramework
             return results;
         }
 
+        /// <summary>
+        /// Возвращает геометрию всех рецептов привязанных к конкретному материалу
+        /// </summary>
+        /// <param name="material"></param>
+        /// <returns></returns>
         public List<RecipeGeometry> GetRecipesListByGMID(string material)
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
             //Создаем запрос к БД
-            string cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id where r.GMID = '{1}' order by r.Id, g.LineId",
+            string cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id where r.GMID = '{1}' and g.LineId <> -1 order by r.Id, g.LineId",
                 _DBname, material);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             // И выполняем его

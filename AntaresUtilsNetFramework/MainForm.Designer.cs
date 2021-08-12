@@ -66,16 +66,16 @@ namespace AntaresUtilsNetFramework
             this.LoadFromFileButton = new System.Windows.Forms.Button();
             this.SaveToFileButton = new System.Windows.Forms.Button();
             this.RecipesGridView = new System.Windows.Forms.DataGridView();
-            this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GMIDBox = new System.Windows.Forms.ComboBox();
             this.GetRecipeListButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.GetGMIDsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
+            this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -481,34 +481,6 @@ namespace AntaresUtilsNetFramework
             this.RecipesGridView.Size = new System.Drawing.Size(614, 300);
             this.RecipesGridView.TabIndex = 9;
             // 
-            // RecipeID
-            // 
-            this.RecipeID.HeaderText = "RecipeID";
-            this.RecipeID.Name = "RecipeID";
-            this.RecipeID.ReadOnly = true;
-            this.RecipeID.Width = 220;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "LineID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 130;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Type";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 130;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Quntiy";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 130;
-            // 
             // GMIDBox
             // 
             this.GMIDBox.FormattingEnabled = true;
@@ -565,6 +537,34 @@ namespace AntaresUtilsNetFramework
             this.RecipesServerBox.Size = new System.Drawing.Size(134, 28);
             this.RecipesServerBox.TabIndex = 3;
             // 
+            // RecipeID
+            // 
+            this.RecipeID.HeaderText = "RecipeID";
+            this.RecipeID.Name = "RecipeID";
+            this.RecipeID.ReadOnly = true;
+            this.RecipeID.Width = 220;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "LineID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 130;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Type";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 130;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Quantity";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 130;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,10 +618,6 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Button UpdateDbButton;
         private System.Windows.Forms.Button LoadFromFileButton;
         private System.Windows.Forms.Button SaveToFileButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RecipeID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.TabPage CryptoGetter;
         private System.Windows.Forms.TextBox SerialBox;
         private System.Windows.Forms.Label label8;
@@ -638,6 +634,10 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button SaveImageButton;
         private System.Windows.Forms.PictureBox DMPictureBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecipeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
 
