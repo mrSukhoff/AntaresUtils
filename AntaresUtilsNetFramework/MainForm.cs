@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
 {
@@ -24,9 +26,11 @@ namespace AntaresUtilsNetFramework
             //заполняем список серверов
             foreach (var s in Servers)
             {
+                CryptoServerBox.Items.Add(s.Name);
                 GeometryServerBox.Items.Add(s.Name);
                 RecipesServerBox.Items.Add(s.Name);
             }
+            CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
         }
@@ -125,14 +129,18 @@ namespace AntaresUtilsNetFramework
         private void SendButton_Click(object sender, EventArgs e)
         {
             if (GeometryGridView.Rows.Count == 0) return;
-            List<RecipeGeometry> list = new List<RecipeGeometry>();
+
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
+
+            List<RecipeGeometry> list = new List<RecipeGeometry>();
+            
             for (int i=0; i<GeometryGridView.Rows.Count; i++)
             {
                 var cells = GeometryGridView.Rows[i].Cells;
                 RecipeGeometry r = new RecipeGeometry
                 {
+                    RecipeId = RecipesBox.SelectedItem.ToString(),
                     LineId = int.Parse(cells[0].Value.ToString()),
                     ItemType = int.Parse(cells[1].Value.ToString()),
                     X = int.Parse(cells[2].Value.ToString()),
@@ -141,8 +149,8 @@ namespace AntaresUtilsNetFramework
                 };
                 list.Add(r);
             }
-            string recipeId = RecipesBox.SelectedItem.ToString();
-            au.SetRecipeGeometry(list, recipeId);
+
+            au.SetRecipeGeometry(list);
         }
 
         //При изменении содержимого проверяет корректность и пересчитывает поля
@@ -202,7 +210,6 @@ namespace AntaresUtilsNetFramework
         {
             RecipesGridView.Rows.Clear();
             if (GMIDBox.SelectedItem is null) return;
-            string gmid = GMIDBox.SelectedItem.ToString();
             try
             {
 
@@ -232,9 +239,11 @@ namespace AntaresUtilsNetFramework
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             string filename = dialog.FileName;
 
-            GMIDGeometry r = new GMIDGeometry();
-            r.GMID = GMIDBox.SelectedItem.ToString();
-            r.ListOfrecipeGeometries = _recipeGeometries;
+            GMIDGeometry r = new GMIDGeometry
+            {
+                GMID = GMIDBox.SelectedItem.ToString(),
+                ListOfrecipeGeometries = _recipeGeometries
+            };
             XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
             // получаем поток, куда будем записывать сериализованный объект
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
@@ -283,14 +292,24 @@ namespace AntaresUtilsNetFramework
         //очистка при переключении вкладок
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Crypto
+            ClearCryptoResultFields();
+            SgtinBox.Text = "";
+            GtinBox.Text = "";
+            SerialBox.Text = "";
+            //Geometry
             RecipesBox.Items.Clear();
             RecipesBox.Text = "";
             GeometryGridView.Rows.Clear();
+            
+            //Recipes
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
-            au.Disconnect();
             _recipeGeometries = null;
+
+            au.Disconnect();
+            
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -300,7 +319,104 @@ namespace AntaresUtilsNetFramework
             if (result != DialogResult.Yes) return;
             au.SetRecipesGeometry(_recipeGeometries);
         }
+
+        private void GetCryptoСodeButton_Click(object sender, EventArgs e)
+        {
+            ClearCryptoResultFields();
+
+            string servername = CryptoServerBox.SelectedItem.ToString();
+            Server server = Servers.First(s => s.Name == servername);
+            au.Connect(server.FQN, server.DBName);
+            try
+            {
+                Package package = new Package()
+                {
+                    GTIN = GtinBox.Text,
+                    Serial = SerialBox.Text
+                };
+            
+                Package result = au.GetCrypto(package);
+                CryptoKeyBox.Text = result.CryptoKey;
+                CryptoCodeBox.Text = result.CryptoCode;
+                ShowDM("01" + result.GTIN + "21" + result.Serial + char.ConvertFromUtf32(29) + "91" + result.CryptoKey + 
+                    char.ConvertFromUtf32(29) + "92" + result.CryptoCode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // По входной строке рисует DMC
+        private void ShowDM(string dataMatrixString)
+        {
+            DmtxImageEncoder encoder = new DmtxImageEncoder();
+            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions
+            {
+                ModuleSize = 5,
+                MarginSize = 4
+            };
+            Bitmap encodedBitmap = encoder.EncodeImage(dataMatrixString, options);
+            DMPictureBox.Image = encodedBitmap;
+        }
+
+        //Очищает поля вывода криптоданный
+        private void ClearCryptoResultFields()
+        {
+            CryptoKeyBox.Text = "";
+            CryptoCodeBox.Text = "";
+            if (DMPictureBox.Image != null) DMPictureBox.Image.Dispose();
+            DMPictureBox.Image = null;
+        }
+        
+        // Метод при изменении SGTIN меняет поля GTIN и серийного номера
+        private void SgtinBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SgtinBox.Text.Length == 27)
+            {
+                //странная переменная, но без неё не работает
+                string text = SgtinBox.Text;
+                GtinBox.Text = text.Substring(0, 14);
+                SerialBox.Text = text.Substring(14, 13);
+            }
+        }
+
+        // Метод при изменении поля GTIN меняет поле SGTIN
+        private void GtinBox_TextChanged(object sender, EventArgs e)
+        {
+            if (GtinBox.Text.Length > 14) GtinBox.Text = GtinBox.Text.Substring(0, 13);
+            if (GtinBox.Text.Length == 14)
+            {
+                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+            }
+        }
+
+        // Метод при изменении поля мерийного номера меняет SGTIN
+        private void SerialBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SerialBox.Text.Length > 13) SerialBox.Text = SerialBox.Text.Substring(0, 13);
+            if (SerialBox.Text.Length == 13)
+            {
+                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+            }
+        }
+
+        //Метод сохраняет картинку в файл
+        private void SaveImageButton_Click(object sender, EventArgs e)
+        {
+            if (DMPictureBox.Image == null) return;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "bmp";
+            saveFileDialog.FileName = SgtinBox.Text;
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+
+            string path = saveFileDialog.FileName;
+            DMPictureBox.Image.Save(path);
+        }
     }
+
+    //Формат списка серверов
     public class Server
     {
         public string Name { get; set; }
@@ -308,30 +424,10 @@ namespace AntaresUtilsNetFramework
         public string DBName { get; set; }
     }
 
-    class GMIDGeometry
+    //Описывает структуру объектов для сериализации
+    public class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;
-    }
-
-    public class RecipeGeometry : IComparable<RecipeGeometry>
-    {
-        public string RecipeId;
-        public int LineId;
-        public int ItemType;
-        public int X;
-        public int Y;
-        public int Z;
-        public int Total;
-
-        public int CompareTo(RecipeGeometry other)
-        {
-            if (this.LineId > other.LineId) return 1;
-            else if (this.LineId > other.LineId) return -1;
-
-            if (this.ItemType > other.ItemType) return 1;
-            else if (this.ItemType > other.ItemType) return -1;
-            return 0;
-        }
     }
 }
