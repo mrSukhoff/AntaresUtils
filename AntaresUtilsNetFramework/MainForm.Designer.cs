@@ -167,6 +167,7 @@ namespace AntaresUtilsNetFramework
             this.SaveImageButton.TabIndex = 14;
             this.SaveImageButton.Text = "Save";
             this.SaveImageButton.UseVisualStyleBackColor = true;
+            this.SaveImageButton.Click += new System.EventHandler(this.SaveImageButton_Click);
             // 
             // DMPictureBox
             // 
@@ -183,7 +184,6 @@ namespace AntaresUtilsNetFramework
             this.SerialBox.Name = "SerialBox";
             this.SerialBox.Size = new System.Drawing.Size(124, 26);
             this.SerialBox.TabIndex = 12;
-            this.SerialBox.Text = "1234567890123";
             this.SerialBox.TextChanged += new System.EventHandler(this.SerialBox_TextChanged);
             // 
             // label8
@@ -201,7 +201,6 @@ namespace AntaresUtilsNetFramework
             this.GtinBox.Name = "GtinBox";
             this.GtinBox.Size = new System.Drawing.Size(134, 26);
             this.GtinBox.TabIndex = 10;
-            this.GtinBox.Text = "04605310011236";
             this.GtinBox.TextChanged += new System.EventHandler(this.GtinBox_TextChanged);
             // 
             // label7
@@ -219,7 +218,6 @@ namespace AntaresUtilsNetFramework
             this.SgtinBox.Name = "SgtinBox";
             this.SgtinBox.Size = new System.Drawing.Size(251, 26);
             this.SgtinBox.TabIndex = 8;
-            this.SgtinBox.Text = "046053100112361234567890123";
             this.SgtinBox.TextChanged += new System.EventHandler(this.SgtinBox_TextChanged);
             // 
             // label6

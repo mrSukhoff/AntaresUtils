@@ -26,9 +26,11 @@ namespace AntaresUtilsNetFramework
             //заполняем список серверов
             foreach (var s in Servers)
             {
+                CryptoServerBox.Items.Add(s.Name);
                 GeometryServerBox.Items.Add(s.Name);
                 RecipesServerBox.Items.Add(s.Name);
             }
+            CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
         }
@@ -286,14 +288,24 @@ namespace AntaresUtilsNetFramework
         //очистка при переключении вкладок
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Crypto
+            ClearCryptoResultFields();
+            SgtinBox.Text = "";
+            GtinBox.Text = "";
+            SerialBox.Text = "";
+            //Geometry
             RecipesBox.Items.Clear();
             RecipesBox.Text = "";
             GeometryGridView.Rows.Clear();
+            
+            //Recipes
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
-            au.Disconnect();
             _recipeGeometries = null;
+
+            au.Disconnect();
+            
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -343,7 +355,7 @@ namespace AntaresUtilsNetFramework
             DMPictureBox.Image = encodedBitmap;
         }
 
-        //Jxboftn gjkz dsdjlf rhbgnjlfyysq
+        //Очищает поля вывода криптоданный
         private void ClearCryptoResultFields()
         {
             CryptoKeyBox.Text = "";
@@ -351,6 +363,7 @@ namespace AntaresUtilsNetFramework
             if (DMPictureBox.Image != null) DMPictureBox.Image.Dispose();
             DMPictureBox.Image = null;
         }
+        
         // Метод при изменении SGTIN меняет поля GTIN и серийного номера
         private void SgtinBox_TextChanged(object sender, EventArgs e)
         {
@@ -366,7 +379,11 @@ namespace AntaresUtilsNetFramework
         // Метод при изменении поля GTIN меняет поле SGTIN
         private void GtinBox_TextChanged(object sender, EventArgs e)
         {
-
+            if (GtinBox.Text.Length > 14) GtinBox.Text = GtinBox.Text.Substring(0, 13);
+            if (GtinBox.Text.Length == 14)
+            {
+                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+            }
         }
 
         // Метод при изменении поля мерийного номера меняет SGTIN
@@ -379,6 +396,18 @@ namespace AntaresUtilsNetFramework
             }
         }
 
+        //Метод сохраняет картинку в файл
+        private void SaveImageButton_Click(object sender, EventArgs e)
+        {
+            if (DMPictureBox.Image == null) return;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "bmp";
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+
+            string path = saveFileDialog.FileName;
+            DMPictureBox.Image.Save(path);
+        }
     }
 
     //Формат списка серверов
