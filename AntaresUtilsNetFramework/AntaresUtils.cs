@@ -244,7 +244,7 @@ namespace AntaresUtilsNetFramework
         }
 
         /// <summary>
-        ////Метод по идентификатору GTIN и серийному номеру находит криптоданные и возвращает пакет со всеми даннфми
+        /// Метод по идентификатору GTIN и серийному номеру находит криптоданные и возвращает пакет со всеми даннфми
         /// </summary>
         /// <param name="package">пакет с заполненым GTIN и серийным номером</param>
         /// <param name="gtinId">Идентификатор GTIN</param>
@@ -282,6 +282,60 @@ namespace AntaresUtilsNetFramework
             }
             return result;
         }
+    
+        /// <summary>
+        /// Возвращает описание рецепта по его имени
+        /// </summary>
+        /// <param name="recipeName"></param>
+        /// <returns></returns>
+        public string GetRecipeName(string recipeName)
+        {
+            //Формируем запрос
+            string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] Where Id='{1}'", _DBname, recipeName);
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            cmd.CommandTimeout = 300;
+            //И выполняем его
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string result = "";
+            //Читаем по порядку все ответы
+            while (reader.Read())
+            {
+                result = reader.GetValue(0).ToString();
+            }
+            reader.Close();
+            cmd.Dispose();
+            if (result == "") throw new Exception("Recipe description doesn't found!");
+            return result;
+        }
+
+
+        /// <summary>
+        /// Возвращает описание материала по его имени
+        /// </summary>
+        /// <param name="recipeName"></param>
+        /// <returns></returns>
+        public string GetMaterialName(string materialName)
+        {
+            //Формируем запрос
+            string cmdString = String.Format("SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'", _DBname, materialName);
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            cmd.CommandTimeout = 300;
+            //И выполняем его
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string result = "";
+            //Читаем по порядку все ответы
+            while (reader.Read())
+            {
+                result = reader.GetValue(0).ToString();
+            }
+            reader.Close();
+            cmd.Dispose();
+            if (result == "") throw new Exception("Material description doesn't found!");
+            return result;
+        }
+
     }
 
     public class RecipeGeometry : IComparable<RecipeGeometry>

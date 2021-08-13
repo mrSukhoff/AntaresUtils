@@ -48,6 +48,8 @@ namespace AntaresUtilsNetFramework
             this.label5 = new System.Windows.Forms.Label();
             this.CryptoServerBox = new System.Windows.Forms.ComboBox();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.AgregationRecipeNameBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
             this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +65,8 @@ namespace AntaresUtilsNetFramework
             this.label1 = new System.Windows.Forms.Label();
             this.GeometryServerBox = new System.Windows.Forms.ComboBox();
             this.RecipePage = new System.Windows.Forms.TabPage();
+            this.MaterialNameTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.UpdateDbButton = new System.Windows.Forms.Button();
             this.LoadFromFileButton = new System.Windows.Forms.Button();
             this.SaveToFileButton = new System.Windows.Forms.Button();
@@ -98,7 +102,7 @@ namespace AntaresUtilsNetFramework
             this.MainTabControl.Location = new System.Drawing.Point(12, 12);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(763, 426);
+            this.MainTabControl.Size = new System.Drawing.Size(763, 500);
             this.MainTabControl.TabIndex = 0;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -123,7 +127,7 @@ namespace AntaresUtilsNetFramework
             this.CryptoGetter.Margin = new System.Windows.Forms.Padding(3, 8, 8, 3);
             this.CryptoGetter.Name = "CryptoGetter";
             this.CryptoGetter.Padding = new System.Windows.Forms.Padding(3);
-            this.CryptoGetter.Size = new System.Drawing.Size(755, 393);
+            this.CryptoGetter.Size = new System.Drawing.Size(755, 467);
             this.CryptoGetter.TabIndex = 2;
             this.CryptoGetter.Text = "CryptoGetter";
             this.CryptoGetter.UseVisualStyleBackColor = true;
@@ -261,6 +265,8 @@ namespace AntaresUtilsNetFramework
             // 
             // GeometriesPage
             // 
+            this.GeometriesPage.Controls.Add(this.label11);
+            this.GeometriesPage.Controls.Add(this.AgregationRecipeNameBox);
             this.GeometriesPage.Controls.Add(this.SendButton);
             this.GeometriesPage.Controls.Add(this.GeometryGridView);
             this.GeometriesPage.Controls.Add(this.RecipesBox);
@@ -273,17 +279,35 @@ namespace AntaresUtilsNetFramework
             this.GeometriesPage.Location = new System.Drawing.Point(4, 29);
             this.GeometriesPage.Name = "GeometriesPage";
             this.GeometriesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.GeometriesPage.Size = new System.Drawing.Size(755, 393);
+            this.GeometriesPage.Size = new System.Drawing.Size(755, 467);
             this.GeometriesPage.TabIndex = 0;
             this.GeometriesPage.Text = "Aggregation Geometries";
             this.GeometriesPage.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 92);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 20);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Name";
+            // 
+            // AgregationRecipeNameBox
+            // 
+            this.AgregationRecipeNameBox.Location = new System.Drawing.Point(76, 89);
+            this.AgregationRecipeNameBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AgregationRecipeNameBox.Name = "AgregationRecipeNameBox";
+            this.AgregationRecipeNameBox.ReadOnly = true;
+            this.AgregationRecipeNameBox.Size = new System.Drawing.Size(598, 26);
+            this.AgregationRecipeNameBox.TabIndex = 9;
+            // 
             // SendButton
             // 
             this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.SendButton.Location = new System.Drawing.Point(682, 137);
+            this.SendButton.Location = new System.Drawing.Point(682, 198);
             this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(67, 207);
+            this.SendButton.Size = new System.Drawing.Size(67, 201);
             this.SendButton.TabIndex = 8;
             this.SendButton.Text = "Send to DB";
             this.SendButton.UseVisualStyleBackColor = true;
@@ -304,13 +328,13 @@ namespace AntaresUtilsNetFramework
             this.Y,
             this.Z,
             this.Total});
-            this.GeometryGridView.Location = new System.Drawing.Point(10, 87);
-            this.GeometryGridView.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.GeometryGridView.Location = new System.Drawing.Point(11, 129);
+            this.GeometryGridView.Margin = new System.Windows.Forms.Padding(8);
             this.GeometryGridView.MultiSelect = false;
             this.GeometryGridView.Name = "GeometryGridView";
             this.GeometryGridView.RowHeadersVisible = false;
             this.GeometryGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.GeometryGridView.Size = new System.Drawing.Size(664, 300);
+            this.GeometryGridView.Size = new System.Drawing.Size(660, 327);
             this.GeometryGridView.TabIndex = 7;
             this.GeometryGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
             // 
@@ -362,7 +386,6 @@ namespace AntaresUtilsNetFramework
             // 
             // RecipesBox
             // 
-            this.RecipesBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RecipesBox.FormattingEnabled = true;
             this.RecipesBox.Location = new System.Drawing.Point(76, 50);
             this.RecipesBox.Name = "RecipesBox";
@@ -420,6 +443,8 @@ namespace AntaresUtilsNetFramework
             // 
             // RecipePage
             // 
+            this.RecipePage.Controls.Add(this.MaterialNameTextBox);
+            this.RecipePage.Controls.Add(this.label12);
             this.RecipePage.Controls.Add(this.UpdateDbButton);
             this.RecipePage.Controls.Add(this.LoadFromFileButton);
             this.RecipePage.Controls.Add(this.SaveToFileButton);
@@ -433,14 +458,32 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.Location = new System.Drawing.Point(4, 29);
             this.RecipePage.Name = "RecipePage";
             this.RecipePage.Padding = new System.Windows.Forms.Padding(3);
-            this.RecipePage.Size = new System.Drawing.Size(755, 393);
+            this.RecipePage.Size = new System.Drawing.Size(755, 467);
             this.RecipePage.TabIndex = 1;
             this.RecipePage.Text = "Recipes";
             this.RecipePage.UseVisualStyleBackColor = true;
             // 
+            // MaterialNameTextBox
+            // 
+            this.MaterialNameTextBox.Location = new System.Drawing.Point(76, 89);
+            this.MaterialNameTextBox.Margin = new System.Windows.Forms.Padding(8);
+            this.MaterialNameTextBox.Name = "MaterialNameTextBox";
+            this.MaterialNameTextBox.ReadOnly = true;
+            this.MaterialNameTextBox.Size = new System.Drawing.Size(548, 26);
+            this.MaterialNameTextBox.TabIndex = 14;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 20);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Name";
+            // 
             // UpdateDbButton
             // 
-            this.UpdateDbButton.Location = new System.Drawing.Point(630, 359);
+            this.UpdateDbButton.Location = new System.Drawing.Point(630, 433);
             this.UpdateDbButton.Name = "UpdateDbButton";
             this.UpdateDbButton.Size = new System.Drawing.Size(119, 28);
             this.UpdateDbButton.TabIndex = 12;
@@ -450,7 +493,7 @@ namespace AntaresUtilsNetFramework
             // 
             // LoadFromFileButton
             // 
-            this.LoadFromFileButton.Location = new System.Drawing.Point(630, 199);
+            this.LoadFromFileButton.Location = new System.Drawing.Point(630, 224);
             this.LoadFromFileButton.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
             this.LoadFromFileButton.Name = "LoadFromFileButton";
             this.LoadFromFileButton.Size = new System.Drawing.Size(119, 28);
@@ -461,7 +504,7 @@ namespace AntaresUtilsNetFramework
             // 
             // SaveToFileButton
             // 
-            this.SaveToFileButton.Location = new System.Drawing.Point(630, 134);
+            this.SaveToFileButton.Location = new System.Drawing.Point(630, 159);
             this.SaveToFileButton.Name = "SaveToFileButton";
             this.SaveToFileButton.Size = new System.Drawing.Size(119, 28);
             this.SaveToFileButton.TabIndex = 10;
@@ -479,11 +522,11 @@ namespace AntaresUtilsNetFramework
             this.Column1,
             this.Column3,
             this.Column4});
-            this.RecipesGridView.Location = new System.Drawing.Point(10, 87);
+            this.RecipesGridView.Location = new System.Drawing.Point(10, 126);
             this.RecipesGridView.Name = "RecipesGridView";
             this.RecipesGridView.ReadOnly = true;
             this.RecipesGridView.RowHeadersVisible = false;
-            this.RecipesGridView.Size = new System.Drawing.Size(614, 300);
+            this.RecipesGridView.Size = new System.Drawing.Size(614, 335);
             this.RecipesGridView.TabIndex = 9;
             // 
             // RecipeID
@@ -516,7 +559,6 @@ namespace AntaresUtilsNetFramework
             // 
             // GMIDBox
             // 
-            this.GMIDBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GMIDBox.DropDownWidth = 144;
             this.GMIDBox.FormattingEnabled = true;
             this.GMIDBox.Location = new System.Drawing.Point(76, 50);
@@ -578,7 +620,7 @@ namespace AntaresUtilsNetFramework
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 450);
+            this.ClientSize = new System.Drawing.Size(781, 524);
             this.Controls.Add(this.MainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -648,6 +690,10 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.TextBox AgregationRecipeNameBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox MaterialNameTextBox;
+        private System.Windows.Forms.Label label12;
     }
 }
 

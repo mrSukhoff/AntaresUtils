@@ -118,6 +118,8 @@ namespace AntaresUtilsNetFramework
                 {
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
                 }
+
+                AgregationRecipeNameBox.Text = au.GetRecipeName(RecipesBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -219,6 +221,8 @@ namespace AntaresUtilsNetFramework
                     RecipesGridView.Rows.Add(r.RecipeId, r.LineId, r.ItemType, r.Total);
                 }
                 _recipeGeometries = recipeGeometryList;
+
+                MaterialNameTextBox.Text = au.GetMaterialName(GMIDBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
