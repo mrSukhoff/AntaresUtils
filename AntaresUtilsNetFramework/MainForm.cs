@@ -119,7 +119,7 @@ namespace AntaresUtilsNetFramework
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
                 }
 
-                AgregationRecipeNameBox.Text = au.GetRecipeName(RecipesBox.SelectedItem.ToString());
+                RecipeNameTextBox.Text = au.GetRecipeName(RecipesBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -301,19 +301,21 @@ namespace AntaresUtilsNetFramework
             SgtinBox.Text = "";
             GtinBox.Text = "";
             SerialBox.Text = "";
+            
             //Geometry
             RecipesBox.Items.Clear();
             RecipesBox.Text = "";
             GeometryGridView.Rows.Clear();
-            
+            RecipeNameTextBox.Text = "";
+
             //Recipes
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
             _recipeGeometries = null;
+            MaterialNameTextBox.Text = "";
 
             au.Disconnect();
-            
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -417,6 +419,18 @@ namespace AntaresUtilsNetFramework
 
             string path = saveFileDialog.FileName;
             DMPictureBox.Image.Save(path);
+        }
+
+        //при вставке текста выбирает этот элемент
+        private void RecipesBox_TextChanged(object sender, EventArgs e)
+        {
+            RecipesBox.SelectedItem = RecipesBox.Text;
+        }
+
+        //при вставке текста выбирает этот элемент
+        private void GMIDBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GMIDBox.SelectedItem = GMIDBox.Text;
         }
     }
 

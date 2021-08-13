@@ -49,7 +49,7 @@ namespace AntaresUtilsNetFramework
             this.CryptoServerBox = new System.Windows.Forms.ComboBox();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.AgregationRecipeNameBox = new System.Windows.Forms.TextBox();
+            this.RecipeNameTextBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
             this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -266,7 +266,7 @@ namespace AntaresUtilsNetFramework
             // GeometriesPage
             // 
             this.GeometriesPage.Controls.Add(this.label11);
-            this.GeometriesPage.Controls.Add(this.AgregationRecipeNameBox);
+            this.GeometriesPage.Controls.Add(this.RecipeNameTextBox);
             this.GeometriesPage.Controls.Add(this.SendButton);
             this.GeometriesPage.Controls.Add(this.GeometryGridView);
             this.GeometriesPage.Controls.Add(this.RecipesBox);
@@ -293,14 +293,14 @@ namespace AntaresUtilsNetFramework
             this.label11.TabIndex = 10;
             this.label11.Text = "Name";
             // 
-            // AgregationRecipeNameBox
+            // RecipeNameTextBox
             // 
-            this.AgregationRecipeNameBox.Location = new System.Drawing.Point(76, 89);
-            this.AgregationRecipeNameBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.AgregationRecipeNameBox.Name = "AgregationRecipeNameBox";
-            this.AgregationRecipeNameBox.ReadOnly = true;
-            this.AgregationRecipeNameBox.Size = new System.Drawing.Size(598, 26);
-            this.AgregationRecipeNameBox.TabIndex = 9;
+            this.RecipeNameTextBox.Location = new System.Drawing.Point(76, 89);
+            this.RecipeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.RecipeNameTextBox.Name = "RecipeNameTextBox";
+            this.RecipeNameTextBox.ReadOnly = true;
+            this.RecipeNameTextBox.Size = new System.Drawing.Size(598, 26);
+            this.RecipeNameTextBox.TabIndex = 9;
             // 
             // SendButton
             // 
@@ -391,6 +391,7 @@ namespace AntaresUtilsNetFramework
             this.RecipesBox.Name = "RecipesBox";
             this.RecipesBox.Size = new System.Drawing.Size(144, 28);
             this.RecipesBox.TabIndex = 5;
+            this.RecipesBox.TextChanged += new System.EventHandler(this.RecipesBox_TextChanged);
             // 
             // GetGeometryButton
             // 
@@ -565,6 +566,7 @@ namespace AntaresUtilsNetFramework
             this.GMIDBox.Name = "GMIDBox";
             this.GMIDBox.Size = new System.Drawing.Size(144, 28);
             this.GMIDBox.TabIndex = 8;
+            this.GMIDBox.SelectedIndexChanged += new System.EventHandler(this.GMIDBox_SelectedIndexChanged);
             // 
             // GetRecipeListButton
             // 
@@ -690,7 +692,7 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.TextBox AgregationRecipeNameBox;
+        private System.Windows.Forms.TextBox RecipeNameTextBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox MaterialNameTextBox;
         private System.Windows.Forms.Label label12;
