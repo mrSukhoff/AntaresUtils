@@ -29,6 +29,7 @@ namespace AntaresUtilsNetFramework
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.CryptoGetter = new System.Windows.Forms.TabPage();
             this.CryptoCodeBox = new System.Windows.Forms.TextBox();
@@ -66,16 +67,16 @@ namespace AntaresUtilsNetFramework
             this.LoadFromFileButton = new System.Windows.Forms.Button();
             this.SaveToFileButton = new System.Windows.Forms.Button();
             this.RecipesGridView = new System.Windows.Forms.DataGridView();
+            this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GMIDBox = new System.Windows.Forms.ComboBox();
             this.GetRecipeListButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.GetGMIDsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
-            this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -233,7 +234,7 @@ namespace AntaresUtilsNetFramework
             // 
             this.GetCryptocodeButton.Location = new System.Drawing.Point(77, 136);
             this.GetCryptocodeButton.Name = "GetCryptocodeButton";
-            this.GetCryptocodeButton.Size = new System.Drawing.Size(134, 28);
+            this.GetCryptocodeButton.Size = new System.Drawing.Size(144, 28);
             this.GetCryptocodeButton.TabIndex = 5;
             this.GetCryptocodeButton.Text = "Get Cryptocode";
             this.GetCryptocodeButton.UseVisualStyleBackColor = true;
@@ -250,10 +251,12 @@ namespace AntaresUtilsNetFramework
             // 
             // CryptoServerBox
             // 
+            this.CryptoServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CryptoServerBox.DropDownWidth = 144;
             this.CryptoServerBox.FormattingEnabled = true;
             this.CryptoServerBox.Location = new System.Drawing.Point(77, 6);
             this.CryptoServerBox.Name = "CryptoServerBox";
-            this.CryptoServerBox.Size = new System.Drawing.Size(134, 28);
+            this.CryptoServerBox.Size = new System.Drawing.Size(144, 28);
             this.CryptoServerBox.TabIndex = 3;
             // 
             // GeometriesPage
@@ -359,18 +362,19 @@ namespace AntaresUtilsNetFramework
             // 
             // RecipesBox
             // 
+            this.RecipesBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RecipesBox.FormattingEnabled = true;
             this.RecipesBox.Location = new System.Drawing.Point(76, 50);
             this.RecipesBox.Name = "RecipesBox";
-            this.RecipesBox.Size = new System.Drawing.Size(134, 28);
+            this.RecipesBox.Size = new System.Drawing.Size(144, 28);
             this.RecipesBox.TabIndex = 5;
             // 
             // GetGeometryButton
             // 
-            this.GetGeometryButton.Location = new System.Drawing.Point(222, 50);
+            this.GetGeometryButton.Location = new System.Drawing.Point(231, 49);
             this.GetGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetGeometryButton.Name = "GetGeometryButton";
-            this.GetGeometryButton.Size = new System.Drawing.Size(134, 28);
+            this.GetGeometryButton.Size = new System.Drawing.Size(144, 28);
             this.GetGeometryButton.TabIndex = 4;
             this.GetGeometryButton.Text = "Get Geometry";
             this.GetGeometryButton.UseVisualStyleBackColor = true;
@@ -387,10 +391,10 @@ namespace AntaresUtilsNetFramework
             // 
             // GetRecipesButton
             // 
-            this.GetRecipesButton.Location = new System.Drawing.Point(222, 6);
+            this.GetRecipesButton.Location = new System.Drawing.Point(232, 6);
             this.GetRecipesButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetRecipesButton.Name = "GetRecipesButton";
-            this.GetRecipesButton.Size = new System.Drawing.Size(134, 28);
+            this.GetRecipesButton.Size = new System.Drawing.Size(144, 28);
             this.GetRecipesButton.TabIndex = 2;
             this.GetRecipesButton.Text = "Get Recipes";
             this.GetRecipesButton.UseVisualStyleBackColor = true;
@@ -407,10 +411,11 @@ namespace AntaresUtilsNetFramework
             // 
             // GeometryServerBox
             // 
+            this.GeometryServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GeometryServerBox.FormattingEnabled = true;
             this.GeometryServerBox.Location = new System.Drawing.Point(77, 6);
             this.GeometryServerBox.Name = "GeometryServerBox";
-            this.GeometryServerBox.Size = new System.Drawing.Size(134, 28);
+            this.GeometryServerBox.Size = new System.Drawing.Size(144, 28);
             this.GeometryServerBox.TabIndex = 0;
             // 
             // RecipePage
@@ -481,62 +486,6 @@ namespace AntaresUtilsNetFramework
             this.RecipesGridView.Size = new System.Drawing.Size(614, 300);
             this.RecipesGridView.TabIndex = 9;
             // 
-            // GMIDBox
-            // 
-            this.GMIDBox.FormattingEnabled = true;
-            this.GMIDBox.Location = new System.Drawing.Point(76, 50);
-            this.GMIDBox.Name = "GMIDBox";
-            this.GMIDBox.Size = new System.Drawing.Size(134, 28);
-            this.GMIDBox.TabIndex = 8;
-            // 
-            // GetRecipeListButton
-            // 
-            this.GetRecipeListButton.Location = new System.Drawing.Point(221, 50);
-            this.GetRecipeListButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetRecipeListButton.Name = "GetRecipeListButton";
-            this.GetRecipeListButton.Size = new System.Drawing.Size(134, 28);
-            this.GetRecipeListButton.TabIndex = 7;
-            this.GetRecipeListButton.Text = "Get Recipes";
-            this.GetRecipeListButton.UseVisualStyleBackColor = true;
-            this.GetRecipeListButton.Click += new System.EventHandler(this.GetRecipeListButton_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 20);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "GMID";
-            // 
-            // GetGMIDsButton
-            // 
-            this.GetGMIDsButton.Location = new System.Drawing.Point(222, 6);
-            this.GetGMIDsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetGMIDsButton.Name = "GetGMIDsButton";
-            this.GetGMIDsButton.Size = new System.Drawing.Size(134, 28);
-            this.GetGMIDsButton.TabIndex = 5;
-            this.GetGMIDsButton.Text = "Get GMIDs";
-            this.GetGMIDsButton.UseVisualStyleBackColor = true;
-            this.GetGMIDsButton.Click += new System.EventHandler(this.GetGMIDsButton_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Server";
-            // 
-            // RecipesServerBox
-            // 
-            this.RecipesServerBox.FormattingEnabled = true;
-            this.RecipesServerBox.Location = new System.Drawing.Point(77, 6);
-            this.RecipesServerBox.Name = "RecipesServerBox";
-            this.RecipesServerBox.Size = new System.Drawing.Size(134, 28);
-            this.RecipesServerBox.TabIndex = 3;
-            // 
             // RecipeID
             // 
             this.RecipeID.HeaderText = "RecipeID";
@@ -565,6 +514,66 @@ namespace AntaresUtilsNetFramework
             this.Column4.ReadOnly = true;
             this.Column4.Width = 130;
             // 
+            // GMIDBox
+            // 
+            this.GMIDBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GMIDBox.DropDownWidth = 144;
+            this.GMIDBox.FormattingEnabled = true;
+            this.GMIDBox.Location = new System.Drawing.Point(76, 50);
+            this.GMIDBox.Name = "GMIDBox";
+            this.GMIDBox.Size = new System.Drawing.Size(144, 28);
+            this.GMIDBox.TabIndex = 8;
+            // 
+            // GetRecipeListButton
+            // 
+            this.GetRecipeListButton.Location = new System.Drawing.Point(231, 49);
+            this.GetRecipeListButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetRecipeListButton.Name = "GetRecipeListButton";
+            this.GetRecipeListButton.Size = new System.Drawing.Size(144, 28);
+            this.GetRecipeListButton.TabIndex = 7;
+            this.GetRecipeListButton.Text = "Get Recipes";
+            this.GetRecipeListButton.UseVisualStyleBackColor = true;
+            this.GetRecipeListButton.Click += new System.EventHandler(this.GetRecipeListButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "GMID";
+            // 
+            // GetGMIDsButton
+            // 
+            this.GetGMIDsButton.Location = new System.Drawing.Point(231, 6);
+            this.GetGMIDsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetGMIDsButton.Name = "GetGMIDsButton";
+            this.GetGMIDsButton.Size = new System.Drawing.Size(144, 28);
+            this.GetGMIDsButton.TabIndex = 5;
+            this.GetGMIDsButton.Text = "Get GMIDs";
+            this.GetGMIDsButton.UseVisualStyleBackColor = true;
+            this.GetGMIDsButton.Click += new System.EventHandler(this.GetGMIDsButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Server";
+            // 
+            // RecipesServerBox
+            // 
+            this.RecipesServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RecipesServerBox.DropDownWidth = 144;
+            this.RecipesServerBox.FormattingEnabled = true;
+            this.RecipesServerBox.Location = new System.Drawing.Point(77, 6);
+            this.RecipesServerBox.Name = "RecipesServerBox";
+            this.RecipesServerBox.Size = new System.Drawing.Size(144, 28);
+            this.RecipesServerBox.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -572,6 +581,7 @@ namespace AntaresUtilsNetFramework
             this.ClientSize = new System.Drawing.Size(781, 450);
             this.Controls.Add(this.MainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Antares Vision utilities by S.M.S.";

@@ -255,7 +255,7 @@ namespace AntaresUtilsNetFramework
         //Загружает список рецептов с геометрией из файла
         private void LoadFromFileButton_Click(object sender, EventArgs e)
         {
-            if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
+            if (GMIDBox.Items.Count == 0) return;
             OpenFileDialog dialog = new OpenFileDialog
             {
                 DefaultExt = "xml",
