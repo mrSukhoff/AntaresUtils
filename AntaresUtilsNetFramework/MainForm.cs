@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+
 using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
@@ -248,12 +248,8 @@ namespace AntaresUtilsNetFramework
                 GMID = GMIDBox.SelectedItem.ToString(),
                 ListOfrecipeGeometries = _recipeGeometries
             };
-            XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
-            // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, r);
-            }
+            r.Save(filename);
+
         }
         
         //Загружает список рецептов с геометрией из файла
@@ -270,12 +266,7 @@ namespace AntaresUtilsNetFramework
 
             RecipesGridView.Rows.Clear();
 
-            XmlSerializer deserializer = new XmlSerializer(typeof(GMIDGeometry));
-            GMIDGeometry r = new GMIDGeometry();
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
-            {
-                r=(GMIDGeometry)deserializer.Deserialize(fs);
-            }
+            GMIDGeometry r = GMIDGeometry.Load(filename);
 
             _recipeGeometries = r.ListOfrecipeGeometries;
             GMIDBox.SelectedItem = r.GMID;
@@ -432,20 +423,5 @@ namespace AntaresUtilsNetFramework
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
-    }
-
-    //Формат списка серверов
-    public class Server
-    {
-        public string Name { get; set; }
-        public string FQN { get; set; }
-        public string DBName { get; set; }
-    }
-
-    //Описывает структуру объектов для сериализации
-    public class GMIDGeometry
-    {
-        public string GMID;
-        public List<RecipeGeometry> ListOfrecipeGeometries;
     }
 }
