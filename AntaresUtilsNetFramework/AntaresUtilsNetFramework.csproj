@@ -70,7 +70,7 @@
     <Compile Include="Antares Utilities\GMIDGeometry.cs" />
     <Compile Include="Antares Utilities\Package.cs" />
     <Compile Include="Antares Utilities\RecipeGeometry.cs" />
-    <Compile Include="Antares Utilities\Server.cs" />
+    <Compile Include="Antares Utilities\ServerList.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

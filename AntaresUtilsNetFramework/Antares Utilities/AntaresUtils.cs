@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace AntaresUtilsNetFramework
+namespace AntaresUtilities
 {
     public class AntaresUtils
     {

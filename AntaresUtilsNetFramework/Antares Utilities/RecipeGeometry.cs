@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AntaresUtilsNetFramework.Antares_Utilities
+namespace AntaresUtilities
 {
     public class RecipeGeometry : IComparable<RecipeGeometry>
     {

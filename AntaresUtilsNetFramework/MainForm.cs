@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-
+using AntaresUtilities;
 using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
@@ -12,73 +10,29 @@ namespace AntaresUtilsNetFramework
     public partial class MainForm : Form
     {
         //Список используемых серверов
-        List<Server> Servers;
+        ServerList Servers;
         
         readonly AntaresUtils au = new AntaresUtils();
         
         //текущая информаци о геометрии рецепта
         private List<RecipeGeometry> _recipeGeometries;
+        
         public MainForm()
         {
             InitializeComponent();
             //Создаем список серверов
-            LoadServerList();
+            Servers = new ServerList();
+                
             //заполняем список серверов
-            foreach (var s in Servers)
+            foreach (string s in Servers.ServerNameList)
             {
-                CryptoServerBox.Items.Add(s.Name);
-                GeometryServerBox.Items.Add(s.Name);
-                RecipesServerBox.Items.Add(s.Name);
+                CryptoServerBox.Items.Add(s);
+                GeometryServerBox.Items.Add(s);
+                RecipesServerBox.Items.Add(s);
             }
             CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
-        }
-
-        //Загрузка списка серверов либо из файла либо, если файл не найден, только тестового
-        private void LoadServerList()
-        {
-            string path = @"server.ini";
-            if (File.Exists(path))
-            {
-                Servers = new List<Server>();
-                try
-                {
-                    List<string> lines = new List<string>();
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        string line;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            lines.Add(line);
-                        }
-                    }
-
-                    foreach (string l in lines)
-                    {
-                        string[] word = l.Split(' ');
-                        string name = word[0];
-                        string fqn = word[1];
-                        string dbname = word[2];
-                        Server server = new Server
-                        {
-                            Name = name,
-                            FQN = fqn,
-                            DBName = dbname
-                        };
-                        Servers.Add(server);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                Servers = new List<Server> { new Server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" } };
-            }
-            
         }
 
         //Получаем список рецептов с выбраного сервера
@@ -88,10 +42,7 @@ namespace AntaresUtilsNetFramework
             RecipesBox.Items.Clear();
             try
             {
-                string servername = GeometryServerBox.SelectedItem.ToString();
-                Server server = Servers.First(s => s.Name == servername);
-
-                au.Connect(server.FQN, server.DBName);
+                au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
 
                 foreach (string recipe in au.GetRecipeList())
                 {
@@ -190,10 +141,7 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             try
             {
-                string servername = RecipesServerBox.SelectedItem.ToString();
-                Server server = Servers.First(s => s.Name == servername);
-
-                au.Connect(server.FQN, server.DBName);
+                au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
 
                 foreach (string material in au.GetGMIDList())
                 {
@@ -321,9 +269,7 @@ namespace AntaresUtilsNetFramework
         {
             ClearCryptoResultFields();
 
-            string servername = CryptoServerBox.SelectedItem.ToString();
-            Server server = Servers.First(s => s.Name == servername);
-            au.Connect(server.FQN, server.DBName);
+            au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
             try
             {
                 Package package = new Package()
@@ -412,13 +358,13 @@ namespace AntaresUtilsNetFramework
             DMPictureBox.Image.Save(path);
         }
 
-        //при вставке текста выбирает этот элемент
+        //при вставке текста выбирает рецепт с тем же именем
         private void RecipesBox_TextChanged(object sender, EventArgs e)
         {
             RecipesBox.SelectedItem = RecipesBox.Text;
         }
 
-        //при вставке текста выбирает этот элемент
+        //при вставке текста выбирает материал с тем же именем
         private void GMIDBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             GMIDBox.SelectedItem = GMIDBox.Text;

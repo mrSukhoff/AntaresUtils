@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 using System.IO;
 
-namespace AntaresUtilsNetFramework.Antares_Utilities
+namespace AntaresUtilities
 {
     //Описывает структуру объектов для сериализации
     public class GMIDGeometry
