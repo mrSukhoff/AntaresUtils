@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
+
 
 namespace AntaresUtilities
 {
@@ -53,42 +53,37 @@ namespace AntaresUtilities
             if (File.Exists(path))
             {
                 _serverList = new List<_server>();
-                try
+                
+                List<string> lines = new List<string>();
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    List<string> lines = new List<string>();
-                    using (StreamReader sr = new StreamReader(path))
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        string line;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            lines.Add(line);
-                        }
-                    }
-
-                    foreach (string l in lines)
-                    {
-                        string[] word = l.Split(' ');
-                        string name = word[0];
-                        string fqn = word[1];
-                        string dbname = word[2];
-                        _server server = new _server
-                        {
-                            Name = name,
-                            FQN = fqn,
-                            DBName = dbname
-                        };
-                        _serverList.Add(server);
-                        _serverNameList.Add(server.Name);
+                        lines.Add(line);
                     }
                 }
-                catch (Exception ex)
+
+                foreach (string l in lines)
                 {
-                    MessageBox.Show(ex.Message);
+                    string[] word = l.Split(' ');
+                    string name = word[0];
+                    string fqn = word[1];
+                    string dbname = word[2];
+                    _server server = new _server
+                    {
+                        Name = name,
+                        FQN = fqn,
+                        DBName = dbname
+                    };
+                    _serverList.Add(server);
+                    _serverNameList.Add(server.Name);
                 }
             }
             else
             {
                 _serverList = new List<_server> { new _server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" } };
+                _serverNameList = new List<string> { "Иркутск" };
             }
         }
 
