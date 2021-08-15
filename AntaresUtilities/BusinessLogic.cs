@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace AntaresUtilities
 {
     class BusinessLogic
     {
+        
         AntaresUtils au = new AntaresUtils();
+        ServerList _listOfServer = new ServerList();
 
-        public List<string> GetRecipeList() 
+        //Получаем список рецептов с выбраного сервера
+        public List<string> GetRecipeList()
         {
-            au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
+            au.Connect(_listOfServer.SelectedServerFQN, _listOfServer.SelectedServerDBName);
 
+            List<string> result = new List<string>();
             foreach (string recipe in au.GetRecipeList())
             {
-                RecipesBox.Items.Add(recipe);
+                result.Add(recipe);
             }
-            RecipesBox.SelectedIndex = 0;
+            return result;
         }
-    
+
+        //Получаем с сервера геометрию выбраного рецепта
+        public List<RecipeGeometry> GetSelectedRecipeGeometrysList()
+        {
+            return au.GetRecipeGeometry();
+        }
     }
 }
-*/
