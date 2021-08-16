@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntaresUtilsNetFramework", "AntaresUtilsNetFramework\AntaresUtilsNetFramework.csproj", "{0B003F61-63BA-4BA6-B82E-BD51F598C063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntaresUtilitiesForNetFramework", "AntaresUtilsNetFramework\AntaresUtilitiesForNetFramework.csproj", "{0B003F61-63BA-4BA6-B82E-BD51F598C063}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntaresUtilities", "AntaresUtilities\AntaresUtilities.csproj", "{30AE4CEB-CE62-4C9D-B628-92E072F6AB80}"
 EndProject
