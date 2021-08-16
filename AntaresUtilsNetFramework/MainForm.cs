@@ -12,11 +12,11 @@ namespace AntaresUtilsNetFramework
         //Список используемых серверов
         ServerList Servers;
 
-        readonly DataMiner dm = new DataMiner();
+        //Фасад утилит
         BusinessLogic au = new BusinessLogic();
 
         //текущая информаци о геометрии рецепта
-        //private List<RecipeGeometry> _recipeGeometries;
+        private List<RecipeGeometry> _recipeGeometries;
         
         public MainForm()
         {
