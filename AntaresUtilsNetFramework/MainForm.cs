@@ -428,7 +428,7 @@ namespace AntaresUtilsNetFramework
         }
 
         //при вставке текста выбирает этот элемент
-        private void GMIDBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void GMIDBox_TextChanged(object sender, EventArgs e)
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
