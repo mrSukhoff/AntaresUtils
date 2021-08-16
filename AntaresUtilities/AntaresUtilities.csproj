@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntaresUtils.cs" />
+    <Compile Include="DataMiner.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="GMIDGeometry.cs" />
     <Compile Include="Package.cs" />

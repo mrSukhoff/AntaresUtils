@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace AntaresUtilities
 {
-    public class AntaresUtils
+    internal class DataMiner
     {
         private SqlConnection connection;
         private string _DBname;

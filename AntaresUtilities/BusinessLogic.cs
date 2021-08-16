@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 
 namespace AntaresUtilities
 {
-    class BusinessLogic
+    public class BusinessLogic
     {
         
-        AntaresUtils au = new AntaresUtils();
-        ServerList _listOfServer;
+        private DataMiner dm;
+        public ServerList ListOfServers;
 
-        public BusinessLogic(ServerList s)
+        public BusinessLogic()
         {
-            _listOfServer = s;
+            ListOfServers = new ServerList();
+            dm = new DataMiner();
         }
 
         //Получаем список рецептов с выбраного сервера
         public List<string> GetRecipeList()
         {
-            au.Connect(_listOfServer.SelectedServerFQN, _listOfServer.SelectedServerDBName);
+            dm.Connect(ListOfServers.SelectedServerFQN, ListOfServers.SelectedServerDBName);
 
             List<string> result = new List<string>();
-            foreach (string recipe in au.GetRecipeList())
+            foreach (string recipe in dm.GetRecipeList())
             {
                 result.Add(recipe);
             }
@@ -33,7 +34,44 @@ namespace AntaresUtilities
         //Получаем с сервера геометрию выбраного рецепта
         public List<RecipeGeometry> GetSelectedRecipeGeometrysList(string recipeID)
         {
-            return au.GetRecipeGeometry(recipeID);
+            return dm.GetRecipeGeometry(recipeID);
+        }
+
+        public string GetRecipeDescription(string recipeName)
+        {
+            return dm.GetRecipeName(recipeName);
+        }
+
+        public string GetMaterialDescription(string recipeName)
+        {
+            return dm.GetMaterialName(recipeName);
+        }
+
+        public void SaveRecipeGeometryToDb(List<RecipeGeometry> list)
+        {
+            dm.SetRecipeGeometry(list);
+        }
+
+        public List<string> GetMaterialsList()
+        {
+            dm.Connect(ListOfServers.SelectedServerFQN, ListOfServers.SelectedServerDBName);
+            return dm.GetGMIDList();
+        }
+
+        public List<RecipeGeometry> GetRecipesListByGMID(string gMID)
+        {
+            return dm.GetRecipesListByGMID(gMID);
+        }
+    
+        public void SaveMaterialGeometrysToDb(List<RecipeGeometry> list)
+        {
+            dm.SetRecipesGeometry(list);
+        }
+        
+        public Package GetCrypto(Package package)
+        {
+            dm.Connect(ListOfServers.SelectedServerFQN, ListOfServers.SelectedServerDBName);
+            return dm.GetCrypto(package);
         }
     }
 }

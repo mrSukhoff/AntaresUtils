@@ -11,18 +11,18 @@ namespace AntaresUtilsNetFramework
     {
         //Список используемых серверов
         ServerList Servers;
-        
-        readonly AntaresUtils au = new AntaresUtils();
-        
+
+        readonly DataMiner dm = new DataMiner();
+        BusinessLogic au = new BusinessLogic();
+
         //текущая информаци о геометрии рецепта
-        private List<RecipeGeometry> _recipeGeometries;
+        //private List<RecipeGeometry> _recipeGeometries;
         
         public MainForm()
         {
             InitializeComponent();
             //Создаем список серверов
-            Servers = new ServerList();
-                
+            Servers = au.ListOfServers;    
             //заполняем список серверов
             foreach (string s in Servers.ServerNameList)
             {
@@ -42,8 +42,6 @@ namespace AntaresUtilsNetFramework
             RecipesBox.Items.Clear();
             try
             {
-                au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
-
                 foreach (string recipe in au.GetRecipeList())
                 {
                     RecipesBox.Items.Add(recipe);
@@ -64,13 +62,13 @@ namespace AntaresUtilsNetFramework
             try
             {
                 
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometry(RecipesBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetSelectedRecipeGeometrysList(RecipesBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
                 }
 
-                RecipeNameTextBox.Text = au.GetRecipeName(RecipesBox.SelectedItem.ToString());
+                RecipeNameTextBox.Text = au.GetRecipeDescription(RecipesBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -103,7 +101,7 @@ namespace AntaresUtilsNetFramework
                 list.Add(r);
             }
 
-            au.SetRecipeGeometry(list);
+            au.SaveRecipeGeometryToDb(list);
         }
 
         //При изменении содержимого проверяет корректность и пересчитывает поля
@@ -141,9 +139,7 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             try
             {
-                au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
-
-                foreach (string material in au.GetGMIDList())
+                foreach (string material in au.GetMaterialsList())
                 {
                     GMIDBox.Items.Add(material);
                 }
@@ -162,7 +158,6 @@ namespace AntaresUtilsNetFramework
             if (GMIDBox.SelectedItem is null) return;
             try
             {
-
                 List<RecipeGeometry> recipeGeometryList = au.GetRecipesListByGMID(GMIDBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
@@ -170,7 +165,7 @@ namespace AntaresUtilsNetFramework
                 }
                 _recipeGeometries = recipeGeometryList;
 
-                MaterialNameTextBox.Text = au.GetMaterialName(GMIDBox.SelectedItem.ToString());
+                MaterialNameTextBox.Text = au.GetMaterialDescription(GMIDBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -197,7 +192,6 @@ namespace AntaresUtilsNetFramework
                 ListOfrecipeGeometries = _recipeGeometries
             };
             r.Save(filename);
-
         }
         
         //Загружает список рецептов с геометрией из файла
@@ -229,7 +223,6 @@ namespace AntaresUtilsNetFramework
             {
                 RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
             }
-              
         }
         
         //очистка при переключении вкладок
@@ -253,8 +246,6 @@ namespace AntaresUtilsNetFramework
             RecipesGridView.Rows.Clear();
             _recipeGeometries = null;
             MaterialNameTextBox.Text = "";
-
-            au.Disconnect();
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -262,14 +253,13 @@ namespace AntaresUtilsNetFramework
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
-            au.SetRecipesGeometry(_recipeGeometries);
+            au.SaveMaterialGeometrysToDb(_recipeGeometries);
         }
 
         private void GetCryptoСodeButton_Click(object sender, EventArgs e)
         {
             ClearCryptoResultFields();
 
-            au.Connect(Servers.SelectedServerFQN, Servers.SelectedServerDBName);
             try
             {
                 Package package = new Package()
@@ -334,7 +324,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
-        // Метод при изменении поля мерийного номера меняет SGTIN
+        // Метод при изменении поля cерийного номера меняет SGTIN
         private void SerialBox_TextChanged(object sender, EventArgs e)
         {
             if (SerialBox.Text.Length > 13) SerialBox.Text = SerialBox.Text.Substring(0, 13);
