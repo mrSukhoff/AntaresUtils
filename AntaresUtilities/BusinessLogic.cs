@@ -10,7 +10,12 @@ namespace AntaresUtilities
     {
         
         AntaresUtils au = new AntaresUtils();
-        ServerList _listOfServer = new ServerList();
+        ServerList _listOfServer;
+
+        public BusinessLogic(ServerList s)
+        {
+            _listOfServer = s;
+        }
 
         //Получаем список рецептов с выбраного сервера
         public List<string> GetRecipeList()
@@ -26,9 +31,9 @@ namespace AntaresUtilities
         }
 
         //Получаем с сервера геометрию выбраного рецепта
-        public List<RecipeGeometry> GetSelectedRecipeGeometrysList()
+        public List<RecipeGeometry> GetSelectedRecipeGeometrysList(string recipeID)
         {
-            return au.GetRecipeGeometry();
+            return au.GetRecipeGeometry(recipeID);
         }
     }
 }

@@ -262,6 +262,7 @@ namespace AntaresUtilsNetFramework
             this.CryptoServerBox.Name = "CryptoServerBox";
             this.CryptoServerBox.Size = new System.Drawing.Size(144, 28);
             this.CryptoServerBox.TabIndex = 3;
+            this.CryptoServerBox.SelectedIndexChanged += new System.EventHandler(this.CryptoServerBox_SelectedIndexChanged);
             // 
             // GeometriesPage
             // 
@@ -441,6 +442,7 @@ namespace AntaresUtilsNetFramework
             this.GeometryServerBox.Name = "GeometryServerBox";
             this.GeometryServerBox.Size = new System.Drawing.Size(144, 28);
             this.GeometryServerBox.TabIndex = 0;
+            this.GeometryServerBox.SelectedIndexChanged += new System.EventHandler(this.GeometryServerBox_SelectedIndexChanged);
             // 
             // RecipePage
             // 
@@ -617,6 +619,7 @@ namespace AntaresUtilsNetFramework
             this.RecipesServerBox.Name = "RecipesServerBox";
             this.RecipesServerBox.Size = new System.Drawing.Size(144, 28);
             this.RecipesServerBox.TabIndex = 3;
+            this.RecipesServerBox.SelectedIndexChanged += new System.EventHandler(this.RecipesServerBox_SelectedIndexChanged);
             // 
             // MainForm
             // 

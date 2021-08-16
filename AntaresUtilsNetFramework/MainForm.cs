@@ -369,5 +369,22 @@ namespace AntaresUtilsNetFramework
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void CryptoServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Servers.SelectServer(CryptoServerBox.SelectedItem.ToString());
+        }
+        
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void GeometryServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Servers.SelectServer(GeometryServerBox.SelectedItem.ToString());
+        }
+
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void RecipesServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Servers.SelectServer(RecipesServerBox.SelectedItem.ToString());
+        }
     }
 }

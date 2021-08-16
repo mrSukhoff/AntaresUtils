@@ -53,6 +53,7 @@ namespace AntaresUtilities
             if (File.Exists(path))
             {
                 _serverList = new List<_server>();
+                _serverNameList = new List<string>();
                 
                 List<string> lines = new List<string>();
                 using (StreamReader sr = new StreamReader(path))
@@ -95,7 +96,7 @@ namespace AntaresUtilities
         {
             _server selectedServer = null;
             selectedServer = _serverList.First( s => s.Name == name);
-            if (_selectedServer is null) throw new ArgumentException("Сервер не найден");
+            if (selectedServer is null) throw new ArgumentException("Сервер не найден");
             _selectedServer = selectedServer;
         }
 
