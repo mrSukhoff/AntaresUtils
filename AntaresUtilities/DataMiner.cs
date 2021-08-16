@@ -8,36 +8,28 @@ namespace AntaresUtilities
     {
         private SqlConnection connection;
         private string _DBname;
-        public bool IsConnected { get; private set; }
 
         /// <summary>
         /// Соединение с БД 
         /// </summary>
         /// <param name="serverAdress"></param>
         /// <param name="dBname"></param>
-        public void Connect(string serverAdress, string dBname)
+        internal void Connect(string serverAdress, string dBname)
         {
             Disconnect();
             string connectionString = "Data Source=" + serverAdress + ";Initial Catalog=" + dBname + ";Persist Security Info=True;User ID=tav;Password=tav";
             connection = new SqlConnection(connectionString);
             connection.Open();
             _DBname = dBname;
-            IsConnected = true;
         }
 
-        /// <summary>
-        /// Отключеие от БД
-        /// </summary>
-        public void Disconnect()
+        // Отключеие от БД
+        private void Disconnect()
         {
-            if (IsConnected)
+            if (connection != null)
             {
-                if (connection != null)
-                {
-                    connection.Close();
-                    _DBname = null;
-                    IsConnected = false;
-                }
+                connection.Close();
+                _DBname = null;
             }
         }
 
@@ -45,7 +37,7 @@ namespace AntaresUtilities
         /// Возвращает список рецептов из БД
         /// </summary>
         /// <returns></returns>
-        public List<string> GetRecipeList()
+        internal List<string> GetRecipeList()
         {
             List<string> results = new List<string>();
 
@@ -73,7 +65,7 @@ namespace AntaresUtilities
         /// </summary>
         /// <param name="recipeId">Идентификатора рецепта</param>
         /// <returns></returns>
-        public List<RecipeGeometry> GetRecipeGeometry(string recipeId)
+        internal List<RecipeGeometry> GetRecipeGeometry(string recipeId)
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
 
@@ -106,7 +98,7 @@ namespace AntaresUtilities
         /// Записывает в БД геометрию из каждого рецепта из списка
         /// </summary>
         /// <param name="recipeGeometries">Список рецептов</param>
-        public void SetRecipeGeometry(List<RecipeGeometry> recipeGeometries)
+        internal void SetRecipeGeometry(List<RecipeGeometry> recipeGeometries)
         {
             foreach (RecipeGeometry r in recipeGeometries)
             {
@@ -123,7 +115,7 @@ namespace AntaresUtilities
         /// Возвращает список материалов из БД
         /// </summary>
         /// <returns></returns>
-        public List<string> GetGMIDList()
+        internal List<string> GetGMIDList()
         {
             List<string> results = new List<string>();
 
@@ -151,7 +143,7 @@ namespace AntaresUtilities
         /// </summary>
         /// <param name="material"></param>
         /// <returns></returns>
-        public List<RecipeGeometry> GetRecipesListByGMID(string material)
+        internal List<RecipeGeometry> GetRecipesListAssociatedWithGMID(string material)
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
             //Создаем запрос к БД
@@ -178,9 +170,12 @@ namespace AntaresUtilities
             cmd.Dispose();
             return results;
         }
-        
 
-        public void SetRecipesGeometry(List<RecipeGeometry> recipes)
+        /// <summary>
+        /// Сохраняет геометрию списка рецептов
+        /// </summary>
+        /// <param name="recipes"></param>
+        internal void SaveMaterialGeometriesToDb(List<RecipeGeometry> recipes)
         {
             foreach (var r in recipes)
             {
@@ -191,13 +186,13 @@ namespace AntaresUtilities
                 cmd.Dispose();
             }
         }
-        
+
         /// <summary>
         /// Возвращает пакет со всеми заполнеными полями.
         /// </summary>
         /// <param name="package">В пакете должны быть заполнены GTIN и серийный номер</param>
         /// <returns></returns>
-        public Package GetCrypto(Package package)
+        internal Package GetCrypto(Package package)
         {
             //Получаем по GTIN его идентификатор.
             string GTINid = GetGtinId(package.GTIN);
@@ -212,7 +207,6 @@ namespace AntaresUtilities
             return GetCryptoData(package, GTINid);
         }
 
-
         /// <summary>
         /// Метод запрашивает в БД идентификатор GTINа
         /// </summary>
@@ -220,27 +214,8 @@ namespace AntaresUtilities
         /// <returns></returns>
         private string GetGtinId(string gtin)
         {
-            //Результат по умолчанию
-            string result = "";
-
-            //Создаем запрос к БД
             string cmdString = String.Format("SELECT [Id] FROM [{0}].[dbo].[NtinDefinition] WHERE Ntin = '{1}'", _DBname, gtin);
-            SqlCommand cmd = new SqlCommand(cmdString, connection);
-            // И выполняем его
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            //Читаем все результаты
-            while (reader.Read())
-            {
-                //но запоминаем последний :)
-                result = reader.GetValue(0).ToString();
-            }
-
-            //Всё закрываем
-            reader.Close();
-            cmd.Dispose();
-
-            return result;
+            return ExecuteQuery(cmdString);
         }
 
         /// <summary>
@@ -288,39 +263,29 @@ namespace AntaresUtilities
         /// </summary>
         /// <param name="recipeName"></param>
         /// <returns></returns>
-        public string GetRecipeName(string recipeName)
+        internal string GetRecipeDescription(string recipeName)
         {
-            //Формируем запрос
             string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] Where Id='{1}'", _DBname, recipeName);
-            SqlCommand cmd = new SqlCommand(cmdString, connection);
-
-            //И выполняем его
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            string result = "";
-            //Читаем по порядку все ответы
-            while (reader.Read())
-            {
-                result = reader.GetValue(0).ToString();
-            }
-            reader.Close();
-            cmd.Dispose();
-            if (result == "") throw new Exception("Recipe description doesn't found!");
-            return result;
+            return ExecuteQuery(cmdString);
         }
-
 
         /// <summary>
         /// Возвращает описание материала по его имени
         /// </summary>
         /// <param name="recipeName"></param>
         /// <returns></returns>
-        public string GetMaterialName(string materialName)
+        internal string GetMaterialDescription(string materialName)
+        {
+            string str = string.Format("SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'", _DBname, materialName);
+            return ExecuteQuery(str);
+        }
+
+        //выполняет команду и возвращает результат
+        private string ExecuteQuery(string cmdString)
         {
             //Формируем запрос
-            string cmdString = String.Format("SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'", _DBname, materialName);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            
+
             //И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -332,9 +297,8 @@ namespace AntaresUtilities
             }
             reader.Close();
             cmd.Dispose();
-            if (result == "") throw new Exception("Material description doesn't found!");
+
             return result;
         }
-
     }
 }

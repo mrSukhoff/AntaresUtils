@@ -9,22 +9,15 @@ namespace AntaresUtilsNetFramework
 {
     public partial class MainForm : Form
     {
-        //Список используемых серверов
-        readonly ServerList Servers;
-
         //Фасад утилит
         readonly BusinessLogic au = new BusinessLogic();
 
-        //текущая информаци о геометрии рецепта
-        private List<RecipeGeometry> _recipeGeometries;
-        
         public MainForm()
         {
             InitializeComponent();
-            //Создаем список серверов
-            Servers = au.ListOfServers;    
+
             //заполняем список серверов
-            foreach (string s in Servers.ServerNameList)
+            foreach (string s in au.ServerNames)
             {
                 CryptoServerBox.Items.Add(s);
                 GeometryServerBox.Items.Add(s);
@@ -62,7 +55,7 @@ namespace AntaresUtilsNetFramework
             try
             {
                 
-                List<RecipeGeometry> recipeGeometryList = au.GetSelectedRecipeGeometrysList(RecipesBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetSelectedRecipeGeometriesList(RecipesBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
@@ -107,7 +100,7 @@ namespace AntaresUtilsNetFramework
         //При изменении содержимого проверяет корректность и пересчитывает поля
         private void GeometryGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string message = "Должно быть целое положительное число!";
+            string message = "Must be a positive integer!";
             for (int i = 0; i < GeometryGridView.Rows.Count; i++)
             {
                 if  (!int.TryParse(GeometryGridView[2,i].Value.ToString(),out int x) || x<1)
@@ -158,12 +151,11 @@ namespace AntaresUtilsNetFramework
             if (GMIDBox.SelectedItem is null) return;
             try
             {
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListByGMID(GMIDBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListAssociatedWithGMID(GMIDBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     RecipesGridView.Rows.Add(r.RecipeId, r.LineId, r.ItemType, r.Total);
                 }
-                _recipeGeometries = recipeGeometryList;
 
                 MaterialNameTextBox.Text = au.GetMaterialDescription(GMIDBox.SelectedItem.ToString());
             }
@@ -185,13 +177,7 @@ namespace AntaresUtilsNetFramework
             };
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             string filename = dialog.FileName;
-
-            GMIDGeometry r = new GMIDGeometry
-            {
-                GMID = GMIDBox.SelectedItem.ToString(),
-                ListOfrecipeGeometries = _recipeGeometries
-            };
-            r.Save(filename);
+            au.SaveMaterialGeometriesToFile(filename);
         }
         
         //Загружает список рецептов с геометрией из файла
@@ -208,9 +194,8 @@ namespace AntaresUtilsNetFramework
 
             RecipesGridView.Rows.Clear();
 
-            GMIDGeometry r = GMIDGeometry.Load(filename);
+            GMIDGeometry r = au.LoadMaterialGeometriesfromFile(filename);
 
-            _recipeGeometries = r.ListOfrecipeGeometries;
             GMIDBox.SelectedItem = r.GMID;
             if (GMIDBox.SelectedItem.ToString() != r.GMID) 
             {
@@ -219,7 +204,7 @@ namespace AntaresUtilsNetFramework
                 return;
             }
             
-            foreach (var rg in _recipeGeometries)
+            foreach (var rg in r.ListOfrecipeGeometries)
             {
                 RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
             }
@@ -244,16 +229,17 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
-            _recipeGeometries = null;
+            //_recipeGeometries = null;
+            au.Clear();
             MaterialNameTextBox.Text = "";
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
+            if (GMIDBox.SelectedItem is null || RecipesGridView.Rows.Count == 0) return;
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
-            if (result != DialogResult.Yes) return;
-            au.SaveMaterialGeometrysToDb(_recipeGeometries);
+            if (result == DialogResult.Yes) au.SaveMaterialGeometriesToDb();
         }
 
         private void GetCryptoСodeButton_Click(object sender, EventArgs e)
@@ -361,22 +347,23 @@ namespace AntaresUtilsNetFramework
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
+        
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void CryptoServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Servers.SelectServer(CryptoServerBox.SelectedItem.ToString());
+            au.SelectServer(CryptoServerBox.SelectedItem.ToString());
         }
         
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void GeometryServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Servers.SelectServer(GeometryServerBox.SelectedItem.ToString());
+            au.SelectServer(GeometryServerBox.SelectedItem.ToString());
         }
 
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void RecipesServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Servers.SelectServer(RecipesServerBox.SelectedItem.ToString());
+            au.SelectServer(RecipesServerBox.SelectedItem.ToString());
         }
     }
 }
