@@ -78,7 +78,7 @@ namespace AntaresUtilities
             }
             else
             {
-                _serverList.Add(new Server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" });
+                _serverList.Add(new Server { Name = "Иркутск_ТСТ", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" });
                 _serverNameList.Add("Иркутск_ТСТ");
             }
         }
