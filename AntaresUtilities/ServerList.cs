@@ -43,16 +43,16 @@ namespace AntaresUtilities
         }
 
         
-        private List<_server> _serverList;
-        private List<string> _serverNameList;
-        private _server _selectedServer;
+        private readonly List<Server> _serverList;
+        private readonly List<string> _serverNameList;
+        private Server _selectedServer;
 
         public ServerList()
         {
             string path = @"server.ini";
             if (File.Exists(path))
             {
-                _serverList = new List<_server>();
+                _serverList = new List<Server>();
                 _serverNameList = new List<string>();
                 
                 List<string> lines = new List<string>();
@@ -71,7 +71,7 @@ namespace AntaresUtilities
                     string name = word[0];
                     string fqn = word[1];
                     string dbname = word[2];
-                    _server server = new _server
+                    Server server = new Server
                     {
                         Name = name,
                         FQN = fqn,
@@ -83,7 +83,7 @@ namespace AntaresUtilities
             }
             else
             {
-                _serverList = new List<_server> { new _server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" } };
+                _serverList = new List<Server> { new Server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" } };
                 _serverNameList = new List<string> { "Иркутск" };
             }
         }
@@ -94,13 +94,13 @@ namespace AntaresUtilities
         /// <param name="name">название сервера</param>
         public void SelectServer(string name) 
         {
-            _server selectedServer = null;
+            Server selectedServer = null;
             selectedServer = _serverList.First( s => s.Name == name);
             if (selectedServer is null) throw new ArgumentException("Сервер не найден");
             _selectedServer = selectedServer;
         }
 
-        class _server 
+        class Server 
         {
             public string Name { get; set; }
             public string FQN { get; set; }

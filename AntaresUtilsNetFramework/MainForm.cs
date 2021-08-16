@@ -10,10 +10,10 @@ namespace AntaresUtilsNetFramework
     public partial class MainForm : Form
     {
         //Список используемых серверов
-        ServerList Servers;
+        readonly ServerList Servers;
 
         //Фасад утилит
-        BusinessLogic au = new BusinessLogic();
+        readonly BusinessLogic au = new BusinessLogic();
 
         //текущая информаци о геометрии рецепта
         private List<RecipeGeometry> _recipeGeometries;
@@ -339,9 +339,11 @@ namespace AntaresUtilsNetFramework
         {
             if (DMPictureBox.Image == null) return;
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = "bmp";
-            saveFileDialog.FileName = SgtinBox.Text;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                DefaultExt = "bmp",
+                FileName = SgtinBox.Text
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string path = saveFileDialog.FileName;

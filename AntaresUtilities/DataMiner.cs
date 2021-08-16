@@ -257,7 +257,7 @@ namespace AntaresUtilities
             //Формируем запрос
             string cmdString = String.Format("SELECT [VariableName] ,[VariableValue] FROM [{0}].[dbo].[ItemDetails] where Serial='{1}' and NtinId={2}", _DBname, package.Serial, gtinId);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            cmd.CommandTimeout = 300;
+
             //И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -293,7 +293,7 @@ namespace AntaresUtilities
             //Формируем запрос
             string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] Where Id='{1}'", _DBname, recipeName);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            cmd.CommandTimeout = 300;
+
             //И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -320,7 +320,7 @@ namespace AntaresUtilities
             //Формируем запрос
             string cmdString = String.Format("SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'", _DBname, materialName);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            cmd.CommandTimeout = 300;
+            
             //И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
 

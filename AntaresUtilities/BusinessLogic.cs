@@ -9,7 +9,7 @@ namespace AntaresUtilities
     public class BusinessLogic
     {
         
-        private DataMiner dm;
+        private readonly DataMiner dm;
         public ServerList ListOfServers;
 
         public BusinessLogic()
