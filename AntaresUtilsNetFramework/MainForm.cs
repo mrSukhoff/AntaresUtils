@@ -55,7 +55,7 @@ namespace AntaresUtilsNetFramework
             try
             {
                 
-                List<RecipeGeometry> recipeGeometryList = au.GetSelectedRecipeGeometriesList(RecipesBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometriesList(RecipesBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
@@ -194,17 +194,17 @@ namespace AntaresUtilsNetFramework
 
             RecipesGridView.Rows.Clear();
 
-            GMIDGeometry r = au.LoadMaterialGeometriesfromFile(filename);
+            List<RecipeGeometry> r = au.LoadMaterialGeometriesfromFile(filename);
 
-            GMIDBox.SelectedItem = r.GMID;
-            if (GMIDBox.SelectedItem.ToString() != r.GMID) 
+            GMIDBox.SelectedItem = au.CurrentGMID;
+            if (GMIDBox.SelectedItem.ToString() != au.CurrentGMID) 
             {
                 MessageBox.Show("Check the Server!");
                 MainTabControl_SelectedIndexChanged(null, null);
                 return;
             }
             
-            foreach (var rg in r.ListOfrecipeGeometries)
+            foreach (var rg in r)
             {
                 RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
             }

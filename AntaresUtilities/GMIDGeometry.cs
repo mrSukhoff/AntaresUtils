@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace AntaresUtilities
 {
     //Описывает структуру объектов для сериализации
-    public class GMIDGeometry
+    internal class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;
 
-        public void Save(string path) 
+        public void Save(string path)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
             // получаем поток, куда будем записывать сериализованный объект

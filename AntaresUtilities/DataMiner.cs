@@ -95,20 +95,16 @@ namespace AntaresUtilities
         }
 
         /// <summary>
-        /// Записывает в БД геометрию из каждого рецепта из списка
+        /// Сохраняет геометрию списка рецептов
         /// </summary>
-        /// <param name="recipeGeometries">Список рецептов</param>
-        internal void SetRecipeGeometry(List<RecipeGeometry> recipeGeometries)
+        /// <param name="recipes"></param>
+        internal void SaveGeometryToDb(RecipeGeometry r)
         {
-            foreach (RecipeGeometry r in recipeGeometries)
-            {
-                //Создаем запрос к БД
-                string cmdString = string.Format("update [{0}].[dbo].[ItemTypeGeometry] set X = {1}, Y = {2}, Z = {3} where RecipeId = '{4}' and LineID = {5} and ItemType = {6}",
-                    _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
-                SqlCommand cmd = new SqlCommand(cmdString, connection);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-            }
+            string cmdString = string.Format("Update [{0}].[dbo].[ItemTypeGeometry] set x={1},y={2},z={3} where RecipeId='{4}' and LineId={5} and ItemType={6}",
+                _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
         }
 
         /// <summary>
@@ -145,14 +141,13 @@ namespace AntaresUtilities
         /// <returns></returns>
         internal List<RecipeGeometry> GetRecipesListAssociatedWithGMID(string material)
         {
-            List<RecipeGeometry> results = new List<RecipeGeometry>();
-            //Создаем запрос к БД
             string cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id where r.GMID = '{1}' and g.LineId <> -1 order by r.Id, g.LineId",
                 _DBname, material);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
-            //Читаем все результаты
+
+            List<RecipeGeometry> results = new List<RecipeGeometry>();
+
             while (reader.Read())
             {
                 RecipeGeometry r = new RecipeGeometry();
@@ -171,48 +166,14 @@ namespace AntaresUtilities
             return results;
         }
 
-        /// <summary>
-        /// Сохраняет геометрию списка рецептов
-        /// </summary>
-        /// <param name="recipes"></param>
-        internal void SaveMaterialGeometriesToDb(List<RecipeGeometry> recipes)
-        {
-            foreach (var r in recipes)
-            {
-                string cmdString = string.Format("Update [{0}].[dbo].[ItemTypeGeometry] set x={1},y={2},z={3} where RecipeId='{4}' and LineId={5} and ItemType={6}",
-                    _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
-                SqlCommand cmd = new SqlCommand(cmdString, connection);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-            }
-        }
 
-        /// <summary>
-        /// Возвращает пакет со всеми заполнеными полями.
-        /// </summary>
-        /// <param name="package">В пакете должны быть заполнены GTIN и серийный номер</param>
-        /// <returns></returns>
-        internal Package GetCrypto(Package package)
-        {
-            //Получаем по GTIN его идентификатор.
-            string GTINid = GetGtinId(package.GTIN);
-
-            //Проверяем найден ли GTIN
-            if (GTINid.Length != 4)
-            {
-                throw new Exception("GTIN не найден!");
-            }
-
-            // По идентификатору GTIN и серийному номеру пачки получаем крипто-данные.
-            return GetCryptoData(package, GTINid);
-        }
 
         /// <summary>
         /// Метод запрашивает в БД идентификатор GTINа
         /// </summary>
         /// <param name="GTIN">GTIN, для которого ищем идентификатор</param>
         /// <returns></returns>
-        private string GetGtinId(string gtin)
+        internal string GetGtinId(string gtin)
         {
             string cmdString = String.Format("SELECT [Id] FROM [{0}].[dbo].[NtinDefinition] WHERE Ntin = '{1}'", _DBname, gtin);
             return ExecuteQuery(cmdString);
@@ -224,32 +185,28 @@ namespace AntaresUtilities
         /// <param name="package">пакет с заполненым GTIN и серийным номером</param>
         /// <param name="gtinId">Идентификатор GTIN</param>
         /// <returns></returns>
-        private Package GetCryptoData(Package package, string gtinId)
+        internal Package GetCryptoData(Package package, string gtinId)
         {
-            Package result = new Package() { GTIN = package.GTIN, Serial = package.Serial };
-            Dictionary<string, string> results = new Dictionary<string, string>();
-
-            //Формируем запрос
             string cmdString = String.Format("SELECT [VariableName] ,[VariableValue] FROM [{0}].[dbo].[ItemDetails] where Serial='{1}' and NtinId={2}", _DBname, package.Serial, gtinId);
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-
-            //И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
 
-            //Читаем по порядку все ответы
+            Dictionary<string, string> answers = new Dictionary<string, string>();
+            //Читаем ответы и складываем в словарь
             while (reader.Read())
             {
                 string key = reader.GetValue(0).ToString();
                 string value = reader.GetValue(1).ToString();
-                results.Add(key, value);
+                answers.Add(key, value);
             }
             reader.Close();
             cmd.Dispose();
 
-            if (results.Count >= 2)
+            Package result = new Package() { GTIN = package.GTIN, Serial = package.Serial };
+            if (answers.Count >= 2)
             {
-                result.CryptoCode = results["cryptocode"];
-                result.CryptoKey = results["cryptokey"];
+                result.CryptoCode = answers["cryptocode"];
+                result.CryptoKey = answers["cryptokey"];
             }
             else
             {
@@ -257,7 +214,7 @@ namespace AntaresUtilities
             }
             return result;
         }
-    
+
         /// <summary>
         /// Возвращает описание рецепта по его имени
         /// </summary>
