@@ -1,84 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+using AntaresUtilities;
 using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
 {
     public partial class MainForm : Form
     {
-        //Список используемых серверов
-        List<Server> Servers;
-        
-        readonly AntaresUtils au = new AntaresUtils();
-        
-        //текущая информаци о геометрии рецепта
-        private List<RecipeGeometry> _recipeGeometries;
+        //Фасад утилит
+        readonly BusinessLogic au = new BusinessLogic();
+
         public MainForm()
         {
             InitializeComponent();
-            //Создаем список серверов
-            LoadServerList();
+
             //заполняем список серверов
-            foreach (var s in Servers)
+            foreach (string s in au.ServerNames)
             {
-                CryptoServerBox.Items.Add(s.Name);
-                GeometryServerBox.Items.Add(s.Name);
-                RecipesServerBox.Items.Add(s.Name);
+                CryptoServerBox.Items.Add(s);
+                GeometryServerBox.Items.Add(s);
+                RecipesServerBox.Items.Add(s);
             }
             CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
-        }
-
-        //Загрузка списка серверов либо из файла либо, если файл не найден, только тестового
-        private void LoadServerList()
-        {
-            string path = @"server.ini";
-            if (File.Exists(path))
-            {
-                Servers = new List<Server>();
-                try
-                {
-                    List<string> lines = new List<string>();
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        string line;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            lines.Add(line);
-                        }
-                    }
-
-                    foreach (string l in lines)
-                    {
-                        string[] word = l.Split(' ');
-                        string name = word[0];
-                        string fqn = word[1];
-                        string dbname = word[2];
-                        Server server = new Server
-                        {
-                            Name = name,
-                            FQN = fqn,
-                            DBName = dbname
-                        };
-                        Servers.Add(server);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                Servers = new List<Server> { new Server { Name = "Иркутск", FQN = "irk-sql-tst", DBName = "AntaresTracking_QA" } };
-            }
-            
         }
 
         //Получаем список рецептов с выбраного сервера
@@ -88,11 +35,6 @@ namespace AntaresUtilsNetFramework
             RecipesBox.Items.Clear();
             try
             {
-                string servername = GeometryServerBox.SelectedItem.ToString();
-                Server server = Servers.First(s => s.Name == servername);
-
-                au.Connect(server.FQN, server.DBName);
-
                 foreach (string recipe in au.GetRecipeList())
                 {
                     RecipesBox.Items.Add(recipe);
@@ -113,13 +55,13 @@ namespace AntaresUtilsNetFramework
             try
             {
                 
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometry(RecipesBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometriesList(RecipesBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
                 }
 
-                RecipeNameTextBox.Text = au.GetRecipeName(RecipesBox.SelectedItem.ToString());
+                RecipeNameTextBox.Text = au.GetRecipeDescription(RecipesBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -152,13 +94,13 @@ namespace AntaresUtilsNetFramework
                 list.Add(r);
             }
 
-            au.SetRecipeGeometry(list);
+            au.UpdateRecipeGeometryInDb(list);
         }
 
         //При изменении содержимого проверяет корректность и пересчитывает поля
         private void GeometryGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string message = "Должно быть целое положительное число!";
+            string message = "Must be a positive integer!";
             for (int i = 0; i < GeometryGridView.Rows.Count; i++)
             {
                 if  (!int.TryParse(GeometryGridView[2,i].Value.ToString(),out int x) || x<1)
@@ -190,12 +132,7 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             try
             {
-                string servername = RecipesServerBox.SelectedItem.ToString();
-                Server server = Servers.First(s => s.Name == servername);
-
-                au.Connect(server.FQN, server.DBName);
-
-                foreach (string material in au.GetGMIDList())
+                foreach (string material in au.GetMaterialsList())
                 {
                     GMIDBox.Items.Add(material);
                 }
@@ -214,15 +151,13 @@ namespace AntaresUtilsNetFramework
             if (GMIDBox.SelectedItem is null) return;
             try
             {
-
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListByGMID(GMIDBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListAssociatedWithGMID(GMIDBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     RecipesGridView.Rows.Add(r.RecipeId, r.LineId, r.ItemType, r.Total);
                 }
-                _recipeGeometries = recipeGeometryList;
 
-                MaterialNameTextBox.Text = au.GetMaterialName(GMIDBox.SelectedItem.ToString());
+                MaterialNameTextBox.Text = au.GetMaterialDescription(GMIDBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -242,18 +177,7 @@ namespace AntaresUtilsNetFramework
             };
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             string filename = dialog.FileName;
-
-            GMIDGeometry r = new GMIDGeometry
-            {
-                GMID = GMIDBox.SelectedItem.ToString(),
-                ListOfrecipeGeometries = _recipeGeometries
-            };
-            XmlSerializer formatter = new XmlSerializer(typeof(GMIDGeometry));
-            // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, r);
-            }
+            au.SaveMaterialGeometriesToFile(filename);
         }
         
         //Загружает список рецептов с геометрией из файла
@@ -270,27 +194,20 @@ namespace AntaresUtilsNetFramework
 
             RecipesGridView.Rows.Clear();
 
-            XmlSerializer deserializer = new XmlSerializer(typeof(GMIDGeometry));
-            GMIDGeometry r = new GMIDGeometry();
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
-            {
-                r=(GMIDGeometry)deserializer.Deserialize(fs);
-            }
+            List<RecipeGeometry> r = au.LoadMaterialGeometriesfromFile(filename);
 
-            _recipeGeometries = r.ListOfrecipeGeometries;
-            GMIDBox.SelectedItem = r.GMID;
-            if (GMIDBox.SelectedItem.ToString() != r.GMID) 
+            GMIDBox.SelectedItem = au.CurrentGMID;
+            if (GMIDBox.SelectedItem.ToString() != au.CurrentGMID) 
             {
                 MessageBox.Show("Check the Server!");
                 MainTabControl_SelectedIndexChanged(null, null);
                 return;
             }
             
-            foreach (var rg in _recipeGeometries)
+            foreach (var rg in r)
             {
                 RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
             }
-              
         }
         
         //очистка при переключении вкладок
@@ -312,27 +229,23 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
-            _recipeGeometries = null;
+            //_recipeGeometries = null;
+            au.Clear();
             MaterialNameTextBox.Text = "";
-
-            au.Disconnect();
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
+            if (GMIDBox.SelectedItem is null || RecipesGridView.Rows.Count == 0) return;
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
-            if (result != DialogResult.Yes) return;
-            au.SetRecipesGeometry(_recipeGeometries);
+            if (result == DialogResult.Yes) au.SaveMaterialGeometriesToDb();
         }
 
         private void GetCryptoСodeButton_Click(object sender, EventArgs e)
         {
             ClearCryptoResultFields();
 
-            string servername = CryptoServerBox.SelectedItem.ToString();
-            Server server = Servers.First(s => s.Name == servername);
-            au.Connect(server.FQN, server.DBName);
             try
             {
                 Package package = new Package()
@@ -397,7 +310,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
-        // Метод при изменении поля мерийного номера меняет SGTIN
+        // Метод при изменении поля cерийного номера меняет SGTIN
         private void SerialBox_TextChanged(object sender, EventArgs e)
         {
             if (SerialBox.Text.Length > 13) SerialBox.Text = SerialBox.Text.Substring(0, 13);
@@ -412,16 +325,18 @@ namespace AntaresUtilsNetFramework
         {
             if (DMPictureBox.Image == null) return;
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = "bmp";
-            saveFileDialog.FileName = SgtinBox.Text;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                DefaultExt = "bmp",
+                FileName = SgtinBox.Text
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string path = saveFileDialog.FileName;
             DMPictureBox.Image.Save(path);
         }
 
-        //при вставке текста выбирает этот элемент
+        //при вставке текста выбирает рецепт с тем же именем
         private void RecipesBox_TextChanged(object sender, EventArgs e)
         {
             RecipesBox.SelectedItem = RecipesBox.Text;
@@ -432,20 +347,25 @@ namespace AntaresUtilsNetFramework
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
-    }
 
-    //Формат списка серверов
-    public class Server
-    {
-        public string Name { get; set; }
-        public string FQN { get; set; }
-        public string DBName { get; set; }
-    }
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void CryptoServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(CryptoServerBox.SelectedItem.ToString());
+        }
+        
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void GeometryServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(GeometryServerBox.SelectedItem.ToString());
+        }
 
-    //Описывает структуру объектов для сериализации
-    public class GMIDGeometry
-    {
-        public string GMID;
-        public List<RecipeGeometry> ListOfrecipeGeometries;
+        //При изменении выбранного сервера вызывает метод смены выбранного сервера
+        private void RecipesServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(RecipesServerBox.SelectedItem.ToString());
+        }
+
+
     }
 }
