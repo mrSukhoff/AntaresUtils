@@ -343,11 +343,11 @@ namespace AntaresUtilsNetFramework
         }
 
         //при вставке текста выбирает материал с тем же именем
-        private void GMIDBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void GMIDBox_TextChanged(object sender, EventArgs e)
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
         }
-        
+
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void CryptoServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -365,5 +365,7 @@ namespace AntaresUtilsNetFramework
         {
             au.SelectServer(RecipesServerBox.SelectedItem.ToString());
         }
+
+
     }
 }

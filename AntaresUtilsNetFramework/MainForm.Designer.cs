@@ -569,6 +569,7 @@ namespace AntaresUtilsNetFramework
             this.GMIDBox.Size = new System.Drawing.Size(144, 28);
             this.GMIDBox.TabIndex = 8;
             this.GMIDBox.SelectedIndexChanged += new System.EventHandler(this.GMIDBox_SelectedIndexChanged);
+            this.GMIDBox.TextChanged += new System.EventHandler(this.GMIDBox_TextChanged);
             // 
             // GetRecipeListButton
             // 
