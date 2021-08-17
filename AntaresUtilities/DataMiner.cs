@@ -90,7 +90,6 @@ namespace AntaresUtilities
             reader.Close();
             cmd.Dispose();
 
-            results.Sort();
             return results;
         }
 
