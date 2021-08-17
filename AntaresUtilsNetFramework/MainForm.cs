@@ -342,7 +342,7 @@ namespace AntaresUtilsNetFramework
             RecipesBox.SelectedItem = RecipesBox.Text;
         }
 
-        //при вставке текста выбирает материал с тем же именем
+        //при вставке текста выбирает этот элемент
         private void GMIDBox_TextChanged(object sender, EventArgs e)
         {
             GMIDBox.SelectedItem = GMIDBox.Text;
