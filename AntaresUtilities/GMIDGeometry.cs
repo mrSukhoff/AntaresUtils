@@ -5,10 +5,11 @@ using System.Xml.Serialization;
 namespace AntaresUtilities
 {
     //Описывает структуру объектов для сериализации
-    internal class GMIDGeometry
+    public class GMIDGeometry
     {
         public string GMID;
         public List<RecipeGeometry> ListOfrecipeGeometries;
+
 
         public void Save(string path)
         {
