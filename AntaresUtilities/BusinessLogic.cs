@@ -36,11 +36,11 @@ namespace AntaresUtilities
             return _dm.GetRecipeDescription(recipeName);
         }
 
-        public void SaveRecipeGeometryToDb(List<RecipeGeometry> list)
+        public void UpdateRecipeGeometryInDb(List<RecipeGeometry> list)
         {
             foreach (RecipeGeometry r in list)
             {
-                _dm.SaveGeometryToDb(r);
+                _dm.UpdateGeometryInDb(r);
             }
         }
 
@@ -82,7 +82,7 @@ namespace AntaresUtilities
 
         public void SaveMaterialGeometriesToDb()
         {
-            SaveRecipeGeometryToDb(_currentGMIDRecipesGeometry);
+            UpdateRecipeGeometryInDb(_currentGMIDRecipesGeometry);
         }
 
         public Package GetCrypto(Package package)

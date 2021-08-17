@@ -94,7 +94,7 @@ namespace AntaresUtilsNetFramework
                 list.Add(r);
             }
 
-            au.SaveRecipeGeometryToDb(list);
+            au.UpdateRecipeGeometryInDb(list);
         }
 
         //При изменении содержимого проверяет корректность и пересчитывает поля

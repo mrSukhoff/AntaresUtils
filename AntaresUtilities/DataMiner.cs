@@ -98,7 +98,7 @@ namespace AntaresUtilities
         /// Сохраняет геометрию списка рецептов
         /// </summary>
         /// <param name="recipes"></param>
-        internal void SaveGeometryToDb(RecipeGeometry r)
+        internal void UpdateGeometryInDb(RecipeGeometry r)
         {
             string cmdString = string.Format("Update [{0}].[dbo].[ItemTypeGeometry] set x={1},y={2},z={3} where RecipeId='{4}' and LineId={5} and ItemType={6}",
                 _DBname, r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
@@ -169,7 +169,7 @@ namespace AntaresUtilities
 
 
         /// <summary>
-        /// Метод запрашивает в БД идентификатор GTINа
+        /// Запрашивает в БД идентификатор GTINа
         /// </summary>
         /// <param name="GTIN">GTIN, для которого ищем идентификатор</param>
         /// <returns></returns>
