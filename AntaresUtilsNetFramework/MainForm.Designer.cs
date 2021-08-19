@@ -160,6 +160,7 @@ namespace AntaresUtilsNetFramework
             // 
             this.CryptoCodeBox.Location = new System.Drawing.Point(77, 233);
             this.CryptoCodeBox.Name = "CryptoCodeBox";
+            this.CryptoCodeBox.ReadOnly = true;
             this.CryptoCodeBox.Size = new System.Drawing.Size(455, 26);
             this.CryptoCodeBox.TabIndex = 18;
             // 
@@ -167,6 +168,7 @@ namespace AntaresUtilsNetFramework
             // 
             this.CryptoKeyBox.Location = new System.Drawing.Point(77, 201);
             this.CryptoKeyBox.Name = "CryptoKeyBox";
+            this.CryptoKeyBox.ReadOnly = true;
             this.CryptoKeyBox.Size = new System.Drawing.Size(59, 26);
             this.CryptoKeyBox.TabIndex = 17;
             // 
