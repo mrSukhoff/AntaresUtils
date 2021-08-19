@@ -81,6 +81,28 @@ namespace AntaresUtilsNetFramework
             this.GetGMIDsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.WOServerBox = new System.Windows.Forms.ComboBox();
+            this.WOBox = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.WODescriptionBox = new System.Windows.Forms.TextBox();
+            this.WOLotBox = new System.Windows.Forms.TextBox();
+            this.WOLineInfoBox = new System.Windows.Forms.TextBox();
+            this.WOStatusBox = new System.Windows.Forms.TextBox();
+            this.WOQuantityBox = new System.Windows.Forms.TextBox();
+            this.WOExpiryBox = new System.Windows.Forms.TextBox();
+            this.WOManufacturedBox = new System.Windows.Forms.TextBox();
+            this.WOUpdateDbButton = new System.Windows.Forms.Button();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -88,6 +110,7 @@ namespace AntaresUtilsNetFramework
             ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
             this.RecipePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -98,6 +121,7 @@ namespace AntaresUtilsNetFramework
             this.MainTabControl.Controls.Add(this.CryptoGetter);
             this.MainTabControl.Controls.Add(this.GeometriesPage);
             this.MainTabControl.Controls.Add(this.RecipePage);
+            this.MainTabControl.Controls.Add(this.tabPage1);
             this.MainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MainTabControl.Location = new System.Drawing.Point(12, 12);
             this.MainTabControl.Name = "MainTabControl";
@@ -621,6 +645,227 @@ namespace AntaresUtilsNetFramework
             this.RecipesServerBox.TabIndex = 3;
             this.RecipesServerBox.SelectedIndexChanged += new System.EventHandler(this.RecipesServerBox_SelectedIndexChanged);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.WOUpdateDbButton);
+            this.tabPage1.Controls.Add(this.WOManufacturedBox);
+            this.tabPage1.Controls.Add(this.WOExpiryBox);
+            this.tabPage1.Controls.Add(this.WOQuantityBox);
+            this.tabPage1.Controls.Add(this.WOStatusBox);
+            this.tabPage1.Controls.Add(this.WOLineInfoBox);
+            this.tabPage1.Controls.Add(this.WOLotBox);
+            this.tabPage1.Controls.Add(this.WODescriptionBox);
+            this.tabPage1.Controls.Add(this.label21);
+            this.tabPage1.Controls.Add(this.label20);
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.label16);
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.WOBox);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.WOServerBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(755, 467);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Active Workorders";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(231, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 28);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Get Workorders";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(55, 20);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Server";
+            // 
+            // WOServerBox
+            // 
+            this.WOServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WOServerBox.DropDownWidth = 144;
+            this.WOServerBox.FormattingEnabled = true;
+            this.WOServerBox.Location = new System.Drawing.Point(77, 6);
+            this.WOServerBox.Name = "WOServerBox";
+            this.WOServerBox.Size = new System.Drawing.Size(144, 28);
+            this.WOServerBox.TabIndex = 6;
+            // 
+            // WOBox
+            // 
+            this.WOBox.DropDownWidth = 144;
+            this.WOBox.FormattingEnabled = true;
+            this.WOBox.Location = new System.Drawing.Point(77, 49);
+            this.WOBox.Name = "WOBox";
+            this.WOBox.Size = new System.Drawing.Size(144, 28);
+            this.WOBox.TabIndex = 11;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(231, 49);
+            this.button2.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(144, 28);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Get Info";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 53);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 20);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "WO";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 133);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(39, 20);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Line";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(487, 130);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 20);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Lot";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 91);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(51, 20);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Name";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(227, 175);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 20);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "Quantity";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(227, 217);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(108, 20);
+            this.label19.TabIndex = 16;
+            this.label19.Text = "Manufactured";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(10, 217);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(51, 20);
+            this.label20.TabIndex = 17;
+            this.label20.Text = "Expiry";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(10, 175);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(56, 20);
+            this.label21.TabIndex = 18;
+            this.label21.Text = "Status";
+            // 
+            // WODescriptionBox
+            // 
+            this.WODescriptionBox.Location = new System.Drawing.Point(77, 88);
+            this.WODescriptionBox.Margin = new System.Windows.Forms.Padding(8);
+            this.WODescriptionBox.Name = "WODescriptionBox";
+            this.WODescriptionBox.ReadOnly = true;
+            this.WODescriptionBox.Size = new System.Drawing.Size(548, 26);
+            this.WODescriptionBox.TabIndex = 19;
+            // 
+            // WOLotBox
+            // 
+            this.WOLotBox.Location = new System.Drawing.Point(525, 127);
+            this.WOLotBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOLotBox.Name = "WOLotBox";
+            this.WOLotBox.ReadOnly = true;
+            this.WOLotBox.Size = new System.Drawing.Size(100, 26);
+            this.WOLotBox.TabIndex = 20;
+            // 
+            // WOLineInfoBox
+            // 
+            this.WOLineInfoBox.Location = new System.Drawing.Point(77, 130);
+            this.WOLineInfoBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOLineInfoBox.Name = "WOLineInfoBox";
+            this.WOLineInfoBox.ReadOnly = true;
+            this.WOLineInfoBox.Size = new System.Drawing.Size(364, 26);
+            this.WOLineInfoBox.TabIndex = 21;
+            // 
+            // WOStatusBox
+            // 
+            this.WOStatusBox.Location = new System.Drawing.Point(77, 172);
+            this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOStatusBox.Name = "WOStatusBox";
+            this.WOStatusBox.ReadOnly = true;
+            this.WOStatusBox.Size = new System.Drawing.Size(100, 26);
+            this.WOStatusBox.TabIndex = 22;
+            // 
+            // WOQuantityBox
+            // 
+            this.WOQuantityBox.Location = new System.Drawing.Point(341, 172);
+            this.WOQuantityBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOQuantityBox.Name = "WOQuantityBox";
+            this.WOQuantityBox.ReadOnly = true;
+            this.WOQuantityBox.Size = new System.Drawing.Size(100, 26);
+            this.WOQuantityBox.TabIndex = 23;
+            // 
+            // WOExpiryBox
+            // 
+            this.WOExpiryBox.Location = new System.Drawing.Point(77, 214);
+            this.WOExpiryBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOExpiryBox.Name = "WOExpiryBox";
+            this.WOExpiryBox.Size = new System.Drawing.Size(100, 26);
+            this.WOExpiryBox.TabIndex = 24;
+            // 
+            // WOManufacturedBox
+            // 
+            this.WOManufacturedBox.Location = new System.Drawing.Point(341, 214);
+            this.WOManufacturedBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOManufacturedBox.Name = "WOManufacturedBox";
+            this.WOManufacturedBox.Size = new System.Drawing.Size(100, 26);
+            this.WOManufacturedBox.TabIndex = 25;
+            // 
+            // WOUpdateDbButton
+            // 
+            this.WOUpdateDbButton.Location = new System.Drawing.Point(605, 433);
+            this.WOUpdateDbButton.Name = "WOUpdateDbButton";
+            this.WOUpdateDbButton.Size = new System.Drawing.Size(144, 28);
+            this.WOUpdateDbButton.TabIndex = 26;
+            this.WOUpdateDbButton.Text = "Update DB";
+            this.WOUpdateDbButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -642,6 +887,8 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.ResumeLayout(false);
             this.RecipePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -699,6 +946,28 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox MaterialNameTextBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox WOManufacturedBox;
+        private System.Windows.Forms.TextBox WOExpiryBox;
+        private System.Windows.Forms.TextBox WOQuantityBox;
+        private System.Windows.Forms.TextBox WOStatusBox;
+        private System.Windows.Forms.TextBox WOLineInfoBox;
+        private System.Windows.Forms.TextBox WOLotBox;
+        private System.Windows.Forms.TextBox WODescriptionBox;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox WOBox;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox WOServerBox;
+        private System.Windows.Forms.Button WOUpdateDbButton;
     }
 }
 
