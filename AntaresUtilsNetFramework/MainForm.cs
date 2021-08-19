@@ -22,10 +22,12 @@ namespace AntaresUtilsNetFramework
                 CryptoServerBox.Items.Add(s);
                 GeometryServerBox.Items.Add(s);
                 RecipesServerBox.Items.Add(s);
+                WOServerBox.Items.Add(s);
             }
             CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
+            WOServerBox.SelectedIndex = 0;
         }
 
         //Получаем список рецептов с выбраного сервера
@@ -234,6 +236,8 @@ namespace AntaresUtilsNetFramework
             MaterialNameTextBox.Text = "";
 
             ClerarWOWindow();
+            WOListBox.Items.Clear();
+            WOListBox.Text = "";
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -400,6 +404,7 @@ namespace AntaresUtilsNetFramework
 
         private void GetWODetailButton_Click(object sender, EventArgs e)
         {
+            if (WOListBox.SelectedItem == null) return;
             WorkOrder w = au.GetWorOrderDetails(WOListBox.SelectedItem.ToString());
             WODescriptionBox.Text = w.Descrition;
             WOLineInfoBox.Text = w.Line;
@@ -424,6 +429,11 @@ namespace AntaresUtilsNetFramework
         private void WOListBox_TextChanged(object sender, EventArgs e)
         {
             WOListBox.SelectedItem = WOListBox.Text;
+        }
+
+        private void WOServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(WOServerBox.SelectedItem.ToString());
         }
     }
 }

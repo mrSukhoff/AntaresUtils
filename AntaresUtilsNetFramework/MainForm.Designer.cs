@@ -707,6 +707,7 @@ namespace AntaresUtilsNetFramework
             this.WOServerBox.Name = "WOServerBox";
             this.WOServerBox.Size = new System.Drawing.Size(144, 28);
             this.WOServerBox.TabIndex = 6;
+            this.WOServerBox.SelectedIndexChanged += new System.EventHandler(this.WOServerBox_SelectedIndexChanged);
             // 
             // WOListBox
             // 
@@ -741,7 +742,7 @@ namespace AntaresUtilsNetFramework
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 133);
+            this.label15.Location = new System.Drawing.Point(6, 130);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(39, 20);
             this.label15.TabIndex = 12;
@@ -750,7 +751,7 @@ namespace AntaresUtilsNetFramework
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(487, 130);
+            this.label16.Location = new System.Drawing.Point(6, 175);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(32, 20);
             this.label16.TabIndex = 13;
@@ -768,7 +769,7 @@ namespace AntaresUtilsNetFramework
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(227, 175);
+            this.label18.Location = new System.Drawing.Point(571, 175);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(68, 20);
             this.label18.TabIndex = 15;
@@ -777,7 +778,7 @@ namespace AntaresUtilsNetFramework
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(227, 217);
+            this.label19.Location = new System.Drawing.Point(241, 217);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(108, 20);
             this.label19.TabIndex = 16;
@@ -786,7 +787,7 @@ namespace AntaresUtilsNetFramework
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(10, 217);
+            this.label20.Location = new System.Drawing.Point(6, 217);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(51, 20);
             this.label20.TabIndex = 17;
@@ -795,7 +796,7 @@ namespace AntaresUtilsNetFramework
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(10, 175);
+            this.label21.Location = new System.Drawing.Point(293, 175);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(56, 20);
             this.label21.TabIndex = 18;
@@ -803,20 +804,20 @@ namespace AntaresUtilsNetFramework
             // 
             // WODescriptionBox
             // 
-            this.WODescriptionBox.Location = new System.Drawing.Point(77, 88);
+            this.WODescriptionBox.Location = new System.Drawing.Point(78, 89);
             this.WODescriptionBox.Margin = new System.Windows.Forms.Padding(8);
             this.WODescriptionBox.Name = "WODescriptionBox";
             this.WODescriptionBox.ReadOnly = true;
-            this.WODescriptionBox.Size = new System.Drawing.Size(548, 26);
+            this.WODescriptionBox.Size = new System.Drawing.Size(667, 26);
             this.WODescriptionBox.TabIndex = 19;
             // 
             // WOLotBox
             // 
-            this.WOLotBox.Location = new System.Drawing.Point(525, 127);
+            this.WOLotBox.Location = new System.Drawing.Point(78, 172);
             this.WOLotBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOLotBox.Name = "WOLotBox";
             this.WOLotBox.ReadOnly = true;
-            this.WOLotBox.Size = new System.Drawing.Size(100, 26);
+            this.WOLotBox.Size = new System.Drawing.Size(143, 26);
             this.WOLotBox.TabIndex = 20;
             // 
             // WOLineInfoBox
@@ -825,21 +826,21 @@ namespace AntaresUtilsNetFramework
             this.WOLineInfoBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOLineInfoBox.Name = "WOLineInfoBox";
             this.WOLineInfoBox.ReadOnly = true;
-            this.WOLineInfoBox.Size = new System.Drawing.Size(364, 26);
+            this.WOLineInfoBox.Size = new System.Drawing.Size(298, 26);
             this.WOLineInfoBox.TabIndex = 21;
             // 
             // WOStatusBox
             // 
-            this.WOStatusBox.Location = new System.Drawing.Point(77, 172);
+            this.WOStatusBox.Location = new System.Drawing.Point(355, 172);
             this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOStatusBox.Name = "WOStatusBox";
             this.WOStatusBox.ReadOnly = true;
-            this.WOStatusBox.Size = new System.Drawing.Size(100, 26);
+            this.WOStatusBox.Size = new System.Drawing.Size(120, 26);
             this.WOStatusBox.TabIndex = 22;
             // 
             // WOQuantityBox
             // 
-            this.WOQuantityBox.Location = new System.Drawing.Point(341, 172);
+            this.WOQuantityBox.Location = new System.Drawing.Point(645, 172);
             this.WOQuantityBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOQuantityBox.Name = "WOQuantityBox";
             this.WOQuantityBox.ReadOnly = true;
@@ -856,7 +857,7 @@ namespace AntaresUtilsNetFramework
             // 
             // WOManufacturedBox
             // 
-            this.WOManufacturedBox.Location = new System.Drawing.Point(341, 214);
+            this.WOManufacturedBox.Location = new System.Drawing.Point(355, 214);
             this.WOManufacturedBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOManufacturedBox.Name = "WOManufacturedBox";
             this.WOManufacturedBox.Size = new System.Drawing.Size(100, 26);

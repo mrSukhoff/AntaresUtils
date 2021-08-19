@@ -39,25 +39,8 @@ namespace AntaresUtilities
         /// <returns></returns>
         internal List<string> GetRecipeList()
         {
-            List<string> results = new List<string>();
-
-            //Создаем запрос к БД
             string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[Recipe]";
-            SqlCommand cmd = new SqlCommand(cmdString, connection);
-            // И выполняем его
-            SqlDataReader reader = cmd.ExecuteReader();
-            //Читаем все результаты
-            while (reader.Read())
-            {
-                results.Add(reader.GetValue(0).ToString());
-            }
-
-            //Всё закрываем
-            reader.Close();
-            cmd.Dispose();
-
-            results.Sort();
-            return results;
+            return SelectListFromDb(cmdString);
         }
 
         /// <summary>
@@ -106,20 +89,7 @@ namespace AntaresUtilities
             cmd.Dispose();
         }
 
-        internal WorkOrder GetWODetail(string woName)
-        {
-            throw new NotImplementedException();
-        }
 
-        internal void UpdateWoInDb(WorkOrder wo)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal List<string> GetWOList()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Возвращает список материалов из БД
@@ -127,25 +97,8 @@ namespace AntaresUtilities
         /// <returns></returns>
         internal List<string> GetGMIDList()
         {
-            List<string> results = new List<string>();
-
-            //Создаем запрос к БД
             string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[Material]";
-            SqlCommand cmd = new SqlCommand(cmdString, connection);
-            // И выполняем его
-            SqlDataReader reader = cmd.ExecuteReader();
-            //Читаем все результаты
-            while (reader.Read())
-            {
-                results.Add(reader.GetValue(0).ToString());
-            }
-
-            //Всё закрываем
-            reader.Close();
-            cmd.Dispose();
-
-            results.Sort();
-            return results;
+            return SelectListFromDb(cmdString);
         }
 
         /// <summary>
@@ -190,7 +143,7 @@ namespace AntaresUtilities
         internal string GetGtinId(string gtin)
         {
             string cmdString = String.Format("SELECT [Id] FROM [{0}].[dbo].[NtinDefinition] WHERE Ntin = '{1}'", _DBname, gtin);
-            return ExecuteQuery(cmdString);
+            return SelectValueFromDb(cmdString);
         }
 
         /// <summary>
@@ -237,7 +190,7 @@ namespace AntaresUtilities
         internal string GetRecipeDescription(string recipeName)
         {
             string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] Where Id='{1}'", _DBname, recipeName);
-            return ExecuteQuery(cmdString);
+            return SelectValueFromDb(cmdString);
         }
 
         /// <summary>
@@ -248,11 +201,11 @@ namespace AntaresUtilities
         internal string GetMaterialDescription(string materialName)
         {
             string str = string.Format("SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'", _DBname, materialName);
-            return ExecuteQuery(str);
+            return SelectValueFromDb(str);
         }
 
         //выполняет команду и возвращает результат
-        private string ExecuteQuery(string cmdString)
+        private string SelectValueFromDb(string cmdString)
         {
             //Формируем запрос
             SqlCommand cmd = new SqlCommand(cmdString, connection);
@@ -270,6 +223,76 @@ namespace AntaresUtilities
             cmd.Dispose();
 
             return result;
+        }
+
+        //выполняет команду и возвращает список результатов
+        private List<string> SelectListFromDb(string cmdString)
+        {
+            List<string> results = new List<string>();
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            // И выполняем его
+            SqlDataReader reader = cmd.ExecuteReader();
+            //Читаем все результаты
+            while (reader.Read())
+            {
+                results.Add(reader.GetValue(0).ToString());
+            }
+
+            //Всё закрываем
+            reader.Close();
+            cmd.Dispose();
+
+            results.Sort();
+            return results;
+        }
+
+        internal List<string> GetWOList()
+        {
+            string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[WorkOrder] where Status in (1,3,9,11)";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal WorkOrder GetWODetail(string woName)
+        {
+            string cmdString = string.Format("SELECT [Id],[LineId],[RecipeId],[QuantityToProduce],[Lot],[Expiry],[Manufactured],[ProductDescription],[UserName],[Status],[OpenTime],[CloseTime] FROM [{0}].[dbo].[WorkOrder] where Id = '{1}'",
+              _DBname, woName);
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            WorkOrder wo = new WorkOrder();
+
+            while (reader.Read())
+            {
+                wo.Id = reader.GetValue(0).ToString();
+                wo.Line = reader.GetValue(1).ToString();
+                wo.RecipeId = reader.GetValue(2).ToString();
+                wo.Quantity = reader.GetValue(3).ToString();
+                wo.Lot = reader.GetValue(4).ToString();
+                wo.Expiry = reader.GetValue(5).ToString();
+                wo.Manufactured = reader.GetValue(6).ToString();
+                wo.Descrition = reader.GetValue(7).ToString();
+                wo.UserName = reader.GetValue(8).ToString();
+                wo.Status = reader.GetValue(9).ToString();
+                wo.OpenTime = reader.GetValue(10).ToString();
+                wo.Closetime = reader.GetValue(11).ToString();
+            }
+            //Всё закрываем
+            reader.Close();
+            cmd.Dispose();
+            //меняем идентификатор на описание
+            cmdString = String.Format("SELECT[Description] FROM[{0}].[dbo].[Line] where id = {1}", _DBname, wo.Line);
+            wo.Line = SelectValueFromDb(cmdString);
+
+            return wo;
+        }
+
+        internal void UpdateWoInDb(WorkOrder wo)
+        {
+            string cmdString = string.Format("Update [{0}].[dbo].[WorkOrder] set Expiry={1}, Manufactured={2} where Id='{3}'",
+                _DBname, wo.Expiry, wo.Manufactured, wo.Id);
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
         }
     }
 }

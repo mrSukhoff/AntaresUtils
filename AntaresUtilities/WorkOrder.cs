@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AntaresUtilities
+﻿namespace AntaresUtilities
 {
     public class WorkOrder
     {
@@ -16,5 +10,9 @@ namespace AntaresUtilities
         public string Quantity;
         public string Expiry;
         public string Manufactured;
+        public string RecipeId;
+        public string UserName;
+        public string OpenTime;
+        public string Closetime;
     }
 }
