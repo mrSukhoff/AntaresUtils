@@ -106,6 +106,21 @@ namespace AntaresUtilities
             cmd.Dispose();
         }
 
+        internal WorkOrder GetWODetail(string woName)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void UpdateWoInDb(WorkOrder wo)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<string> GetWOList()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Возвращает список материалов из БД
         /// </summary>

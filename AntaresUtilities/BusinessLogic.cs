@@ -111,5 +111,21 @@ namespace AntaresUtilities
             _currentGMID = "";
             _currentGMIDRecipesGeometry = null;
         }
+        
+        public List<string> GetWorkordersList()
+        {
+            _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
+            return _dm.GetWOList();
+        }
+
+        public WorkOrder GetWorOrderDetails(string woName)
+        {
+            return _dm.GetWODetail(woName);
+        }
+
+        public void UpdateWoInDb (WorkOrder wo)
+        {
+            _dm.UpdateWoInDb(wo);
+        }
     }
 }

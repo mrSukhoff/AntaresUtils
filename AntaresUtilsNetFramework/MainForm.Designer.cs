@@ -82,11 +82,11 @@ namespace AntaresUtilsNetFramework
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.GetWOsButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.WOServerBox = new System.Windows.Forms.ComboBox();
-            this.WOBox = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.WOListBox = new System.Windows.Forms.ComboBox();
+            this.GetWODetailButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -664,10 +664,10 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.WOBox);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.WOListBox);
+            this.tabPage1.Controls.Add(this.GetWODetailButton);
             this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.GetWOsButton);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.WOServerBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -678,15 +678,16 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Text = "Active Workorders";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // GetWOsButton
             // 
-            this.button1.Location = new System.Drawing.Point(231, 6);
-            this.button1.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 28);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Get Workorders";
-            this.button1.UseVisualStyleBackColor = true;
+            this.GetWOsButton.Location = new System.Drawing.Point(231, 6);
+            this.GetWOsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetWOsButton.Name = "GetWOsButton";
+            this.GetWOsButton.Size = new System.Drawing.Size(144, 28);
+            this.GetWOsButton.TabIndex = 8;
+            this.GetWOsButton.Text = "Get Workorders";
+            this.GetWOsButton.UseVisualStyleBackColor = true;
+            this.GetWOsButton.Click += new System.EventHandler(this.GetWOsButton_Click);
             // 
             // label13
             // 
@@ -707,24 +708,26 @@ namespace AntaresUtilsNetFramework
             this.WOServerBox.Size = new System.Drawing.Size(144, 28);
             this.WOServerBox.TabIndex = 6;
             // 
-            // WOBox
+            // WOListBox
             // 
-            this.WOBox.DropDownWidth = 144;
-            this.WOBox.FormattingEnabled = true;
-            this.WOBox.Location = new System.Drawing.Point(77, 49);
-            this.WOBox.Name = "WOBox";
-            this.WOBox.Size = new System.Drawing.Size(144, 28);
-            this.WOBox.TabIndex = 11;
+            this.WOListBox.DropDownWidth = 144;
+            this.WOListBox.FormattingEnabled = true;
+            this.WOListBox.Location = new System.Drawing.Point(77, 49);
+            this.WOListBox.Name = "WOListBox";
+            this.WOListBox.Size = new System.Drawing.Size(144, 28);
+            this.WOListBox.TabIndex = 11;
+            this.WOListBox.TextChanged += new System.EventHandler(this.WOListBox_TextChanged);
             // 
-            // button2
+            // GetWODetailButton
             // 
-            this.button2.Location = new System.Drawing.Point(231, 49);
-            this.button2.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 28);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Get Info";
-            this.button2.UseVisualStyleBackColor = true;
+            this.GetWODetailButton.Location = new System.Drawing.Point(231, 49);
+            this.GetWODetailButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetWODetailButton.Name = "GetWODetailButton";
+            this.GetWODetailButton.Size = new System.Drawing.Size(144, 28);
+            this.GetWODetailButton.TabIndex = 10;
+            this.GetWODetailButton.Text = "Get Info";
+            this.GetWODetailButton.UseVisualStyleBackColor = true;
+            this.GetWODetailButton.Click += new System.EventHandler(this.GetWODetailButton_Click);
             // 
             // label14
             // 
@@ -867,6 +870,7 @@ namespace AntaresUtilsNetFramework
             this.WOUpdateDbButton.TabIndex = 26;
             this.WOUpdateDbButton.Text = "Update DB";
             this.WOUpdateDbButton.UseVisualStyleBackColor = true;
+            this.WOUpdateDbButton.Click += new System.EventHandler(this.WOUpdateDbButton_Click);
             // 
             // MainForm
             // 
@@ -963,10 +967,10 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox WOBox;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox WOListBox;
+        private System.Windows.Forms.Button GetWODetailButton;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button GetWOsButton;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox WOServerBox;
         private System.Windows.Forms.Button WOUpdateDbButton;
