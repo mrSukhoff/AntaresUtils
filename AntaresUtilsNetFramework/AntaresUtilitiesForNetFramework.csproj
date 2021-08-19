@@ -56,6 +56,7 @@
   <ItemGroup>
     <Reference Include="DataMatrix.net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DataMatrix.net.0.4.2\lib\20\DataMatrix.net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -113,12 +114,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataMatrix.net.dll" />
+    <EmbeddedResource Include="AntaresUtilities.dll" />
     <Content Include="pic.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AntaresUtilities\AntaresUtilities.csproj">
       <Project>{30ae4ceb-ce62-4c9d-b628-92e072f6ab80}</Project>
       <Name>AntaresUtilities</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
