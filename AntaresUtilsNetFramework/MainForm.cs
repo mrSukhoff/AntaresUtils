@@ -417,6 +417,10 @@ namespace AntaresUtilsNetFramework
 
         private void WOUpdateDbButton_Click(object sender, EventArgs e)
         {
+            if (WOListBox.SelectedItem == null) return;
+            DialogResult result = MessageBox.Show("Are you sure?", "Save WorkOrder to DB", MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes) return;
+
             WorkOrder wo = new WorkOrder()
             {
                 Id = WOListBox.SelectedItem.ToString(),
