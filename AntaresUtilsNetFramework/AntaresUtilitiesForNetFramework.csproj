@@ -105,7 +105,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="AntaresUtilitiesForNetFramework_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -128,8 +127,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataMatrix.net.dll" />
-    <EmbeddedResource Include="AntaresUtilities.dll" />
     <Content Include="pic.ico" />
   </ItemGroup>
   <ItemGroup>
