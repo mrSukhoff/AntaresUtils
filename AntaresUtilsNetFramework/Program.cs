@@ -8,6 +8,7 @@ namespace AntaresUtilsNetFramework
 {
     static class Program
     {
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

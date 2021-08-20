@@ -22,10 +22,12 @@ namespace AntaresUtilsNetFramework
                 CryptoServerBox.Items.Add(s);
                 GeometryServerBox.Items.Add(s);
                 RecipesServerBox.Items.Add(s);
+                WOServerBox.Items.Add(s);
             }
             CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
+            WOServerBox.SelectedIndex = 0;
         }
 
         //Получаем список рецептов с выбраного сервера
@@ -232,6 +234,10 @@ namespace AntaresUtilsNetFramework
             //_recipeGeometries = null;
             au.Clear();
             MaterialNameTextBox.Text = "";
+
+            ClerarWOWindow();
+            WOListBox.Items.Clear();
+            WOListBox.Text = "";
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД
@@ -366,6 +372,72 @@ namespace AntaresUtilsNetFramework
             au.SelectServer(RecipesServerBox.SelectedItem.ToString());
         }
 
+        private void GetWOsButton_Click(object sender, EventArgs e)
+        {
+            ClerarWOWindow();
 
+            try
+            {
+                foreach (string wo in au.GetWorkordersList())
+                {
+                    WOListBox.Items.Add(wo);
+                }
+                WOListBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        private void ClerarWOWindow()
+        {
+            WOListBox.Items.Clear();
+            WODescriptionBox.Text = "";
+            WOLineInfoBox.Text = "";
+            WOLotBox.Text = "";
+            WOStatusBox.Text = "";
+            WOQuantityBox.Text = "";
+            WOExpiryBox.Text = "";
+            WOManufacturedBox.Text = "";
+        }
+
+        private void GetWODetailButton_Click(object sender, EventArgs e)
+        {
+            if (WOListBox.SelectedItem == null) return;
+            WorkOrder w = au.GetWorOrderDetails(WOListBox.SelectedItem.ToString());
+            WODescriptionBox.Text = w.Descrition;
+            WOLineInfoBox.Text = w.Line;
+            WOLotBox.Text = w.Lot;
+            WOStatusBox.Text = w.Status;
+            WOQuantityBox.Text = w.Quantity;
+            WOExpiryBox.Text = w.Expiry;
+            WOManufacturedBox.Text = w.Manufactured;
+        }
+
+        private void WOUpdateDbButton_Click(object sender, EventArgs e)
+        {
+            if (WOListBox.SelectedItem == null) return;
+            DialogResult result = MessageBox.Show("Are you sure?", "Save WorkOrder to DB", MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes) return;
+
+            WorkOrder wo = new WorkOrder()
+            {
+                Id = WOListBox.SelectedItem.ToString(),
+                Expiry = WOExpiryBox.Text,
+                Manufactured = WOManufacturedBox.Text
+            };
+            au.UpdateWoInDb(wo);
+        }
+
+        private void WOListBox_TextChanged(object sender, EventArgs e)
+        {
+            WOListBox.SelectedItem = WOListBox.Text;
+        }
+
+        private void WOServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(WOServerBox.SelectedItem.ToString());
+        }
     }
 }
