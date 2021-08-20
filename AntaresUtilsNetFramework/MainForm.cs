@@ -23,11 +23,13 @@ namespace AntaresUtilsNetFramework
                 GeometryServerBox.Items.Add(s);
                 RecipesServerBox.Items.Add(s);
                 WOServerBox.Items.Add(s);
+                CounterServerBox.Items.Add(s);
             }
             CryptoServerBox.SelectedIndex = 0;
             GeometryServerBox.SelectedIndex = 0;
             RecipesServerBox.SelectedIndex = 0;
             WOServerBox.SelectedIndex = 0;
+            CounterServerBox.SelectedIndex = 0;
         }
 
         //Получаем список рецептов с выбраного сервера
@@ -231,13 +233,18 @@ namespace AntaresUtilsNetFramework
             GMIDBox.Items.Clear();
             GMIDBox.Text = "";
             RecipesGridView.Rows.Clear();
-            //_recipeGeometries = null;
             au.Clear();
             MaterialNameTextBox.Text = "";
 
+            //workorders
             ClerarWOWindow();
             WOListBox.Items.Clear();
             WOListBox.Text = "";
+
+            //Counters
+            CountedLotListBox.Items.Clear();
+            CountedLotListBox.Text = "";
+            CountedAggregationTreeView.Nodes.Clear();
         }
 
         //Сохраняет текущий список рецептов с геометрией в БД

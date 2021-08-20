@@ -82,27 +82,35 @@ namespace AntaresUtilsNetFramework
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.GetWOsButton = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.WOServerBox = new System.Windows.Forms.ComboBox();
+            this.WOUpdateDbButton = new System.Windows.Forms.Button();
+            this.WOManufacturedBox = new System.Windows.Forms.TextBox();
+            this.WOExpiryBox = new System.Windows.Forms.TextBox();
+            this.WOQuantityBox = new System.Windows.Forms.TextBox();
+            this.WOStatusBox = new System.Windows.Forms.TextBox();
+            this.WOLineInfoBox = new System.Windows.Forms.TextBox();
+            this.WOLotBox = new System.Windows.Forms.TextBox();
+            this.WODescriptionBox = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.WOListBox = new System.Windows.Forms.ComboBox();
             this.GetWODetailButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.WODescriptionBox = new System.Windows.Forms.TextBox();
-            this.WOLotBox = new System.Windows.Forms.TextBox();
-            this.WOLineInfoBox = new System.Windows.Forms.TextBox();
-            this.WOStatusBox = new System.Windows.Forms.TextBox();
-            this.WOQuantityBox = new System.Windows.Forms.TextBox();
-            this.WOExpiryBox = new System.Windows.Forms.TextBox();
-            this.WOManufacturedBox = new System.Windows.Forms.TextBox();
-            this.WOUpdateDbButton = new System.Windows.Forms.Button();
+            this.GetWOsButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.WOServerBox = new System.Windows.Forms.ComboBox();
+            this.CaseCounterPage = new System.Windows.Forms.TabPage();
+            this.GteLotButton = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.CounterServerBox = new System.Windows.Forms.ComboBox();
+            this.CountedLotListBox = new System.Windows.Forms.ComboBox();
+            this.CountButton = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.CountedAggregationTreeView = new System.Windows.Forms.TreeView();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -111,6 +119,7 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
             this.tabPage1.SuspendLayout();
+            this.CaseCounterPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -122,6 +131,7 @@ namespace AntaresUtilsNetFramework
             this.MainTabControl.Controls.Add(this.GeometriesPage);
             this.MainTabControl.Controls.Add(this.RecipePage);
             this.MainTabControl.Controls.Add(this.tabPage1);
+            this.MainTabControl.Controls.Add(this.CaseCounterPage);
             this.MainTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MainTabControl.Location = new System.Drawing.Point(12, 12);
             this.MainTabControl.Name = "MainTabControl";
@@ -332,7 +342,7 @@ namespace AntaresUtilsNetFramework
             // SendButton
             // 
             this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.SendButton.Location = new System.Drawing.Point(682, 198);
+            this.SendButton.Location = new System.Drawing.Point(679, 198);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(67, 201);
             this.SendButton.TabIndex = 8;
@@ -355,13 +365,13 @@ namespace AntaresUtilsNetFramework
             this.Y,
             this.Z,
             this.Total});
-            this.GeometryGridView.Location = new System.Drawing.Point(11, 129);
+            this.GeometryGridView.Location = new System.Drawing.Point(8, 129);
             this.GeometryGridView.Margin = new System.Windows.Forms.Padding(8);
             this.GeometryGridView.MultiSelect = false;
             this.GeometryGridView.Name = "GeometryGridView";
             this.GeometryGridView.RowHeadersVisible = false;
             this.GeometryGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.GeometryGridView.Size = new System.Drawing.Size(660, 327);
+            this.GeometryGridView.Size = new System.Drawing.Size(663, 327);
             this.GeometryGridView.TabIndex = 7;
             this.GeometryGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
             // 
@@ -414,7 +424,7 @@ namespace AntaresUtilsNetFramework
             // RecipesBox
             // 
             this.RecipesBox.FormattingEnabled = true;
-            this.RecipesBox.Location = new System.Drawing.Point(76, 50);
+            this.RecipesBox.Location = new System.Drawing.Point(77, 50);
             this.RecipesBox.Name = "RecipesBox";
             this.RecipesBox.Size = new System.Drawing.Size(144, 28);
             this.RecipesBox.TabIndex = 5;
@@ -422,7 +432,7 @@ namespace AntaresUtilsNetFramework
             // 
             // GetGeometryButton
             // 
-            this.GetGeometryButton.Location = new System.Drawing.Point(231, 49);
+            this.GetGeometryButton.Location = new System.Drawing.Point(232, 50);
             this.GetGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetGeometryButton.Name = "GetGeometryButton";
             this.GetGeometryButton.Size = new System.Drawing.Size(144, 28);
@@ -590,7 +600,7 @@ namespace AntaresUtilsNetFramework
             // 
             this.GMIDBox.DropDownWidth = 144;
             this.GMIDBox.FormattingEnabled = true;
-            this.GMIDBox.Location = new System.Drawing.Point(76, 50);
+            this.GMIDBox.Location = new System.Drawing.Point(77, 50);
             this.GMIDBox.Name = "GMIDBox";
             this.GMIDBox.Size = new System.Drawing.Size(144, 28);
             this.GMIDBox.TabIndex = 8;
@@ -598,7 +608,7 @@ namespace AntaresUtilsNetFramework
             // 
             // GetRecipeListButton
             // 
-            this.GetRecipeListButton.Location = new System.Drawing.Point(231, 49);
+            this.GetRecipeListButton.Location = new System.Drawing.Point(232, 50);
             this.GetRecipeListButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetRecipeListButton.Name = "GetRecipeListButton";
             this.GetRecipeListButton.Size = new System.Drawing.Size(144, 28);
@@ -618,7 +628,7 @@ namespace AntaresUtilsNetFramework
             // 
             // GetGMIDsButton
             // 
-            this.GetGMIDsButton.Location = new System.Drawing.Point(231, 6);
+            this.GetGMIDsButton.Location = new System.Drawing.Point(232, 6);
             this.GetGMIDsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetGMIDsButton.Name = "GetGMIDsButton";
             this.GetGMIDsButton.Size = new System.Drawing.Size(144, 28);
@@ -678,9 +688,173 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Text = "Active Workorders";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // WOUpdateDbButton
+            // 
+            this.WOUpdateDbButton.Location = new System.Drawing.Point(605, 433);
+            this.WOUpdateDbButton.Name = "WOUpdateDbButton";
+            this.WOUpdateDbButton.Size = new System.Drawing.Size(144, 28);
+            this.WOUpdateDbButton.TabIndex = 26;
+            this.WOUpdateDbButton.Text = "Update DB";
+            this.WOUpdateDbButton.UseVisualStyleBackColor = true;
+            this.WOUpdateDbButton.Click += new System.EventHandler(this.WOUpdateDbButton_Click);
+            // 
+            // WOManufacturedBox
+            // 
+            this.WOManufacturedBox.Location = new System.Drawing.Point(375, 214);
+            this.WOManufacturedBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOManufacturedBox.Name = "WOManufacturedBox";
+            this.WOManufacturedBox.Size = new System.Drawing.Size(144, 26);
+            this.WOManufacturedBox.TabIndex = 25;
+            // 
+            // WOExpiryBox
+            // 
+            this.WOExpiryBox.Location = new System.Drawing.Point(77, 214);
+            this.WOExpiryBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOExpiryBox.Name = "WOExpiryBox";
+            this.WOExpiryBox.Size = new System.Drawing.Size(144, 26);
+            this.WOExpiryBox.TabIndex = 24;
+            // 
+            // WOQuantityBox
+            // 
+            this.WOQuantityBox.Location = new System.Drawing.Point(645, 172);
+            this.WOQuantityBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOQuantityBox.Name = "WOQuantityBox";
+            this.WOQuantityBox.ReadOnly = true;
+            this.WOQuantityBox.Size = new System.Drawing.Size(100, 26);
+            this.WOQuantityBox.TabIndex = 23;
+            // 
+            // WOStatusBox
+            // 
+            this.WOStatusBox.Location = new System.Drawing.Point(375, 172);
+            this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOStatusBox.Name = "WOStatusBox";
+            this.WOStatusBox.ReadOnly = true;
+            this.WOStatusBox.Size = new System.Drawing.Size(144, 26);
+            this.WOStatusBox.TabIndex = 22;
+            // 
+            // WOLineInfoBox
+            // 
+            this.WOLineInfoBox.Location = new System.Drawing.Point(77, 130);
+            this.WOLineInfoBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOLineInfoBox.Name = "WOLineInfoBox";
+            this.WOLineInfoBox.ReadOnly = true;
+            this.WOLineInfoBox.Size = new System.Drawing.Size(299, 26);
+            this.WOLineInfoBox.TabIndex = 21;
+            // 
+            // WOLotBox
+            // 
+            this.WOLotBox.Location = new System.Drawing.Point(77, 172);
+            this.WOLotBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.WOLotBox.Name = "WOLotBox";
+            this.WOLotBox.ReadOnly = true;
+            this.WOLotBox.Size = new System.Drawing.Size(144, 26);
+            this.WOLotBox.TabIndex = 20;
+            // 
+            // WODescriptionBox
+            // 
+            this.WODescriptionBox.Location = new System.Drawing.Point(78, 89);
+            this.WODescriptionBox.Margin = new System.Windows.Forms.Padding(8);
+            this.WODescriptionBox.Name = "WODescriptionBox";
+            this.WODescriptionBox.ReadOnly = true;
+            this.WODescriptionBox.Size = new System.Drawing.Size(667, 26);
+            this.WODescriptionBox.TabIndex = 19;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(313, 175);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(56, 20);
+            this.label21.TabIndex = 18;
+            this.label21.Text = "Status";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 217);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(51, 20);
+            this.label20.TabIndex = 17;
+            this.label20.Text = "Expiry";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(261, 217);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(108, 20);
+            this.label19.TabIndex = 16;
+            this.label19.Text = "Manufactured";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(571, 175);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 20);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "Quantity";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 91);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(51, 20);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Name";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 175);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 20);
+            this.label16.TabIndex = 13;
+            this.label16.Text = "Lot";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 130);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(39, 20);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Line";
+            // 
+            // WOListBox
+            // 
+            this.WOListBox.DropDownWidth = 144;
+            this.WOListBox.FormattingEnabled = true;
+            this.WOListBox.Location = new System.Drawing.Point(77, 50);
+            this.WOListBox.Name = "WOListBox";
+            this.WOListBox.Size = new System.Drawing.Size(144, 28);
+            this.WOListBox.TabIndex = 11;
+            this.WOListBox.TextChanged += new System.EventHandler(this.WOListBox_TextChanged);
+            // 
+            // GetWODetailButton
+            // 
+            this.GetWODetailButton.Location = new System.Drawing.Point(232, 50);
+            this.GetWODetailButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetWODetailButton.Name = "GetWODetailButton";
+            this.GetWODetailButton.Size = new System.Drawing.Size(144, 28);
+            this.GetWODetailButton.TabIndex = 10;
+            this.GetWODetailButton.Text = "Get Info";
+            this.GetWODetailButton.UseVisualStyleBackColor = true;
+            this.GetWODetailButton.Click += new System.EventHandler(this.GetWODetailButton_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 53);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 20);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "WO";
+            // 
             // GetWOsButton
             // 
-            this.GetWOsButton.Location = new System.Drawing.Point(231, 6);
+            this.GetWOsButton.Location = new System.Drawing.Point(232, 6);
             this.GetWOsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.GetWOsButton.Name = "GetWOsButton";
             this.GetWOsButton.Size = new System.Drawing.Size(144, 28);
@@ -709,169 +883,89 @@ namespace AntaresUtilsNetFramework
             this.WOServerBox.TabIndex = 6;
             this.WOServerBox.SelectedIndexChanged += new System.EventHandler(this.WOServerBox_SelectedIndexChanged);
             // 
-            // WOListBox
+            // CaseCounterPage
             // 
-            this.WOListBox.DropDownWidth = 144;
-            this.WOListBox.FormattingEnabled = true;
-            this.WOListBox.Location = new System.Drawing.Point(77, 49);
-            this.WOListBox.Name = "WOListBox";
-            this.WOListBox.Size = new System.Drawing.Size(144, 28);
-            this.WOListBox.TabIndex = 11;
-            this.WOListBox.TextChanged += new System.EventHandler(this.WOListBox_TextChanged);
+            this.CaseCounterPage.Controls.Add(this.CountedAggregationTreeView);
+            this.CaseCounterPage.Controls.Add(this.CountedLotListBox);
+            this.CaseCounterPage.Controls.Add(this.CountButton);
+            this.CaseCounterPage.Controls.Add(this.label23);
+            this.CaseCounterPage.Controls.Add(this.GteLotButton);
+            this.CaseCounterPage.Controls.Add(this.label22);
+            this.CaseCounterPage.Controls.Add(this.CounterServerBox);
+            this.CaseCounterPage.Location = new System.Drawing.Point(4, 29);
+            this.CaseCounterPage.Name = "CaseCounterPage";
+            this.CaseCounterPage.Padding = new System.Windows.Forms.Padding(3);
+            this.CaseCounterPage.Size = new System.Drawing.Size(755, 467);
+            this.CaseCounterPage.TabIndex = 4;
+            this.CaseCounterPage.Text = "Case Counters";
+            this.CaseCounterPage.UseVisualStyleBackColor = true;
             // 
-            // GetWODetailButton
+            // GteLotButton
             // 
-            this.GetWODetailButton.Location = new System.Drawing.Point(231, 49);
-            this.GetWODetailButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetWODetailButton.Name = "GetWODetailButton";
-            this.GetWODetailButton.Size = new System.Drawing.Size(144, 28);
-            this.GetWODetailButton.TabIndex = 10;
-            this.GetWODetailButton.Text = "Get Info";
-            this.GetWODetailButton.UseVisualStyleBackColor = true;
-            this.GetWODetailButton.Click += new System.EventHandler(this.GetWODetailButton_Click);
+            this.GteLotButton.Location = new System.Drawing.Point(232, 6);
+            this.GteLotButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GteLotButton.Name = "GteLotButton";
+            this.GteLotButton.Size = new System.Drawing.Size(144, 28);
+            this.GteLotButton.TabIndex = 11;
+            this.GteLotButton.Text = "Get Workorders";
+            this.GteLotButton.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // label22
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 53);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 20);
-            this.label14.TabIndex = 9;
-            this.label14.Text = "WO";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(55, 20);
+            this.label22.TabIndex = 10;
+            this.label22.Text = "Server";
             // 
-            // label15
+            // CounterServerBox
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 130);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(39, 20);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Line";
+            this.CounterServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CounterServerBox.DropDownWidth = 144;
+            this.CounterServerBox.FormattingEnabled = true;
+            this.CounterServerBox.Location = new System.Drawing.Point(77, 6);
+            this.CounterServerBox.Name = "CounterServerBox";
+            this.CounterServerBox.Size = new System.Drawing.Size(144, 28);
+            this.CounterServerBox.TabIndex = 9;
             // 
-            // label16
+            // CountedLotListBox
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 175);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 20);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Lot";
+            this.CountedLotListBox.DropDownWidth = 144;
+            this.CountedLotListBox.FormattingEnabled = true;
+            this.CountedLotListBox.Location = new System.Drawing.Point(77, 50);
+            this.CountedLotListBox.Margin = new System.Windows.Forms.Padding(8);
+            this.CountedLotListBox.Name = "CountedLotListBox";
+            this.CountedLotListBox.Size = new System.Drawing.Size(144, 28);
+            this.CountedLotListBox.TabIndex = 14;
             // 
-            // label17
+            // CountButton
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 91);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(51, 20);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Name";
+            this.CountButton.Location = new System.Drawing.Point(232, 50);
+            this.CountButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.CountButton.Name = "CountButton";
+            this.CountButton.Size = new System.Drawing.Size(144, 28);
+            this.CountButton.TabIndex = 13;
+            this.CountButton.Text = "Count";
+            this.CountButton.UseVisualStyleBackColor = true;
             // 
-            // label18
+            // label23
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(571, 175);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(68, 20);
-            this.label18.TabIndex = 15;
-            this.label18.Text = "Quantity";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 53);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(32, 20);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Lot";
             // 
-            // label19
+            // CountedAggregationTreeView
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(241, 217);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(108, 20);
-            this.label19.TabIndex = 16;
-            this.label19.Text = "Manufactured";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 217);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(51, 20);
-            this.label20.TabIndex = 17;
-            this.label20.Text = "Expiry";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(293, 175);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(56, 20);
-            this.label21.TabIndex = 18;
-            this.label21.Text = "Status";
-            // 
-            // WODescriptionBox
-            // 
-            this.WODescriptionBox.Location = new System.Drawing.Point(78, 89);
-            this.WODescriptionBox.Margin = new System.Windows.Forms.Padding(8);
-            this.WODescriptionBox.Name = "WODescriptionBox";
-            this.WODescriptionBox.ReadOnly = true;
-            this.WODescriptionBox.Size = new System.Drawing.Size(667, 26);
-            this.WODescriptionBox.TabIndex = 19;
-            // 
-            // WOLotBox
-            // 
-            this.WOLotBox.Location = new System.Drawing.Point(78, 172);
-            this.WOLotBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOLotBox.Name = "WOLotBox";
-            this.WOLotBox.ReadOnly = true;
-            this.WOLotBox.Size = new System.Drawing.Size(143, 26);
-            this.WOLotBox.TabIndex = 20;
-            // 
-            // WOLineInfoBox
-            // 
-            this.WOLineInfoBox.Location = new System.Drawing.Point(77, 130);
-            this.WOLineInfoBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOLineInfoBox.Name = "WOLineInfoBox";
-            this.WOLineInfoBox.ReadOnly = true;
-            this.WOLineInfoBox.Size = new System.Drawing.Size(298, 26);
-            this.WOLineInfoBox.TabIndex = 21;
-            // 
-            // WOStatusBox
-            // 
-            this.WOStatusBox.Location = new System.Drawing.Point(355, 172);
-            this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOStatusBox.Name = "WOStatusBox";
-            this.WOStatusBox.ReadOnly = true;
-            this.WOStatusBox.Size = new System.Drawing.Size(120, 26);
-            this.WOStatusBox.TabIndex = 22;
-            // 
-            // WOQuantityBox
-            // 
-            this.WOQuantityBox.Location = new System.Drawing.Point(645, 172);
-            this.WOQuantityBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOQuantityBox.Name = "WOQuantityBox";
-            this.WOQuantityBox.ReadOnly = true;
-            this.WOQuantityBox.Size = new System.Drawing.Size(100, 26);
-            this.WOQuantityBox.TabIndex = 23;
-            // 
-            // WOExpiryBox
-            // 
-            this.WOExpiryBox.Location = new System.Drawing.Point(77, 214);
-            this.WOExpiryBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOExpiryBox.Name = "WOExpiryBox";
-            this.WOExpiryBox.Size = new System.Drawing.Size(100, 26);
-            this.WOExpiryBox.TabIndex = 24;
-            // 
-            // WOManufacturedBox
-            // 
-            this.WOManufacturedBox.Location = new System.Drawing.Point(355, 214);
-            this.WOManufacturedBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOManufacturedBox.Name = "WOManufacturedBox";
-            this.WOManufacturedBox.Size = new System.Drawing.Size(100, 26);
-            this.WOManufacturedBox.TabIndex = 25;
-            // 
-            // WOUpdateDbButton
-            // 
-            this.WOUpdateDbButton.Location = new System.Drawing.Point(605, 433);
-            this.WOUpdateDbButton.Name = "WOUpdateDbButton";
-            this.WOUpdateDbButton.Size = new System.Drawing.Size(144, 28);
-            this.WOUpdateDbButton.TabIndex = 26;
-            this.WOUpdateDbButton.Text = "Update DB";
-            this.WOUpdateDbButton.UseVisualStyleBackColor = true;
-            this.WOUpdateDbButton.Click += new System.EventHandler(this.WOUpdateDbButton_Click);
+            this.CountedAggregationTreeView.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.CountedAggregationTreeView.Location = new System.Drawing.Point(3, 93);
+            this.CountedAggregationTreeView.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.CountedAggregationTreeView.Name = "CountedAggregationTreeView";
+            this.CountedAggregationTreeView.Size = new System.Drawing.Size(746, 368);
+            this.CountedAggregationTreeView.TabIndex = 15;
             // 
             // MainForm
             // 
@@ -896,6 +990,8 @@ namespace AntaresUtilsNetFramework
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.CaseCounterPage.ResumeLayout(false);
+            this.CaseCounterPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -975,6 +1071,14 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox WOServerBox;
         private System.Windows.Forms.Button WOUpdateDbButton;
+        private System.Windows.Forms.TabPage CaseCounterPage;
+        private System.Windows.Forms.TreeView CountedAggregationTreeView;
+        private System.Windows.Forms.ComboBox CountedLotListBox;
+        private System.Windows.Forms.Button CountButton;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button GteLotButton;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox CounterServerBox;
     }
 }
 
