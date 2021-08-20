@@ -133,8 +133,6 @@ namespace AntaresUtilities
             return results;
         }
 
-
-
         /// <summary>
         /// Запрашивает в БД идентификатор GTINа
         /// </summary>
@@ -293,6 +291,18 @@ namespace AntaresUtilities
             SqlCommand cmd = new SqlCommand(cmdString, connection);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
+        }
+
+        internal List<string> GetClosedWorkorderList()
+        {
+            string cmdString = $"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Status = 31";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal List<string> GetWorkOrdersByLot(string lot)
+        {
+            string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[Workorder] where ";
+            return SelectListFromDb(cmdString);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AntaresUtilities
 {
@@ -135,5 +136,23 @@ namespace AntaresUtilities
         {
             _dm.UpdateWoInDb(wo);
         }
+    
+        public List<string> GetClosedWorkorderList()
+        {
+            _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
+            return _dm.GetClosedWorkorderList();
+        }
+
+        public TreeNode GetLotTree(string lot)
+        {
+            TreeNode root = new TreeNode($"Lot: {lot}");
+            List<string> workorders = _dm.GetWorkOrdersByLot(lot);
+            foreach(string workorder in workorders)
+            {
+                root.Nodes.Add($"Workorder: {workorder}");
+            }
+            return null;
+        }
+
     }
 }

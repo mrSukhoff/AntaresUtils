@@ -104,10 +104,10 @@ namespace AntaresUtilsNetFramework
             this.label13 = new System.Windows.Forms.Label();
             this.WOServerBox = new System.Windows.Forms.ComboBox();
             this.CaseCounterPage = new System.Windows.Forms.TabPage();
-            this.GteLotButton = new System.Windows.Forms.Button();
+            this.GetWorkorderButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CounterServerBox = new System.Windows.Forms.ComboBox();
-            this.CountedLotListBox = new System.Windows.Forms.ComboBox();
+            this.CountedWorkorderListBox = new System.Windows.Forms.ComboBox();
             this.CountButton = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.CountedAggregationTreeView = new System.Windows.Forms.TreeView();
@@ -886,10 +886,10 @@ namespace AntaresUtilsNetFramework
             // CaseCounterPage
             // 
             this.CaseCounterPage.Controls.Add(this.CountedAggregationTreeView);
-            this.CaseCounterPage.Controls.Add(this.CountedLotListBox);
+            this.CaseCounterPage.Controls.Add(this.CountedWorkorderListBox);
             this.CaseCounterPage.Controls.Add(this.CountButton);
             this.CaseCounterPage.Controls.Add(this.label23);
-            this.CaseCounterPage.Controls.Add(this.GteLotButton);
+            this.CaseCounterPage.Controls.Add(this.GetWorkorderButton);
             this.CaseCounterPage.Controls.Add(this.label22);
             this.CaseCounterPage.Controls.Add(this.CounterServerBox);
             this.CaseCounterPage.Location = new System.Drawing.Point(4, 29);
@@ -900,15 +900,16 @@ namespace AntaresUtilsNetFramework
             this.CaseCounterPage.Text = "Case Counters";
             this.CaseCounterPage.UseVisualStyleBackColor = true;
             // 
-            // GteLotButton
+            // GetWorkorderButton
             // 
-            this.GteLotButton.Location = new System.Drawing.Point(232, 6);
-            this.GteLotButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GteLotButton.Name = "GteLotButton";
-            this.GteLotButton.Size = new System.Drawing.Size(144, 28);
-            this.GteLotButton.TabIndex = 11;
-            this.GteLotButton.Text = "Get Workorders";
-            this.GteLotButton.UseVisualStyleBackColor = true;
+            this.GetWorkorderButton.Location = new System.Drawing.Point(232, 6);
+            this.GetWorkorderButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetWorkorderButton.Name = "GetWorkorderButton";
+            this.GetWorkorderButton.Size = new System.Drawing.Size(144, 28);
+            this.GetWorkorderButton.TabIndex = 11;
+            this.GetWorkorderButton.Text = "Get WO List";
+            this.GetWorkorderButton.UseVisualStyleBackColor = true;
+            this.GetWorkorderButton.Click += new System.EventHandler(this.GetWorkorderButton_Click);
             // 
             // label22
             // 
@@ -928,16 +929,18 @@ namespace AntaresUtilsNetFramework
             this.CounterServerBox.Name = "CounterServerBox";
             this.CounterServerBox.Size = new System.Drawing.Size(144, 28);
             this.CounterServerBox.TabIndex = 9;
+            this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
-            // CountedLotListBox
+            // CountedWorkorderListBox
             // 
-            this.CountedLotListBox.DropDownWidth = 144;
-            this.CountedLotListBox.FormattingEnabled = true;
-            this.CountedLotListBox.Location = new System.Drawing.Point(77, 50);
-            this.CountedLotListBox.Margin = new System.Windows.Forms.Padding(8);
-            this.CountedLotListBox.Name = "CountedLotListBox";
-            this.CountedLotListBox.Size = new System.Drawing.Size(144, 28);
-            this.CountedLotListBox.TabIndex = 14;
+            this.CountedWorkorderListBox.DropDownWidth = 144;
+            this.CountedWorkorderListBox.FormattingEnabled = true;
+            this.CountedWorkorderListBox.Location = new System.Drawing.Point(77, 50);
+            this.CountedWorkorderListBox.Margin = new System.Windows.Forms.Padding(8);
+            this.CountedWorkorderListBox.Name = "CountedWorkorderListBox";
+            this.CountedWorkorderListBox.Size = new System.Drawing.Size(144, 28);
+            this.CountedWorkorderListBox.TabIndex = 14;
+            this.CountedWorkorderListBox.TextChanged += new System.EventHandler(this.CountedWorkorderListBox_TextChanged);
             // 
             // CountButton
             // 
@@ -948,15 +951,16 @@ namespace AntaresUtilsNetFramework
             this.CountButton.TabIndex = 13;
             this.CountButton.Text = "Count";
             this.CountButton.UseVisualStyleBackColor = true;
+            this.CountButton.Click += new System.EventHandler(this.CountButton_Click);
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(6, 53);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(32, 20);
+            this.label23.Size = new System.Drawing.Size(36, 20);
             this.label23.TabIndex = 12;
-            this.label23.Text = "Lot";
+            this.label23.Text = "WO";
             // 
             // CountedAggregationTreeView
             // 
@@ -1073,10 +1077,10 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Button WOUpdateDbButton;
         private System.Windows.Forms.TabPage CaseCounterPage;
         private System.Windows.Forms.TreeView CountedAggregationTreeView;
-        private System.Windows.Forms.ComboBox CountedLotListBox;
+        private System.Windows.Forms.ComboBox CountedWorkorderListBox;
         private System.Windows.Forms.Button CountButton;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button GteLotButton;
+        private System.Windows.Forms.Button GetWorkorderButton;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox CounterServerBox;
     }

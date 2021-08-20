@@ -242,8 +242,8 @@ namespace AntaresUtilsNetFramework
             WOListBox.Text = "";
 
             //Counters
-            CountedLotListBox.Items.Clear();
-            CountedLotListBox.Text = "";
+            CountedWorkorderListBox.Items.Clear();
+            CountedWorkorderListBox.Text = "";
             CountedAggregationTreeView.Nodes.Clear();
         }
 
@@ -446,5 +446,42 @@ namespace AntaresUtilsNetFramework
         {
             au.SelectServer(WOServerBox.SelectedItem.ToString());
         }
+
+        private void CountedWorkorderListBox_TextChanged(object sender, EventArgs e)
+        {
+            CountedWorkorderListBox.SelectedItem = CountedWorkorderListBox.Text;
+        }
+
+        private void GetWorkorderButton_Click(object sender, EventArgs e)
+        {
+            CountedWorkorderListBox.Items.Clear();
+            CountedWorkorderListBox.Text = "";
+            CountedAggregationTreeView.Nodes.Clear();
+
+            try
+            {
+                foreach (string wo in au.GetClosedWorkorderList())
+                {
+                    CountedWorkorderListBox.Items.Add(wo);
+                }
+                WOListBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CounterServerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            au.SelectServer(CounterServerBox.SelectedItem.ToString());
+        }
+
+        private void CountButton_Click(object sender, EventArgs e)
+        {
+            TreeNode root = au.GetLotTree(CountedWorkorderListBox.SelectedItem.ToString());
+            CountedAggregationTreeView.Nodes.Add(root);
+        }
+
     }
 }
