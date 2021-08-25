@@ -104,13 +104,13 @@ namespace AntaresUtilsNetFramework
             this.label13 = new System.Windows.Forms.Label();
             this.WOServerBox = new System.Windows.Forms.ComboBox();
             this.CaseCounterPage = new System.Windows.Forms.TabPage();
-            this.GetWorkorderButton = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.CounterServerBox = new System.Windows.Forms.ComboBox();
+            this.CountedAggregationTreeView = new System.Windows.Forms.TreeView();
             this.CountedWorkorderListBox = new System.Windows.Forms.ComboBox();
             this.CountButton = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
-            this.CountedAggregationTreeView = new System.Windows.Forms.TreeView();
+            this.GetWorkorderButton = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.CounterServerBox = new System.Windows.Forms.ComboBox();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -900,36 +900,14 @@ namespace AntaresUtilsNetFramework
             this.CaseCounterPage.Text = "Case Counters";
             this.CaseCounterPage.UseVisualStyleBackColor = true;
             // 
-            // GetWorkorderButton
+            // CountedAggregationTreeView
             // 
-            this.GetWorkorderButton.Location = new System.Drawing.Point(232, 6);
-            this.GetWorkorderButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetWorkorderButton.Name = "GetWorkorderButton";
-            this.GetWorkorderButton.Size = new System.Drawing.Size(144, 28);
-            this.GetWorkorderButton.TabIndex = 11;
-            this.GetWorkorderButton.Text = "Get WO List";
-            this.GetWorkorderButton.UseVisualStyleBackColor = true;
-            this.GetWorkorderButton.Click += new System.EventHandler(this.GetWorkorderButton_Click);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(6, 9);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(55, 20);
-            this.label22.TabIndex = 10;
-            this.label22.Text = "Server";
-            // 
-            // CounterServerBox
-            // 
-            this.CounterServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CounterServerBox.DropDownWidth = 144;
-            this.CounterServerBox.FormattingEnabled = true;
-            this.CounterServerBox.Location = new System.Drawing.Point(77, 6);
-            this.CounterServerBox.Name = "CounterServerBox";
-            this.CounterServerBox.Size = new System.Drawing.Size(144, 28);
-            this.CounterServerBox.TabIndex = 9;
-            this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
+            this.CountedAggregationTreeView.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.CountedAggregationTreeView.Location = new System.Drawing.Point(3, 93);
+            this.CountedAggregationTreeView.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.CountedAggregationTreeView.Name = "CountedAggregationTreeView";
+            this.CountedAggregationTreeView.Size = new System.Drawing.Size(746, 368);
+            this.CountedAggregationTreeView.TabIndex = 15;
             // 
             // CountedWorkorderListBox
             // 
@@ -962,14 +940,36 @@ namespace AntaresUtilsNetFramework
             this.label23.TabIndex = 12;
             this.label23.Text = "WO";
             // 
-            // CountedAggregationTreeView
+            // GetWorkorderButton
             // 
-            this.CountedAggregationTreeView.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.CountedAggregationTreeView.Location = new System.Drawing.Point(3, 93);
-            this.CountedAggregationTreeView.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.CountedAggregationTreeView.Name = "CountedAggregationTreeView";
-            this.CountedAggregationTreeView.Size = new System.Drawing.Size(746, 368);
-            this.CountedAggregationTreeView.TabIndex = 15;
+            this.GetWorkorderButton.Location = new System.Drawing.Point(232, 6);
+            this.GetWorkorderButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetWorkorderButton.Name = "GetWorkorderButton";
+            this.GetWorkorderButton.Size = new System.Drawing.Size(144, 28);
+            this.GetWorkorderButton.TabIndex = 11;
+            this.GetWorkorderButton.Text = "Get WO List";
+            this.GetWorkorderButton.UseVisualStyleBackColor = true;
+            this.GetWorkorderButton.Click += new System.EventHandler(this.GetWorkorderListButton_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(55, 20);
+            this.label22.TabIndex = 10;
+            this.label22.Text = "Server";
+            // 
+            // CounterServerBox
+            // 
+            this.CounterServerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CounterServerBox.DropDownWidth = 144;
+            this.CounterServerBox.FormattingEnabled = true;
+            this.CounterServerBox.Location = new System.Drawing.Point(77, 6);
+            this.CounterServerBox.Name = "CounterServerBox";
+            this.CounterServerBox.Size = new System.Drawing.Size(144, 28);
+            this.CounterServerBox.TabIndex = 9;
+            this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
