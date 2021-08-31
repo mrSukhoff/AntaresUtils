@@ -46,6 +46,8 @@ namespace AntaresUtilsNetFramework
             RecipesBox.Text = "";
             GeometryGridView.Rows.Clear();
             RecipeNameTextBox.Text = "";
+            GetAgregationGeometryButton.Enabled = false;
+            SendAgregationToDbButton.Enabled = false;
 
             //Recipes
             GMIDBox.Items.Clear();
@@ -188,6 +190,8 @@ namespace AntaresUtilsNetFramework
             {
                 MessageBox.Show(ex.Message);
             }
+            GetAgregationGeometryButton.Enabled = true;
+            SendAgregationToDbButton.Enabled = true;
         }
 
         //Получаем с сервера геометрию выбраного рецепта
