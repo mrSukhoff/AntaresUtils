@@ -55,6 +55,12 @@ namespace AntaresUtilsNetFramework
             this.RecipeNameTextBox = new System.Windows.Forms.TextBox();
             this.SendAgregationToDbButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
+            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecipesBox = new System.Windows.Forms.ComboBox();
             this.GetAgregationGeometryButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -108,12 +114,7 @@ namespace AntaresUtilsNetFramework
             this.GetWorkorderButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CounterServerBox = new System.Windows.Forms.ComboBox();
-            this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WoStatusComboBox = new System.Windows.Forms.ComboBox();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -379,6 +380,58 @@ namespace AntaresUtilsNetFramework
             this.GeometryGridView.TabIndex = 7;
             this.GeometryGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
             // 
+            // LineId
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.LineId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.LineId.HeaderText = "LineId";
+            this.LineId.Name = "LineId";
+            this.LineId.ReadOnly = true;
+            this.LineId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.LineId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LineId.Width = 110;
+            // 
+            // ItemType
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ItemType.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ItemType.HeaderText = "ItemType";
+            this.ItemType.Name = "ItemType";
+            this.ItemType.ReadOnly = true;
+            this.ItemType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ItemType.Width = 110;
+            // 
+            // X
+            // 
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.X.Width = 110;
+            // 
+            // Y
+            // 
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            this.Y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Y.Width = 110;
+            // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
+            this.Z.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Z.Width = 110;
+            // 
+            // Total
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Total.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Total.Width = 110;
+            // 
             // RecipesBox
             // 
             this.RecipesBox.FormattingEnabled = true;
@@ -618,6 +671,7 @@ namespace AntaresUtilsNetFramework
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.WoStatusComboBox);
             this.tabPage1.Controls.Add(this.WOUpdateDbButton);
             this.tabPage1.Controls.Add(this.WOManufacturedBox);
             this.tabPage1.Controls.Add(this.WOExpiryBox);
@@ -684,10 +738,9 @@ namespace AntaresUtilsNetFramework
             // 
             // WOStatusBox
             // 
-            this.WOStatusBox.Location = new System.Drawing.Point(375, 172);
+            this.WOStatusBox.Location = new System.Drawing.Point(245, 330);
             this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOStatusBox.Name = "WOStatusBox";
-            this.WOStatusBox.ReadOnly = true;
             this.WOStatusBox.Size = new System.Drawing.Size(144, 26);
             this.WOStatusBox.TabIndex = 22;
             // 
@@ -930,57 +983,13 @@ namespace AntaresUtilsNetFramework
             this.CounterServerBox.TabIndex = 9;
             this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
-            // LineId
+            // WoStatusComboBox
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.LineId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.LineId.HeaderText = "LineId";
-            this.LineId.Name = "LineId";
-            this.LineId.ReadOnly = true;
-            this.LineId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.LineId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LineId.Width = 110;
-            // 
-            // ItemType
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ItemType.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ItemType.HeaderText = "ItemType";
-            this.ItemType.Name = "ItemType";
-            this.ItemType.ReadOnly = true;
-            this.ItemType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ItemType.Width = 110;
-            // 
-            // X
-            // 
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            this.X.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.X.Width = 110;
-            // 
-            // Y
-            // 
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            this.Y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Y.Width = 110;
-            // 
-            // Z
-            // 
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
-            this.Z.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Z.Width = 110;
-            // 
-            // Total
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Total.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Total.Width = 110;
+            this.WoStatusComboBox.FormattingEnabled = true;
+            this.WoStatusComboBox.Location = new System.Drawing.Point(375, 170);
+            this.WoStatusComboBox.Name = "WoStatusComboBox";
+            this.WoStatusComboBox.Size = new System.Drawing.Size(144, 28);
+            this.WoStatusComboBox.TabIndex = 27;
             // 
             // MainForm
             // 
@@ -1094,6 +1103,7 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.ComboBox WoStatusComboBox;
     }
 }
 

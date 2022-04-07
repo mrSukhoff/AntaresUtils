@@ -14,6 +14,15 @@ namespace AntaresUtilities
         private List<RecipeGeometry> _currentGMIDRecipesGeometry;
         private string _currentGMID;
 
+        public Dictionary<int, string> WOStatus = new Dictionary<int, string>()
+        {
+            { 1, "Assigned" },
+            { 3, "Production" },
+            { 9, "Suspended" },
+            { 11, "Aborted" },
+            { 31, "Completed" }
+        };
+
         public BusinessLogic()
         {
             _listOfServers = new ServerList();
@@ -122,13 +131,7 @@ namespace AntaresUtilities
         public WorkOrder GetWorOrderDetails(string woName)
         {
             WorkOrder wo = _dm.GetWODetail(woName);
-            switch (wo.Status)
-                {
-                    case "1": { wo.Status = "Assigned"; break; }
-                    case "3": { wo.Status = "Suspended"; break; }
-                    case "9": { wo.Status = "Production"; break; }
-                    case "11": { wo.Status = "Aborted"; break; }
-                }
+            if (int.TryParse(wo.Status,out int t)) wo.Status = WOStatus[t];
             return wo;
         }
 

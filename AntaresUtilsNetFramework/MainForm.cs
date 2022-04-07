@@ -432,10 +432,21 @@ namespace AntaresUtilsNetFramework
             WODescriptionBox.Text = w.Descrition;
             WOLineInfoBox.Text = w.Line;
             WOLotBox.Text = w.Lot;
-            WOStatusBox.Text = w.Status;
             WOQuantityBox.Text = w.Quantity;
             WOExpiryBox.Text = w.Expiry;
             WOManufacturedBox.Text = w.Manufactured;
+
+            //WOStatusBox.Text = w.Status;
+            FillWoStatusComboBox();
+            WoStatusComboBox.SelectedItem = w.Status;
+        }
+
+        private void FillWoStatusComboBox() 
+        {
+            foreach (var p in au.WOStatus) 
+            {
+                WoStatusComboBox.Items.Add(p);
+            }
         }
 
         private void WOUpdateDbButton_Click(object sender, EventArgs e)
