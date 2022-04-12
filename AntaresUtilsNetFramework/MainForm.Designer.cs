@@ -29,6 +29,9 @@ namespace AntaresUtilsNetFramework
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.CryptoGetter = new System.Windows.Forms.TabPage();
@@ -50,7 +53,7 @@ namespace AntaresUtilsNetFramework
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.RecipeNameTextBox = new System.Windows.Forms.TextBox();
-            this.SendButton = new System.Windows.Forms.Button();
+            this.SendAgregationToDbButton = new System.Windows.Forms.Button();
             this.GeometryGridView = new System.Windows.Forms.DataGridView();
             this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +62,7 @@ namespace AntaresUtilsNetFramework
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecipesBox = new System.Windows.Forms.ComboBox();
-            this.GetGeometryButton = new System.Windows.Forms.Button();
+            this.GetAgregationGeometryButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.GetRecipesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -111,6 +114,7 @@ namespace AntaresUtilsNetFramework
             this.GetWorkorderButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CounterServerBox = new System.Windows.Forms.ComboBox();
+            this.WoStatusComboBox = new System.Windows.Forms.ComboBox();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -304,10 +308,10 @@ namespace AntaresUtilsNetFramework
             // 
             this.GeometriesPage.Controls.Add(this.label11);
             this.GeometriesPage.Controls.Add(this.RecipeNameTextBox);
-            this.GeometriesPage.Controls.Add(this.SendButton);
+            this.GeometriesPage.Controls.Add(this.SendAgregationToDbButton);
             this.GeometriesPage.Controls.Add(this.GeometryGridView);
             this.GeometriesPage.Controls.Add(this.RecipesBox);
-            this.GeometriesPage.Controls.Add(this.GetGeometryButton);
+            this.GeometriesPage.Controls.Add(this.GetAgregationGeometryButton);
             this.GeometriesPage.Controls.Add(this.label2);
             this.GeometriesPage.Controls.Add(this.GetRecipesButton);
             this.GeometriesPage.Controls.Add(this.label1);
@@ -339,16 +343,17 @@ namespace AntaresUtilsNetFramework
             this.RecipeNameTextBox.Size = new System.Drawing.Size(598, 26);
             this.RecipeNameTextBox.TabIndex = 9;
             // 
-            // SendButton
+            // SendAgregationToDbButton
             // 
-            this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.SendButton.Location = new System.Drawing.Point(679, 198);
-            this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(67, 201);
-            this.SendButton.TabIndex = 8;
-            this.SendButton.Text = "Send to DB";
-            this.SendButton.UseVisualStyleBackColor = true;
-            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
+            this.SendAgregationToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.SendAgregationToDbButton.Enabled = false;
+            this.SendAgregationToDbButton.Location = new System.Drawing.Point(679, 198);
+            this.SendAgregationToDbButton.Name = "SendAgregationToDbButton";
+            this.SendAgregationToDbButton.Size = new System.Drawing.Size(67, 201);
+            this.SendAgregationToDbButton.TabIndex = 8;
+            this.SendAgregationToDbButton.Text = "Send to DB";
+            this.SendAgregationToDbButton.UseVisualStyleBackColor = true;
+            this.SendAgregationToDbButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
             // GeometryGridView
             // 
@@ -377,6 +382,8 @@ namespace AntaresUtilsNetFramework
             // 
             // LineId
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.LineId.DefaultCellStyle = dataGridViewCellStyle1;
             this.LineId.HeaderText = "LineId";
             this.LineId.Name = "LineId";
             this.LineId.ReadOnly = true;
@@ -386,6 +393,8 @@ namespace AntaresUtilsNetFramework
             // 
             // ItemType
             // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ItemType.DefaultCellStyle = dataGridViewCellStyle2;
             this.ItemType.HeaderText = "ItemType";
             this.ItemType.Name = "ItemType";
             this.ItemType.ReadOnly = true;
@@ -415,6 +424,8 @@ namespace AntaresUtilsNetFramework
             // 
             // Total
             // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Total.DefaultCellStyle = dataGridViewCellStyle3;
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
@@ -430,16 +441,17 @@ namespace AntaresUtilsNetFramework
             this.RecipesBox.TabIndex = 5;
             this.RecipesBox.TextChanged += new System.EventHandler(this.RecipesBox_TextChanged);
             // 
-            // GetGeometryButton
+            // GetAgregationGeometryButton
             // 
-            this.GetGeometryButton.Location = new System.Drawing.Point(232, 50);
-            this.GetGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetGeometryButton.Name = "GetGeometryButton";
-            this.GetGeometryButton.Size = new System.Drawing.Size(144, 28);
-            this.GetGeometryButton.TabIndex = 4;
-            this.GetGeometryButton.Text = "Get Geometry";
-            this.GetGeometryButton.UseVisualStyleBackColor = true;
-            this.GetGeometryButton.Click += new System.EventHandler(this.GetGeometryButton_Click);
+            this.GetAgregationGeometryButton.Enabled = false;
+            this.GetAgregationGeometryButton.Location = new System.Drawing.Point(232, 50);
+            this.GetAgregationGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.GetAgregationGeometryButton.Name = "GetAgregationGeometryButton";
+            this.GetAgregationGeometryButton.Size = new System.Drawing.Size(144, 28);
+            this.GetAgregationGeometryButton.TabIndex = 4;
+            this.GetAgregationGeometryButton.Text = "Get Geometry";
+            this.GetAgregationGeometryButton.UseVisualStyleBackColor = true;
+            this.GetAgregationGeometryButton.Click += new System.EventHandler(this.GetGeometryButton_Click);
             // 
             // label2
             // 
@@ -659,6 +671,7 @@ namespace AntaresUtilsNetFramework
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.WoStatusComboBox);
             this.tabPage1.Controls.Add(this.WOUpdateDbButton);
             this.tabPage1.Controls.Add(this.WOManufacturedBox);
             this.tabPage1.Controls.Add(this.WOExpiryBox);
@@ -725,10 +738,9 @@ namespace AntaresUtilsNetFramework
             // 
             // WOStatusBox
             // 
-            this.WOStatusBox.Location = new System.Drawing.Point(375, 172);
+            this.WOStatusBox.Location = new System.Drawing.Point(245, 330);
             this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.WOStatusBox.Name = "WOStatusBox";
-            this.WOStatusBox.ReadOnly = true;
             this.WOStatusBox.Size = new System.Drawing.Size(144, 26);
             this.WOStatusBox.TabIndex = 22;
             // 
@@ -971,6 +983,14 @@ namespace AntaresUtilsNetFramework
             this.CounterServerBox.TabIndex = 9;
             this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
+            // WoStatusComboBox
+            // 
+            this.WoStatusComboBox.FormattingEnabled = true;
+            this.WoStatusComboBox.Location = new System.Drawing.Point(375, 170);
+            this.WoStatusComboBox.Name = "WoStatusComboBox";
+            this.WoStatusComboBox.Size = new System.Drawing.Size(144, 28);
+            this.WoStatusComboBox.TabIndex = 27;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1006,13 +1026,13 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.TabPage GeometriesPage;
         private System.Windows.Forms.TabPage RecipePage;
         private System.Windows.Forms.ComboBox RecipesBox;
-        private System.Windows.Forms.Button GetGeometryButton;
+        private System.Windows.Forms.Button GetAgregationGeometryButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button GetRecipesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox GeometryServerBox;
         private System.Windows.Forms.DataGridView GeometryGridView;
-        private System.Windows.Forms.Button SendButton;
+        private System.Windows.Forms.Button SendAgregationToDbButton;
         private System.Windows.Forms.DataGridView RecipesGridView;
         private System.Windows.Forms.ComboBox GMIDBox;
         private System.Windows.Forms.Button GetRecipeListButton;
@@ -1020,12 +1040,6 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Button GetGMIDsButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox RecipesServerBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn X;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Y;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Z;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.Button UpdateDbButton;
         private System.Windows.Forms.Button LoadFromFileButton;
         private System.Windows.Forms.Button SaveToFileButton;
@@ -1083,6 +1097,13 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Button GetWorkorderButton;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox CounterServerBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn X;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Y;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Z;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.ComboBox WoStatusComboBox;
     }
 }
 
