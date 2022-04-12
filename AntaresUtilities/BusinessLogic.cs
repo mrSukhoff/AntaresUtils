@@ -125,8 +125,8 @@ namespace AntaresUtilities
             switch (wo.Status)
                 {
                     case "1": { wo.Status = "Assigned"; break; }
-                    case "3": { wo.Status = "Suspended"; break; }
-                    case "9": { wo.Status = "Production"; break; }
+                    case "9": { wo.Status = "Suspended"; break; }
+                    case "3": { wo.Status = "Production"; break; }
                     case "11": { wo.Status = "Aborted"; break; }
                 }
             return wo;
