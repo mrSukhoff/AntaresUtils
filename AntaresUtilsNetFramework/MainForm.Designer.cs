@@ -29,6 +29,7 @@ namespace AntaresUtilsNetFramework
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -85,11 +86,11 @@ namespace AntaresUtilsNetFramework
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerBox = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.WoStatusComboBox = new System.Windows.Forms.ComboBox();
             this.WOUpdateDbButton = new System.Windows.Forms.Button();
             this.WOManufacturedBox = new System.Windows.Forms.TextBox();
             this.WOExpiryBox = new System.Windows.Forms.TextBox();
             this.WOQuantityBox = new System.Windows.Forms.TextBox();
-            this.WOStatusBox = new System.Windows.Forms.TextBox();
             this.WOLineInfoBox = new System.Windows.Forms.TextBox();
             this.WOLotBox = new System.Windows.Forms.TextBox();
             this.WODescriptionBox = new System.Windows.Forms.TextBox();
@@ -114,7 +115,7 @@ namespace AntaresUtilsNetFramework
             this.GetWorkorderButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CounterServerBox = new System.Windows.Forms.ComboBox();
-            this.WoStatusComboBox = new System.Windows.Forms.ComboBox();
+            this.businessLogicBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -124,6 +125,7 @@ namespace AntaresUtilsNetFramework
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.CaseCounterPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.businessLogicBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -676,7 +678,6 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Controls.Add(this.WOManufacturedBox);
             this.tabPage1.Controls.Add(this.WOExpiryBox);
             this.tabPage1.Controls.Add(this.WOQuantityBox);
-            this.tabPage1.Controls.Add(this.WOStatusBox);
             this.tabPage1.Controls.Add(this.WOLineInfoBox);
             this.tabPage1.Controls.Add(this.WOLotBox);
             this.tabPage1.Controls.Add(this.WODescriptionBox);
@@ -700,6 +701,15 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "Active Workorders";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // WoStatusComboBox
+            // 
+            this.WoStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WoStatusComboBox.FormattingEnabled = true;
+            this.WoStatusComboBox.Location = new System.Drawing.Point(375, 170);
+            this.WoStatusComboBox.Name = "WoStatusComboBox";
+            this.WoStatusComboBox.Size = new System.Drawing.Size(144, 28);
+            this.WoStatusComboBox.TabIndex = 27;
             // 
             // WOUpdateDbButton
             // 
@@ -735,14 +745,6 @@ namespace AntaresUtilsNetFramework
             this.WOQuantityBox.ReadOnly = true;
             this.WOQuantityBox.Size = new System.Drawing.Size(100, 26);
             this.WOQuantityBox.TabIndex = 23;
-            // 
-            // WOStatusBox
-            // 
-            this.WOStatusBox.Location = new System.Drawing.Point(245, 330);
-            this.WOStatusBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOStatusBox.Name = "WOStatusBox";
-            this.WOStatusBox.Size = new System.Drawing.Size(144, 26);
-            this.WOStatusBox.TabIndex = 22;
             // 
             // WOLineInfoBox
             // 
@@ -983,13 +985,9 @@ namespace AntaresUtilsNetFramework
             this.CounterServerBox.TabIndex = 9;
             this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
-            // WoStatusComboBox
+            // businessLogicBindingSource
             // 
-            this.WoStatusComboBox.FormattingEnabled = true;
-            this.WoStatusComboBox.Location = new System.Drawing.Point(375, 170);
-            this.WoStatusComboBox.Name = "WoStatusComboBox";
-            this.WoStatusComboBox.Size = new System.Drawing.Size(144, 28);
-            this.WoStatusComboBox.TabIndex = 27;
+            this.businessLogicBindingSource.DataSource = typeof(AntaresUtilities.BusinessLogic);
             // 
             // MainForm
             // 
@@ -1016,6 +1014,7 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.PerformLayout();
             this.CaseCounterPage.ResumeLayout(false);
             this.CaseCounterPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.businessLogicBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1071,7 +1070,6 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.TextBox WOManufacturedBox;
         private System.Windows.Forms.TextBox WOExpiryBox;
         private System.Windows.Forms.TextBox WOQuantityBox;
-        private System.Windows.Forms.TextBox WOStatusBox;
         private System.Windows.Forms.TextBox WOLineInfoBox;
         private System.Windows.Forms.TextBox WOLotBox;
         private System.Windows.Forms.TextBox WODescriptionBox;
@@ -1104,6 +1102,7 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.ComboBox WoStatusComboBox;
+        private System.Windows.Forms.BindingSource businessLogicBindingSource;
     }
 }
 

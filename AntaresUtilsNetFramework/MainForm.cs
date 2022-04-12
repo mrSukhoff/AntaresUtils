@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using AntaresUtilities;
 using DataMatrix.net;
@@ -419,7 +420,6 @@ namespace AntaresUtilsNetFramework
             WODescriptionBox.Text = "";
             WOLineInfoBox.Text = "";
             WOLotBox.Text = "";
-            WOStatusBox.Text = "";
             WOQuantityBox.Text = "";
             WOExpiryBox.Text = "";
             WOManufacturedBox.Text = "";
@@ -435,17 +435,15 @@ namespace AntaresUtilsNetFramework
             WOQuantityBox.Text = w.Quantity;
             WOExpiryBox.Text = w.Expiry;
             WOManufacturedBox.Text = w.Manufactured;
-
-            //WOStatusBox.Text = w.Status;
             FillWoStatusComboBox();
-            WoStatusComboBox.SelectedItem = w.Status;
+            WoStatusComboBox.SelectedIndex = WoStatusComboBox.Items.IndexOf(au.WOStatuses[w.Status]);
         }
 
         private void FillWoStatusComboBox() 
         {
-            foreach (var p in au.WOStatus) 
+            foreach (var p in au.WOStatuses) 
             {
-                WoStatusComboBox.Items.Add(p);
+                WoStatusComboBox.Items.Add(p.Value);
             }
         }
 
@@ -455,13 +453,17 @@ namespace AntaresUtilsNetFramework
             DialogResult result = MessageBox.Show("Are you sure?", "Save WorkOrder to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
 
+            int Status = au.WOStatuses.FirstOrDefault(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key;
             WorkOrder wo = new WorkOrder()
             {
                 Id = WOListBox.SelectedItem.ToString(),
                 Expiry = WOExpiryBox.Text,
-                Manufactured = WOManufacturedBox.Text
-            };
-            au.UpdateWoInDb(wo);
+                Manufactured = WOManufacturedBox.Text,
+                Status = au.WOStatuses.FirstOrDefault(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key
+
+        };
+            WoStatusComboBox.Items.Clear();
+            //au.UpdateWoInDb(wo);
         }
 
         private void WOListBox_TextChanged(object sender, EventArgs e)

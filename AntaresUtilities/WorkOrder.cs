@@ -6,7 +6,7 @@
         public string Descrition;
         public string Line;
         public string Lot;
-        public string Status;
+        public int Status;
         public string Quantity;
         public string Expiry;
         public string Manufactured;

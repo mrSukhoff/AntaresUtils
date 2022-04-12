@@ -270,7 +270,7 @@ namespace AntaresUtilities
                 wo.Manufactured = reader.GetValue(6).ToString();
                 wo.Descrition = reader.GetValue(7).ToString();
                 wo.UserName = reader.GetValue(8).ToString();
-                wo.Status = reader.GetValue(9).ToString();
+                wo.Status = int.Parse(reader.GetValue(9).ToString());
                 wo.OpenTime = reader.GetValue(10).ToString();
                 wo.Closetime = reader.GetValue(11).ToString();
             }

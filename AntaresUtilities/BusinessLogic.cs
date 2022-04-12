@@ -14,7 +14,7 @@ namespace AntaresUtilities
         private List<RecipeGeometry> _currentGMIDRecipesGeometry;
         private string _currentGMID;
 
-        public Dictionary<int, string> WOStatus = new Dictionary<int, string>()
+        public Dictionary<int, string> WOStatuses = new Dictionary<int, string>()
         {
             { 1, "Assigned" },
             { 3, "Production" },
@@ -131,7 +131,7 @@ namespace AntaresUtilities
         public WorkOrder GetWorOrderDetails(string woName)
         {
             WorkOrder wo = _dm.GetWODetail(woName);
-            if (int.TryParse(wo.Status,out int t)) wo.Status = WOStatus[t];
+            //if (int.TryParse(wo.Status,out int t)) wo.Status = WOStatus[t];
             return wo;
         }
 
