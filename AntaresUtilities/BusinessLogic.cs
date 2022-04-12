@@ -146,15 +146,26 @@ namespace AntaresUtilities
             return _dm.GetClosedWorkorderList();
         }
 
-        public TreeNode GetLotTree(string lot)
+        public TreeNode GetLotTree(string _workorder)
         {
+            string lot = _dm.GetLotFromWO(_workorder);
             TreeNode root = new TreeNode($"Lot: {lot}");
+            
             List<string> workorders = _dm.GetWorkOrdersByLot(lot);
             foreach(string workorder in workorders)
             {
-                root.Nodes.Add($"Workorder: {workorder}");
+                root.Nodes.Add("Workorder",workorder);
             }
-            return null;
+            
+            /*
+            foreach(TreeNode node in root.Nodes)
+            {
+                node.Nodes.Add("Pallet", _dm.GetPalletsByWorkorder(node.Tag));
+            }
+            */
+            
+            
+            return root;
         }
 
     }

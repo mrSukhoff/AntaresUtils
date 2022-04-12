@@ -301,8 +301,14 @@ namespace AntaresUtilities
 
         internal List<string> GetWorkOrdersByLot(string lot)
         {
-            string cmdString = "SELECT [Id] FROM [" + _DBname + "].[dbo].[Workorder] where ";
+            string cmdString =$"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Lot = '{lot}'";
             return SelectListFromDb(cmdString);
+        }
+
+        internal string GetLotFromWO(string workorder)
+        {
+            string cmdString = $"SELECT [lot] FROM [{_DBname}].[dbo].[Workorder] where Id = '{workorder}'";
+            return SelectValueFromDb(cmdString);
         }
     }
 }

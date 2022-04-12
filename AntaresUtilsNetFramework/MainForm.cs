@@ -453,17 +453,15 @@ namespace AntaresUtilsNetFramework
             DialogResult result = MessageBox.Show("Are you sure?", "Save WorkOrder to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
 
-            int Status = au.WOStatuses.FirstOrDefault(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key;
             WorkOrder wo = new WorkOrder()
             {
                 Id = WOListBox.SelectedItem.ToString(),
                 Expiry = WOExpiryBox.Text,
                 Manufactured = WOManufacturedBox.Text,
-                Status = au.WOStatuses.FirstOrDefault(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key
-
-        };
+                Status = au.WOStatuses.First(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key
+            };
             WoStatusComboBox.Items.Clear();
-            //au.UpdateWoInDb(wo);
+            au.UpdateWoInDb(wo);
         }
 
         private void WOListBox_TextChanged(object sender, EventArgs e)
@@ -496,7 +494,7 @@ namespace AntaresUtilsNetFramework
                 {
                     CountedWorkorderListBox.Items.Add(wo);
                 }
-                WOListBox.SelectedIndex = 0;
+                CountedWorkorderListBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -511,6 +509,7 @@ namespace AntaresUtilsNetFramework
 
         private void CountButton_Click(object sender, EventArgs e)
         {
+            CountedAggregationTreeView.Nodes.Clear();
             TreeNode root = au.GetLotTree(CountedWorkorderListBox.SelectedItem.ToString());
             CountedAggregationTreeView.Nodes.Add(root);
         }
