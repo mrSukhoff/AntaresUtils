@@ -133,16 +133,7 @@ namespace AntaresUtilities
             return results;
         }
 
-        /// <summary>
-        /// Запрашивает в БД идентификатор GTINа
-        /// </summary>
-        /// <param name="GTIN">GTIN, для которого ищем идентификатор</param>
-        /// <returns></returns>
-        internal string GetGtinId(string gtin)
-        {
-            string cmdString = String.Format("SELECT [Id] FROM [{0}].[dbo].[NtinDefinition] WHERE Ntin = '{1}'", _DBname, gtin);
-            return SelectValueFromDb(cmdString);
-        }
+       
 
         /// <summary>
         /// Метод по идентификатору GTIN и серийному номеру находит криптоданные и возвращает пакет со всеми даннфми
@@ -203,7 +194,7 @@ namespace AntaresUtilities
         }
 
         //выполняет команду и возвращает результат
-        private string SelectValueFromDb(string cmdString)
+        internal string SelectValueFromDb(string cmdString)
         {
             //Формируем запрос
             SqlCommand cmd = new SqlCommand(cmdString, connection);
@@ -224,7 +215,7 @@ namespace AntaresUtilities
         }
 
         //выполняет команду и возвращает список результатов
-        private List<string> SelectListFromDb(string cmdString)
+        internal List<string> SelectListFromDb(string cmdString)
         {
             List<string> results = new List<string>();
             SqlCommand cmd = new SqlCommand(cmdString, connection);
