@@ -475,7 +475,7 @@ namespace AntaresUtilsNetFramework
         }
 
 
-        //****************************************************** Case Counters *******************************************************
+        //****************************************************** Case Counter *******************************************************
 
         private void CountedWorkorderListBox_TextChanged(object sender, EventArgs e)
         {
