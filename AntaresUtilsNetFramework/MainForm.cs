@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AntaresUtilities;
+using DataMatrix.net;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using AntaresUtilities;
-using DataMatrix.net;
 
 namespace AntaresUtilsNetFramework
 {
@@ -67,8 +67,8 @@ namespace AntaresUtilsNetFramework
             CCWorkordersListComboBox.Text = "";
             CountedAggregationTreeView.Nodes.Clear();
         }
-        
-        
+
+
         //****************************************************** CryptoGetter ************************************************
 
         private void GetCryptoСodeButton_Click(object sender, EventArgs e)
@@ -171,7 +171,7 @@ namespace AntaresUtilsNetFramework
             au.SelectServer(CGServerComboBox.SelectedItem.ToString());
         }
 
-        
+
         //****************************************************** AggregationGeometries ***********************************************
 
         //Получаем список рецептов с выбраного сервера
@@ -187,7 +187,7 @@ namespace AntaresUtilsNetFramework
                 }
                 AGRecipesComboBox.SelectedIndex = 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -202,7 +202,7 @@ namespace AntaresUtilsNetFramework
             if (AGRecipesComboBox.SelectedItem is null) return;
             try
             {
-                
+
                 List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometriesList(AGRecipesComboBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
@@ -226,8 +226,8 @@ namespace AntaresUtilsNetFramework
             if (result != DialogResult.Yes) return;
 
             List<RecipeGeometry> list = new List<RecipeGeometry>();
-            
-            for (int i=0; i<AGGridView.Rows.Count; i++)
+
+            for (int i = 0; i < AGGridView.Rows.Count; i++)
             {
                 var cells = AGGridView.Rows[i].Cells;
                 RecipeGeometry r = new RecipeGeometry
@@ -251,7 +251,7 @@ namespace AntaresUtilsNetFramework
             string message = "Must be a positive integer!";
             for (int i = 0; i < AGGridView.Rows.Count; i++)
             {
-                if  (!int.TryParse(AGGridView[2,i].Value.ToString(),out int x) || x<1)
+                if (!int.TryParse(AGGridView[2, i].Value.ToString(), out int x) || x < 1)
                 {
                     MessageBox.Show(message);
                     AGGridView[2, i].Value = 1;
@@ -273,7 +273,7 @@ namespace AntaresUtilsNetFramework
             }
         }
 
-        
+
         //****************************************************** Recipes *************************************************************
 
         //Получает список материалов с выбранного сервера
@@ -330,7 +330,7 @@ namespace AntaresUtilsNetFramework
             string filename = dialog.FileName;
             au.SaveMaterialGeometriesToFile(filename);
         }
-        
+
         //Загружает список рецептов с геометрией из файла
         private void LoadFromFileButton_Click(object sender, EventArgs e)
         {
@@ -348,13 +348,13 @@ namespace AntaresUtilsNetFramework
             List<RecipeGeometry> r = au.LoadMaterialGeometriesfromFile(filename);
 
             RecipesGMIDComboBox.SelectedItem = au.CurrentGMID;
-            if (RecipesGMIDComboBox.SelectedItem.ToString() != au.CurrentGMID) 
+            if (RecipesGMIDComboBox.SelectedItem.ToString() != au.CurrentGMID)
             {
                 MessageBox.Show("Check the Server!");
                 MainTabControl_SelectedIndexChanged(null, null);
                 return;
             }
-            
+
             foreach (var rg in r)
             {
                 RecipesGridView.Rows.Add(rg.RecipeId, rg.LineId, rg.ItemType, rg.X * rg.Y * rg.Z);
@@ -369,7 +369,7 @@ namespace AntaresUtilsNetFramework
             if (result == DialogResult.Yes) au.SaveMaterialGeometriesToDb();
         }
 
-        
+
         //при вставке текста выбирает рецепт с тем же именем
         private void RecipesBox_TextChanged(object sender, EventArgs e)
         {
@@ -381,7 +381,7 @@ namespace AntaresUtilsNetFramework
         {
             RecipesGMIDComboBox.SelectedItem = RecipesGMIDComboBox.Text;
         }
-        
+
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void GeometryServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -413,7 +413,7 @@ namespace AntaresUtilsNetFramework
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private void ClerarWOWindow()
         {
             AWOWorkordersListComboBox.Items.Clear();
@@ -439,9 +439,9 @@ namespace AntaresUtilsNetFramework
             AWOStatusComboBox.SelectedIndex = AWOStatusComboBox.Items.IndexOf(au.WOStatuses[w.Status]);
         }
 
-        private void FillWoStatusComboBox() 
+        private void FillWoStatusComboBox()
         {
-            foreach (var p in au.WOStatuses) 
+            foreach (var p in au.WOStatuses)
             {
                 AWOStatusComboBox.Items.Add(p.Value);
             }

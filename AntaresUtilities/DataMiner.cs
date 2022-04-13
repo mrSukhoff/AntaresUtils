@@ -301,7 +301,7 @@ namespace AntaresUtilities
 
         internal List<string> GetWorkOrdersByLot(string lot, string wo)
         {
-            string cmdString =$"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Lot = '{lot}' and Id like('{wo}%')";
+            string cmdString = $"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Lot = '{lot}' and Id like('{wo}%')";
             return SelectListFromDb(cmdString);
         }
 
@@ -323,7 +323,7 @@ namespace AntaresUtilities
             return SelectListFromDb(cmdString);
         }
 
-        internal int CalculetaPackagesInCase(string _caseSerial) 
+        internal int CalculetaPackagesInCase(string _caseSerial)
         {
             string cmdString = $"SELECT count(*) FROM [{_DBname}].[dbo].[Item] where Type = 100 and ParentSerial = '{_caseSerial}'";
             return int.Parse(SelectValueFromDb(cmdString));
