@@ -29,7 +29,6 @@ namespace AntaresUtilsNetFramework
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -115,7 +114,6 @@ namespace AntaresUtilsNetFramework
             this.GetWorkorderButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CounterServerBox = new System.Windows.Forms.ComboBox();
-            this.businessLogicBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DMPictureBox)).BeginInit();
@@ -125,7 +123,6 @@ namespace AntaresUtilsNetFramework
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.CaseCounterPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.businessLogicBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -985,10 +982,6 @@ namespace AntaresUtilsNetFramework
             this.CounterServerBox.TabIndex = 9;
             this.CounterServerBox.SelectedIndexChanged += new System.EventHandler(this.CounterServerBox_SelectedIndexChanged);
             // 
-            // businessLogicBindingSource
-            // 
-            this.businessLogicBindingSource.DataSource = typeof(AntaresUtilities.BusinessLogic);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1014,7 +1007,6 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.PerformLayout();
             this.CaseCounterPage.ResumeLayout(false);
             this.CaseCounterPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.businessLogicBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1102,7 +1094,6 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.ComboBox WoStatusComboBox;
-        private System.Windows.Forms.BindingSource businessLogicBindingSource;
     }
 }
 
