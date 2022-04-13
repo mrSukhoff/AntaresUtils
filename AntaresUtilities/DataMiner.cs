@@ -133,8 +133,6 @@ namespace AntaresUtilities
             return results;
         }
 
-
-
         /// <summary>
         /// Запрашивает в БД идентификатор GTINа
         /// </summary>
@@ -272,7 +270,7 @@ namespace AntaresUtilities
                 wo.Manufactured = reader.GetValue(6).ToString();
                 wo.Descrition = reader.GetValue(7).ToString();
                 wo.UserName = reader.GetValue(8).ToString();
-                wo.Status = reader.GetValue(9).ToString();
+                wo.Status = int.Parse(reader.GetValue(9).ToString());
                 wo.OpenTime = reader.GetValue(10).ToString();
                 wo.Closetime = reader.GetValue(11).ToString();
             }
@@ -294,5 +292,42 @@ namespace AntaresUtilities
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
+
+        internal List<string> GetClosedWorkorderList()
+        {
+            string cmdString = $"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Status = 31";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal List<string> GetWorkOrdersByLot(string lot, string wo)
+        {
+            string cmdString =$"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Lot = '{lot}' and Id like('{wo}%')";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal string GetLotFromWO(string workorder)
+        {
+            string cmdString = $"SELECT [lot] FROM [{_DBname}].[dbo].[Workorder] where Id = '{workorder}'";
+            return SelectValueFromDb(cmdString);
+        }
+
+        internal List<string> GetPalletsByWorkorder(string _wo)
+        {
+            string cmdString = $"SELECT [Serial] FROM [{_DBname}].[dbo].[Item] where WorkOrderID = '{_wo}' and Type = 400";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal List<string> GetCasesbyPallets(string _ser)
+        {
+            string cmdString = $"SELECT [Serial] FROM [{_DBname}].[dbo].[Item] where Type = 300 and ParentSerial = '{_ser}'";
+            return SelectListFromDb(cmdString);
+        }
+
+        internal int CalculetaPackagesInCase(string _caseSerial) 
+        {
+            string cmdString = $"SELECT count(*) FROM [{_DBname}].[dbo].[Item] where Type = 100 and ParentSerial = '{_caseSerial}'";
+            return int.Parse(SelectValueFromDb(cmdString));
+        }
+
     }
 }
