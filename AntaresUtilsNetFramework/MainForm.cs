@@ -43,28 +43,28 @@ namespace AntaresUtilsNetFramework
             CGSerialTextBox.Text = "";
 
             //Geometry
-            RecipesBox.Items.Clear();
-            RecipesBox.Text = "";
-            GeometryGridView.Rows.Clear();
-            RecipeNameTextBox.Text = "";
-            GetAgregationGeometryButton.Enabled = false;
-            SendAgregationToDbButton.Enabled = false;
+            AGRecipesComboBox.Items.Clear();
+            AGRecipesComboBox.Text = "";
+            AGGridView.Rows.Clear();
+            AGRecipeNameTextBox.Text = "";
+            AGGetAgregationGeometryButton.Enabled = false;
+            AGSendAgregationToDbButton.Enabled = false;
 
             //Recipes
-            GMIDBox.Items.Clear();
-            GMIDBox.Text = "";
+            RecipesGMIDComboBox.Items.Clear();
+            RecipesGMIDComboBox.Text = "";
             RecipesGridView.Rows.Clear();
             au.Clear();
-            MaterialNameTextBox.Text = "";
+            RecipesMaterialNameTextBox.Text = "";
 
             //workorders
             ClerarWOWindow();
-            WOListBox.Items.Clear();
-            WOListBox.Text = "";
+            AWOWorkordersListComboBox.Items.Clear();
+            AWOWorkordersListComboBox.Text = "";
 
             //Counters
-            CountedWorkorderListBox.Items.Clear();
-            CountedWorkorderListBox.Text = "";
+            CCWorkordersListComboBox.Items.Clear();
+            CCWorkordersListComboBox.Text = "";
             CountedAggregationTreeView.Nodes.Clear();
         }
         
@@ -177,39 +177,39 @@ namespace AntaresUtilsNetFramework
         //Получаем список рецептов с выбраного сервера
         private void GetRecipesButton_Click(object sender, EventArgs e)
         {
-            GeometryGridView.Rows.Clear();
-            RecipesBox.Items.Clear();
+            AGGridView.Rows.Clear();
+            AGRecipesComboBox.Items.Clear();
             try
             {
                 foreach (string recipe in au.GetRecipeList())
                 {
-                    RecipesBox.Items.Add(recipe);
+                    AGRecipesComboBox.Items.Add(recipe);
                 }
-                RecipesBox.SelectedIndex = 0;
+                AGRecipesComboBox.SelectedIndex = 0;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            GetAgregationGeometryButton.Enabled = true;
-            SendAgregationToDbButton.Enabled = true;
+            AGGetAgregationGeometryButton.Enabled = true;
+            AGSendAgregationToDbButton.Enabled = true;
         }
 
         //Получаем с сервера геометрию выбраного рецепта
         private void GetGeometryButton_Click(object sender, EventArgs e)
         {
-            GeometryGridView.Rows.Clear();
-            if (RecipesBox.SelectedItem is null) return;
+            AGGridView.Rows.Clear();
+            if (AGRecipesComboBox.SelectedItem is null) return;
             try
             {
                 
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometriesList(RecipesBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipeGeometriesList(AGRecipesComboBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
-                    GeometryGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
+                    AGGridView.Rows.Add(r.LineId, r.ItemType, r.X, r.Y, r.Z, r.X * r.Y * r.Z);
                 }
 
-                RecipeNameTextBox.Text = au.GetRecipeDescription(RecipesBox.SelectedItem.ToString());
+                AGRecipeNameTextBox.Text = au.GetRecipeDescription(AGRecipesComboBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -220,19 +220,19 @@ namespace AntaresUtilsNetFramework
         //Записывает новую геометрию в БД из таблицы
         private void SendButton_Click(object sender, EventArgs e)
         {
-            if (GeometryGridView.Rows.Count == 0) return;
+            if (AGGridView.Rows.Count == 0) return;
 
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
 
             List<RecipeGeometry> list = new List<RecipeGeometry>();
             
-            for (int i=0; i<GeometryGridView.Rows.Count; i++)
+            for (int i=0; i<AGGridView.Rows.Count; i++)
             {
-                var cells = GeometryGridView.Rows[i].Cells;
+                var cells = AGGridView.Rows[i].Cells;
                 RecipeGeometry r = new RecipeGeometry
                 {
-                    RecipeId = RecipesBox.SelectedItem.ToString(),
+                    RecipeId = AGRecipesComboBox.SelectedItem.ToString(),
                     LineId = int.Parse(cells[0].Value.ToString()),
                     ItemType = int.Parse(cells[1].Value.ToString()),
                     X = int.Parse(cells[2].Value.ToString()),
@@ -249,27 +249,27 @@ namespace AntaresUtilsNetFramework
         private void GeometryGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             string message = "Must be a positive integer!";
-            for (int i = 0; i < GeometryGridView.Rows.Count; i++)
+            for (int i = 0; i < AGGridView.Rows.Count; i++)
             {
-                if  (!int.TryParse(GeometryGridView[2,i].Value.ToString(),out int x) || x<1)
+                if  (!int.TryParse(AGGridView[2,i].Value.ToString(),out int x) || x<1)
                 {
                     MessageBox.Show(message);
-                    GeometryGridView[2, i].Value = 1;
+                    AGGridView[2, i].Value = 1;
                     x = 1;
                 }
-                if (!int.TryParse(GeometryGridView[3, i].Value.ToString(), out int y) || y < 1)
+                if (!int.TryParse(AGGridView[3, i].Value.ToString(), out int y) || y < 1)
                 {
                     MessageBox.Show(message);
-                    GeometryGridView[3, i].Value = 1;
+                    AGGridView[3, i].Value = 1;
                     y = 1;
                 }
-                if (!int.TryParse(GeometryGridView[4, i].Value.ToString(), out int z) || z < 1)
+                if (!int.TryParse(AGGridView[4, i].Value.ToString(), out int z) || z < 1)
                 {
                     MessageBox.Show(message);
-                    GeometryGridView[4, i].Value = 1;
+                    AGGridView[4, i].Value = 1;
                     y = 1;
                 }
-                GeometryGridView[5, i].Value = x * y * z;
+                AGGridView[5, i].Value = x * y * z;
             }
         }
 
@@ -280,14 +280,14 @@ namespace AntaresUtilsNetFramework
         private void GetGMIDsButton_Click(object sender, EventArgs e)
         {
             RecipesGridView.Rows.Clear();
-            GMIDBox.Items.Clear();
+            RecipesGMIDComboBox.Items.Clear();
             try
             {
                 foreach (string material in au.GetMaterialsList())
                 {
-                    GMIDBox.Items.Add(material);
+                    RecipesGMIDComboBox.Items.Add(material);
                 }
-                GMIDBox.SelectedIndex = 0;
+                RecipesGMIDComboBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -299,16 +299,16 @@ namespace AntaresUtilsNetFramework
         private void GetRecipeListButton_Click(object sender, EventArgs e)
         {
             RecipesGridView.Rows.Clear();
-            if (GMIDBox.SelectedItem is null) return;
+            if (RecipesGMIDComboBox.SelectedItem is null) return;
             try
             {
-                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListAssociatedWithGMID(GMIDBox.SelectedItem.ToString());
+                List<RecipeGeometry> recipeGeometryList = au.GetRecipesListAssociatedWithGMID(RecipesGMIDComboBox.SelectedItem.ToString());
                 foreach (RecipeGeometry r in recipeGeometryList)
                 {
                     RecipesGridView.Rows.Add(r.RecipeId, r.LineId, r.ItemType, r.Total);
                 }
 
-                MaterialNameTextBox.Text = au.GetMaterialDescription(GMIDBox.SelectedItem.ToString());
+                RecipesMaterialNameTextBox.Text = au.GetMaterialDescription(RecipesGMIDComboBox.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -319,10 +319,10 @@ namespace AntaresUtilsNetFramework
         //Сохраняет список рецептов с геометрией в файл
         private void SaveToFileButton_Click(object sender, EventArgs e)
         {
-            if (GMIDBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
+            if (RecipesGMIDComboBox.Items.Count == 0 || RecipesGridView.Rows.Count == 0) return;
             SaveFileDialog dialog = new SaveFileDialog
             {
-                FileName = GMIDBox.SelectedItem.ToString(),
+                FileName = RecipesGMIDComboBox.SelectedItem.ToString(),
                 DefaultExt = "xml",
                 InitialDirectory = Application.StartupPath
             };
@@ -334,7 +334,7 @@ namespace AntaresUtilsNetFramework
         //Загружает список рецептов с геометрией из файла
         private void LoadFromFileButton_Click(object sender, EventArgs e)
         {
-            if (GMIDBox.Items.Count == 0) return;
+            if (RecipesGMIDComboBox.Items.Count == 0) return;
             OpenFileDialog dialog = new OpenFileDialog
             {
                 DefaultExt = "xml",
@@ -347,8 +347,8 @@ namespace AntaresUtilsNetFramework
 
             List<RecipeGeometry> r = au.LoadMaterialGeometriesfromFile(filename);
 
-            GMIDBox.SelectedItem = au.CurrentGMID;
-            if (GMIDBox.SelectedItem.ToString() != au.CurrentGMID) 
+            RecipesGMIDComboBox.SelectedItem = au.CurrentGMID;
+            if (RecipesGMIDComboBox.SelectedItem.ToString() != au.CurrentGMID) 
             {
                 MessageBox.Show("Check the Server!");
                 MainTabControl_SelectedIndexChanged(null, null);
@@ -364,7 +364,7 @@ namespace AntaresUtilsNetFramework
         //Сохраняет текущий список рецептов с геометрией в БД
         private void UpdateDbButton_Click(object sender, EventArgs e)
         {
-            if (GMIDBox.SelectedItem is null || RecipesGridView.Rows.Count == 0) return;
+            if (RecipesGMIDComboBox.SelectedItem is null || RecipesGridView.Rows.Count == 0) return;
             DialogResult result = MessageBox.Show("Are you sure?", "Save geometry to DB", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes) au.SaveMaterialGeometriesToDb();
         }
@@ -373,13 +373,13 @@ namespace AntaresUtilsNetFramework
         //при вставке текста выбирает рецепт с тем же именем
         private void RecipesBox_TextChanged(object sender, EventArgs e)
         {
-            RecipesBox.SelectedItem = RecipesBox.Text;
+            AGRecipesComboBox.SelectedItem = AGRecipesComboBox.Text;
         }
 
         //при вставке текста выбирает этот элемент
         private void GMIDBox_TextChanged(object sender, EventArgs e)
         {
-            GMIDBox.SelectedItem = GMIDBox.Text;
+            RecipesGMIDComboBox.SelectedItem = RecipesGMIDComboBox.Text;
         }
         
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
@@ -404,9 +404,9 @@ namespace AntaresUtilsNetFramework
             {
                 foreach (string wo in au.GetWorkordersList())
                 {
-                    WOListBox.Items.Add(wo);
+                    AWOWorkordersListComboBox.Items.Add(wo);
                 }
-                WOListBox.SelectedIndex = 0;
+                AWOWorkordersListComboBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -416,57 +416,57 @@ namespace AntaresUtilsNetFramework
         
         private void ClerarWOWindow()
         {
-            WOListBox.Items.Clear();
-            WODescriptionBox.Text = "";
-            WOLineInfoBox.Text = "";
-            WOLotBox.Text = "";
-            WOQuantityBox.Text = "";
-            WOExpiryBox.Text = "";
-            WOManufacturedBox.Text = "";
+            AWOWorkordersListComboBox.Items.Clear();
+            AWOWorkordersNameTextBox.Text = "";
+            AWOLineInfoTextBox.Text = "";
+            AWOLotTextBox.Text = "";
+            AWOQuantityTextBox.Text = "";
+            AWOExpiryTextBox.Text = "";
+            AWOManufacturedTextBox.Text = "";
         }
 
         private void GetWODetailButton_Click(object sender, EventArgs e)
         {
-            if (WOListBox.SelectedItem == null) return;
-            WorkOrder w = au.GetWorOrderDetails(WOListBox.SelectedItem.ToString());
-            WODescriptionBox.Text = w.Descrition;
-            WOLineInfoBox.Text = w.Line;
-            WOLotBox.Text = w.Lot;
-            WOQuantityBox.Text = w.Quantity;
-            WOExpiryBox.Text = w.Expiry;
-            WOManufacturedBox.Text = w.Manufactured;
+            if (AWOWorkordersListComboBox.SelectedItem == null) return;
+            WorkOrder w = au.GetWorOrderDetails(AWOWorkordersListComboBox.SelectedItem.ToString());
+            AWOWorkordersNameTextBox.Text = w.Descrition;
+            AWOLineInfoTextBox.Text = w.Line;
+            AWOLotTextBox.Text = w.Lot;
+            AWOQuantityTextBox.Text = w.Quantity;
+            AWOExpiryTextBox.Text = w.Expiry;
+            AWOManufacturedTextBox.Text = w.Manufactured;
             FillWoStatusComboBox();
-            WoStatusComboBox.SelectedIndex = WoStatusComboBox.Items.IndexOf(au.WOStatuses[w.Status]);
+            AWOStatusComboBox.SelectedIndex = AWOStatusComboBox.Items.IndexOf(au.WOStatuses[w.Status]);
         }
 
         private void FillWoStatusComboBox() 
         {
             foreach (var p in au.WOStatuses) 
             {
-                WoStatusComboBox.Items.Add(p.Value);
+                AWOStatusComboBox.Items.Add(p.Value);
             }
         }
 
         private void WOUpdateDbButton_Click(object sender, EventArgs e)
         {
-            if (WOListBox.SelectedItem == null) return;
+            if (AWOWorkordersListComboBox.SelectedItem == null) return;
             DialogResult result = MessageBox.Show("Are you sure?", "Save WorkOrder to DB", MessageBoxButtons.YesNo);
             if (result != DialogResult.Yes) return;
 
             WorkOrder wo = new WorkOrder()
             {
-                Id = WOListBox.SelectedItem.ToString(),
-                Expiry = WOExpiryBox.Text,
-                Manufactured = WOManufacturedBox.Text,
-                Status = au.WOStatuses.First(x => x.Value == WoStatusComboBox.SelectedItem.ToString()).Key
+                Id = AWOWorkordersListComboBox.SelectedItem.ToString(),
+                Expiry = AWOExpiryTextBox.Text,
+                Manufactured = AWOManufacturedTextBox.Text,
+                Status = au.WOStatuses.First(x => x.Value == AWOStatusComboBox.SelectedItem.ToString()).Key
             };
-            WoStatusComboBox.Items.Clear();
+            AWOStatusComboBox.Items.Clear();
             au.UpdateWoInDb(wo);
         }
 
         private void WOListBox_TextChanged(object sender, EventArgs e)
         {
-            WOListBox.SelectedItem = WOListBox.Text;
+            AWOWorkordersListComboBox.SelectedItem = AWOWorkordersListComboBox.Text;
         }
 
         private void WOServerBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -479,22 +479,22 @@ namespace AntaresUtilsNetFramework
 
         private void CountedWorkorderListBox_TextChanged(object sender, EventArgs e)
         {
-            CountedWorkorderListBox.SelectedItem = CountedWorkorderListBox.Text;
+            CCWorkordersListComboBox.SelectedItem = CCWorkordersListComboBox.Text;
         }
 
         private void GetWorkorderListButton_Click(object sender, EventArgs e)
         {
-            CountedWorkorderListBox.Items.Clear();
-            CountedWorkorderListBox.Text = "";
+            CCWorkordersListComboBox.Items.Clear();
+            CCWorkordersListComboBox.Text = "";
             CountedAggregationTreeView.Nodes.Clear();
 
             try
             {
                 foreach (string wo in au.GetClosedWorkorderList())
                 {
-                    CountedWorkorderListBox.Items.Add(wo);
+                    CCWorkordersListComboBox.Items.Add(wo);
                 }
-                CountedWorkorderListBox.SelectedIndex = 0;
+                CCWorkordersListComboBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -510,7 +510,7 @@ namespace AntaresUtilsNetFramework
         private void CountButton_Click(object sender, EventArgs e)
         {
             CountedAggregationTreeView.Nodes.Clear();
-            TreeNode root = au.GetLotTree(CountedWorkorderListBox.SelectedItem.ToString());
+            TreeNode root = au.GetLotTree(CCWorkordersListComboBox.SelectedItem.ToString());
             CountedAggregationTreeView.Nodes.Add(root);
         }
 

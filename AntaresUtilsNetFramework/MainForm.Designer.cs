@@ -52,47 +52,47 @@ namespace AntaresUtilsNetFramework
             this.CGServerComboBox = new System.Windows.Forms.ComboBox();
             this.GeometriesPage = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.RecipeNameTextBox = new System.Windows.Forms.TextBox();
-            this.SendAgregationToDbButton = new System.Windows.Forms.Button();
-            this.GeometryGridView = new System.Windows.Forms.DataGridView();
+            this.AGRecipeNameTextBox = new System.Windows.Forms.TextBox();
+            this.AGSendAgregationToDbButton = new System.Windows.Forms.Button();
+            this.AGGridView = new System.Windows.Forms.DataGridView();
             this.LineId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecipesBox = new System.Windows.Forms.ComboBox();
-            this.GetAgregationGeometryButton = new System.Windows.Forms.Button();
+            this.AGRecipesComboBox = new System.Windows.Forms.ComboBox();
+            this.AGGetAgregationGeometryButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.GetRecipesButton = new System.Windows.Forms.Button();
+            this.AGGetRecipesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.AGServerComboBox = new System.Windows.Forms.ComboBox();
             this.RecipePage = new System.Windows.Forms.TabPage();
-            this.MaterialNameTextBox = new System.Windows.Forms.TextBox();
+            this.RecipesMaterialNameTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.UpdateDbButton = new System.Windows.Forms.Button();
-            this.LoadFromFileButton = new System.Windows.Forms.Button();
-            this.SaveToFileButton = new System.Windows.Forms.Button();
+            this.RecipesUpdateDbButton = new System.Windows.Forms.Button();
+            this.RecipesLoadFromFileButton = new System.Windows.Forms.Button();
+            this.RecipesSaveToFileButton = new System.Windows.Forms.Button();
             this.RecipesGridView = new System.Windows.Forms.DataGridView();
             this.RecipeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GMIDBox = new System.Windows.Forms.ComboBox();
-            this.GetRecipeListButton = new System.Windows.Forms.Button();
+            this.RecipesGMIDComboBox = new System.Windows.Forms.ComboBox();
+            this.RecipesGetRecipeListButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.GetGMIDsButton = new System.Windows.Forms.Button();
+            this.RecipesGetGMIDsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.RecipesServerComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.WoStatusComboBox = new System.Windows.Forms.ComboBox();
-            this.WOUpdateDbButton = new System.Windows.Forms.Button();
-            this.WOManufacturedBox = new System.Windows.Forms.TextBox();
-            this.WOExpiryBox = new System.Windows.Forms.TextBox();
-            this.WOQuantityBox = new System.Windows.Forms.TextBox();
-            this.WOLineInfoBox = new System.Windows.Forms.TextBox();
-            this.WOLotBox = new System.Windows.Forms.TextBox();
-            this.WODescriptionBox = new System.Windows.Forms.TextBox();
+            this.AWOStatusComboBox = new System.Windows.Forms.ComboBox();
+            this.AWOUpdateDbButton = new System.Windows.Forms.Button();
+            this.AWOManufacturedTextBox = new System.Windows.Forms.TextBox();
+            this.AWOExpiryTextBox = new System.Windows.Forms.TextBox();
+            this.AWOQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.AWOLineInfoTextBox = new System.Windows.Forms.TextBox();
+            this.AWOLotTextBox = new System.Windows.Forms.TextBox();
+            this.AWOWorkordersNameTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -100,25 +100,25 @@ namespace AntaresUtilsNetFramework
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.WOListBox = new System.Windows.Forms.ComboBox();
-            this.GetWODetailButton = new System.Windows.Forms.Button();
+            this.AWOWorkordersListComboBox = new System.Windows.Forms.ComboBox();
+            this.AWOGetWODetailButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.GetWOsButton = new System.Windows.Forms.Button();
+            this.AWOGetWOsButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.AWOServerComboBox = new System.Windows.Forms.ComboBox();
             this.CaseCounterPage = new System.Windows.Forms.TabPage();
             this.CountedAggregationTreeView = new System.Windows.Forms.TreeView();
-            this.CountedWorkorderListBox = new System.Windows.Forms.ComboBox();
-            this.CountButton = new System.Windows.Forms.Button();
+            this.CCWorkordersListComboBox = new System.Windows.Forms.ComboBox();
+            this.CCCountCasesButton = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
-            this.GetWorkorderButton = new System.Windows.Forms.Button();
+            this.CCGetWorkordersButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.CCServerComboBox = new System.Windows.Forms.ComboBox();
             this.MainTabControl.SuspendLayout();
             this.CryptoGetter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CGDataMatrixPictureBox)).BeginInit();
             this.GeometriesPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AGGridView)).BeginInit();
             this.RecipePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -306,13 +306,13 @@ namespace AntaresUtilsNetFramework
             // GeometriesPage
             // 
             this.GeometriesPage.Controls.Add(this.label11);
-            this.GeometriesPage.Controls.Add(this.RecipeNameTextBox);
-            this.GeometriesPage.Controls.Add(this.SendAgregationToDbButton);
-            this.GeometriesPage.Controls.Add(this.GeometryGridView);
-            this.GeometriesPage.Controls.Add(this.RecipesBox);
-            this.GeometriesPage.Controls.Add(this.GetAgregationGeometryButton);
+            this.GeometriesPage.Controls.Add(this.AGRecipeNameTextBox);
+            this.GeometriesPage.Controls.Add(this.AGSendAgregationToDbButton);
+            this.GeometriesPage.Controls.Add(this.AGGridView);
+            this.GeometriesPage.Controls.Add(this.AGRecipesComboBox);
+            this.GeometriesPage.Controls.Add(this.AGGetAgregationGeometryButton);
             this.GeometriesPage.Controls.Add(this.label2);
-            this.GeometriesPage.Controls.Add(this.GetRecipesButton);
+            this.GeometriesPage.Controls.Add(this.AGGetRecipesButton);
             this.GeometriesPage.Controls.Add(this.label1);
             this.GeometriesPage.Controls.Add(this.AGServerComboBox);
             this.GeometriesPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -333,51 +333,51 @@ namespace AntaresUtilsNetFramework
             this.label11.TabIndex = 10;
             this.label11.Text = "Name";
             // 
-            // RecipeNameTextBox
+            // AGRecipeNameTextBox
             // 
-            this.RecipeNameTextBox.Location = new System.Drawing.Point(76, 89);
-            this.RecipeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.RecipeNameTextBox.Name = "RecipeNameTextBox";
-            this.RecipeNameTextBox.ReadOnly = true;
-            this.RecipeNameTextBox.Size = new System.Drawing.Size(598, 26);
-            this.RecipeNameTextBox.TabIndex = 9;
+            this.AGRecipeNameTextBox.Location = new System.Drawing.Point(76, 89);
+            this.AGRecipeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AGRecipeNameTextBox.Name = "AGRecipeNameTextBox";
+            this.AGRecipeNameTextBox.ReadOnly = true;
+            this.AGRecipeNameTextBox.Size = new System.Drawing.Size(598, 26);
+            this.AGRecipeNameTextBox.TabIndex = 9;
             // 
-            // SendAgregationToDbButton
+            // AGSendAgregationToDbButton
             // 
-            this.SendAgregationToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.SendAgregationToDbButton.Enabled = false;
-            this.SendAgregationToDbButton.Location = new System.Drawing.Point(679, 198);
-            this.SendAgregationToDbButton.Name = "SendAgregationToDbButton";
-            this.SendAgregationToDbButton.Size = new System.Drawing.Size(67, 201);
-            this.SendAgregationToDbButton.TabIndex = 8;
-            this.SendAgregationToDbButton.Text = "Send to DB";
-            this.SendAgregationToDbButton.UseVisualStyleBackColor = true;
-            this.SendAgregationToDbButton.Click += new System.EventHandler(this.SendButton_Click);
+            this.AGSendAgregationToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.AGSendAgregationToDbButton.Enabled = false;
+            this.AGSendAgregationToDbButton.Location = new System.Drawing.Point(679, 198);
+            this.AGSendAgregationToDbButton.Name = "AGSendAgregationToDbButton";
+            this.AGSendAgregationToDbButton.Size = new System.Drawing.Size(67, 201);
+            this.AGSendAgregationToDbButton.TabIndex = 8;
+            this.AGSendAgregationToDbButton.Text = "Send to DB";
+            this.AGSendAgregationToDbButton.UseVisualStyleBackColor = true;
+            this.AGSendAgregationToDbButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
-            // GeometryGridView
+            // AGGridView
             // 
-            this.GeometryGridView.AllowUserToAddRows = false;
-            this.GeometryGridView.AllowUserToDeleteRows = false;
-            this.GeometryGridView.AllowUserToResizeColumns = false;
-            this.GeometryGridView.AllowUserToResizeRows = false;
-            this.GeometryGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.GeometryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GeometryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AGGridView.AllowUserToAddRows = false;
+            this.AGGridView.AllowUserToDeleteRows = false;
+            this.AGGridView.AllowUserToResizeColumns = false;
+            this.AGGridView.AllowUserToResizeRows = false;
+            this.AGGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AGGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AGGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LineId,
             this.ItemType,
             this.X,
             this.Y,
             this.Z,
             this.Total});
-            this.GeometryGridView.Location = new System.Drawing.Point(8, 129);
-            this.GeometryGridView.Margin = new System.Windows.Forms.Padding(8);
-            this.GeometryGridView.MultiSelect = false;
-            this.GeometryGridView.Name = "GeometryGridView";
-            this.GeometryGridView.RowHeadersVisible = false;
-            this.GeometryGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.GeometryGridView.Size = new System.Drawing.Size(663, 327);
-            this.GeometryGridView.TabIndex = 7;
-            this.GeometryGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
+            this.AGGridView.Location = new System.Drawing.Point(8, 129);
+            this.AGGridView.Margin = new System.Windows.Forms.Padding(8);
+            this.AGGridView.MultiSelect = false;
+            this.AGGridView.Name = "AGGridView";
+            this.AGGridView.RowHeadersVisible = false;
+            this.AGGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.AGGridView.Size = new System.Drawing.Size(663, 327);
+            this.AGGridView.TabIndex = 7;
+            this.AGGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GeometryGridView_CellEndEdit);
             // 
             // LineId
             // 
@@ -431,26 +431,26 @@ namespace AntaresUtilsNetFramework
             this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Total.Width = 110;
             // 
-            // RecipesBox
+            // AGRecipesComboBox
             // 
-            this.RecipesBox.FormattingEnabled = true;
-            this.RecipesBox.Location = new System.Drawing.Point(77, 50);
-            this.RecipesBox.Name = "RecipesBox";
-            this.RecipesBox.Size = new System.Drawing.Size(144, 28);
-            this.RecipesBox.TabIndex = 5;
-            this.RecipesBox.TextChanged += new System.EventHandler(this.RecipesBox_TextChanged);
+            this.AGRecipesComboBox.FormattingEnabled = true;
+            this.AGRecipesComboBox.Location = new System.Drawing.Point(77, 50);
+            this.AGRecipesComboBox.Name = "AGRecipesComboBox";
+            this.AGRecipesComboBox.Size = new System.Drawing.Size(144, 28);
+            this.AGRecipesComboBox.TabIndex = 5;
+            this.AGRecipesComboBox.TextChanged += new System.EventHandler(this.RecipesBox_TextChanged);
             // 
-            // GetAgregationGeometryButton
+            // AGGetAgregationGeometryButton
             // 
-            this.GetAgregationGeometryButton.Enabled = false;
-            this.GetAgregationGeometryButton.Location = new System.Drawing.Point(232, 50);
-            this.GetAgregationGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetAgregationGeometryButton.Name = "GetAgregationGeometryButton";
-            this.GetAgregationGeometryButton.Size = new System.Drawing.Size(144, 28);
-            this.GetAgregationGeometryButton.TabIndex = 4;
-            this.GetAgregationGeometryButton.Text = "Get Geometry";
-            this.GetAgregationGeometryButton.UseVisualStyleBackColor = true;
-            this.GetAgregationGeometryButton.Click += new System.EventHandler(this.GetGeometryButton_Click);
+            this.AGGetAgregationGeometryButton.Enabled = false;
+            this.AGGetAgregationGeometryButton.Location = new System.Drawing.Point(232, 50);
+            this.AGGetAgregationGeometryButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.AGGetAgregationGeometryButton.Name = "AGGetAgregationGeometryButton";
+            this.AGGetAgregationGeometryButton.Size = new System.Drawing.Size(144, 28);
+            this.AGGetAgregationGeometryButton.TabIndex = 4;
+            this.AGGetAgregationGeometryButton.Text = "Get Geometry";
+            this.AGGetAgregationGeometryButton.UseVisualStyleBackColor = true;
+            this.AGGetAgregationGeometryButton.Click += new System.EventHandler(this.GetGeometryButton_Click);
             // 
             // label2
             // 
@@ -461,16 +461,16 @@ namespace AntaresUtilsNetFramework
             this.label2.TabIndex = 3;
             this.label2.Text = "Recipe";
             // 
-            // GetRecipesButton
+            // AGGetRecipesButton
             // 
-            this.GetRecipesButton.Location = new System.Drawing.Point(232, 6);
-            this.GetRecipesButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetRecipesButton.Name = "GetRecipesButton";
-            this.GetRecipesButton.Size = new System.Drawing.Size(144, 28);
-            this.GetRecipesButton.TabIndex = 2;
-            this.GetRecipesButton.Text = "Get Recipes";
-            this.GetRecipesButton.UseVisualStyleBackColor = true;
-            this.GetRecipesButton.Click += new System.EventHandler(this.GetRecipesButton_Click);
+            this.AGGetRecipesButton.Location = new System.Drawing.Point(232, 6);
+            this.AGGetRecipesButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.AGGetRecipesButton.Name = "AGGetRecipesButton";
+            this.AGGetRecipesButton.Size = new System.Drawing.Size(144, 28);
+            this.AGGetRecipesButton.TabIndex = 2;
+            this.AGGetRecipesButton.Text = "Get Recipes";
+            this.AGGetRecipesButton.UseVisualStyleBackColor = true;
+            this.AGGetRecipesButton.Click += new System.EventHandler(this.GetRecipesButton_Click);
             // 
             // label1
             // 
@@ -493,16 +493,16 @@ namespace AntaresUtilsNetFramework
             // 
             // RecipePage
             // 
-            this.RecipePage.Controls.Add(this.MaterialNameTextBox);
+            this.RecipePage.Controls.Add(this.RecipesMaterialNameTextBox);
             this.RecipePage.Controls.Add(this.label12);
-            this.RecipePage.Controls.Add(this.UpdateDbButton);
-            this.RecipePage.Controls.Add(this.LoadFromFileButton);
-            this.RecipePage.Controls.Add(this.SaveToFileButton);
+            this.RecipePage.Controls.Add(this.RecipesUpdateDbButton);
+            this.RecipePage.Controls.Add(this.RecipesLoadFromFileButton);
+            this.RecipePage.Controls.Add(this.RecipesSaveToFileButton);
             this.RecipePage.Controls.Add(this.RecipesGridView);
-            this.RecipePage.Controls.Add(this.GMIDBox);
-            this.RecipePage.Controls.Add(this.GetRecipeListButton);
+            this.RecipePage.Controls.Add(this.RecipesGMIDComboBox);
+            this.RecipePage.Controls.Add(this.RecipesGetRecipeListButton);
             this.RecipePage.Controls.Add(this.label4);
-            this.RecipePage.Controls.Add(this.GetGMIDsButton);
+            this.RecipePage.Controls.Add(this.RecipesGetGMIDsButton);
             this.RecipePage.Controls.Add(this.label3);
             this.RecipePage.Controls.Add(this.RecipesServerComboBox);
             this.RecipePage.Location = new System.Drawing.Point(4, 29);
@@ -513,14 +513,14 @@ namespace AntaresUtilsNetFramework
             this.RecipePage.Text = "Recipes";
             this.RecipePage.UseVisualStyleBackColor = true;
             // 
-            // MaterialNameTextBox
+            // RecipesMaterialNameTextBox
             // 
-            this.MaterialNameTextBox.Location = new System.Drawing.Point(76, 89);
-            this.MaterialNameTextBox.Margin = new System.Windows.Forms.Padding(8);
-            this.MaterialNameTextBox.Name = "MaterialNameTextBox";
-            this.MaterialNameTextBox.ReadOnly = true;
-            this.MaterialNameTextBox.Size = new System.Drawing.Size(548, 26);
-            this.MaterialNameTextBox.TabIndex = 14;
+            this.RecipesMaterialNameTextBox.Location = new System.Drawing.Point(76, 89);
+            this.RecipesMaterialNameTextBox.Margin = new System.Windows.Forms.Padding(8);
+            this.RecipesMaterialNameTextBox.Name = "RecipesMaterialNameTextBox";
+            this.RecipesMaterialNameTextBox.ReadOnly = true;
+            this.RecipesMaterialNameTextBox.Size = new System.Drawing.Size(548, 26);
+            this.RecipesMaterialNameTextBox.TabIndex = 14;
             // 
             // label12
             // 
@@ -531,36 +531,36 @@ namespace AntaresUtilsNetFramework
             this.label12.TabIndex = 13;
             this.label12.Text = "Name";
             // 
-            // UpdateDbButton
+            // RecipesUpdateDbButton
             // 
-            this.UpdateDbButton.Location = new System.Drawing.Point(630, 433);
-            this.UpdateDbButton.Name = "UpdateDbButton";
-            this.UpdateDbButton.Size = new System.Drawing.Size(119, 28);
-            this.UpdateDbButton.TabIndex = 12;
-            this.UpdateDbButton.Text = "Update DB";
-            this.UpdateDbButton.UseVisualStyleBackColor = true;
-            this.UpdateDbButton.Click += new System.EventHandler(this.UpdateDbButton_Click);
+            this.RecipesUpdateDbButton.Location = new System.Drawing.Point(630, 433);
+            this.RecipesUpdateDbButton.Name = "RecipesUpdateDbButton";
+            this.RecipesUpdateDbButton.Size = new System.Drawing.Size(119, 28);
+            this.RecipesUpdateDbButton.TabIndex = 12;
+            this.RecipesUpdateDbButton.Text = "Update DB";
+            this.RecipesUpdateDbButton.UseVisualStyleBackColor = true;
+            this.RecipesUpdateDbButton.Click += new System.EventHandler(this.UpdateDbButton_Click);
             // 
-            // LoadFromFileButton
+            // RecipesLoadFromFileButton
             // 
-            this.LoadFromFileButton.Location = new System.Drawing.Point(630, 224);
-            this.LoadFromFileButton.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
-            this.LoadFromFileButton.Name = "LoadFromFileButton";
-            this.LoadFromFileButton.Size = new System.Drawing.Size(119, 28);
-            this.LoadFromFileButton.TabIndex = 11;
-            this.LoadFromFileButton.Text = "Load from File";
-            this.LoadFromFileButton.UseVisualStyleBackColor = true;
-            this.LoadFromFileButton.Click += new System.EventHandler(this.LoadFromFileButton_Click);
+            this.RecipesLoadFromFileButton.Location = new System.Drawing.Point(630, 224);
+            this.RecipesLoadFromFileButton.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
+            this.RecipesLoadFromFileButton.Name = "RecipesLoadFromFileButton";
+            this.RecipesLoadFromFileButton.Size = new System.Drawing.Size(119, 28);
+            this.RecipesLoadFromFileButton.TabIndex = 11;
+            this.RecipesLoadFromFileButton.Text = "Load from File";
+            this.RecipesLoadFromFileButton.UseVisualStyleBackColor = true;
+            this.RecipesLoadFromFileButton.Click += new System.EventHandler(this.LoadFromFileButton_Click);
             // 
-            // SaveToFileButton
+            // RecipesSaveToFileButton
             // 
-            this.SaveToFileButton.Location = new System.Drawing.Point(630, 159);
-            this.SaveToFileButton.Name = "SaveToFileButton";
-            this.SaveToFileButton.Size = new System.Drawing.Size(119, 28);
-            this.SaveToFileButton.TabIndex = 10;
-            this.SaveToFileButton.Text = "Save to File";
-            this.SaveToFileButton.UseVisualStyleBackColor = true;
-            this.SaveToFileButton.Click += new System.EventHandler(this.SaveToFileButton_Click);
+            this.RecipesSaveToFileButton.Location = new System.Drawing.Point(630, 159);
+            this.RecipesSaveToFileButton.Name = "RecipesSaveToFileButton";
+            this.RecipesSaveToFileButton.Size = new System.Drawing.Size(119, 28);
+            this.RecipesSaveToFileButton.TabIndex = 10;
+            this.RecipesSaveToFileButton.Text = "Save to File";
+            this.RecipesSaveToFileButton.UseVisualStyleBackColor = true;
+            this.RecipesSaveToFileButton.Click += new System.EventHandler(this.SaveToFileButton_Click);
             // 
             // RecipesGridView
             // 
@@ -607,26 +607,26 @@ namespace AntaresUtilsNetFramework
             this.Column4.ReadOnly = true;
             this.Column4.Width = 130;
             // 
-            // GMIDBox
+            // RecipesGMIDComboBox
             // 
-            this.GMIDBox.DropDownWidth = 144;
-            this.GMIDBox.FormattingEnabled = true;
-            this.GMIDBox.Location = new System.Drawing.Point(77, 50);
-            this.GMIDBox.Name = "GMIDBox";
-            this.GMIDBox.Size = new System.Drawing.Size(144, 28);
-            this.GMIDBox.TabIndex = 8;
-            this.GMIDBox.TextChanged += new System.EventHandler(this.GMIDBox_TextChanged);
+            this.RecipesGMIDComboBox.DropDownWidth = 144;
+            this.RecipesGMIDComboBox.FormattingEnabled = true;
+            this.RecipesGMIDComboBox.Location = new System.Drawing.Point(77, 50);
+            this.RecipesGMIDComboBox.Name = "RecipesGMIDComboBox";
+            this.RecipesGMIDComboBox.Size = new System.Drawing.Size(144, 28);
+            this.RecipesGMIDComboBox.TabIndex = 8;
+            this.RecipesGMIDComboBox.TextChanged += new System.EventHandler(this.GMIDBox_TextChanged);
             // 
-            // GetRecipeListButton
+            // RecipesGetRecipeListButton
             // 
-            this.GetRecipeListButton.Location = new System.Drawing.Point(232, 50);
-            this.GetRecipeListButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetRecipeListButton.Name = "GetRecipeListButton";
-            this.GetRecipeListButton.Size = new System.Drawing.Size(144, 28);
-            this.GetRecipeListButton.TabIndex = 7;
-            this.GetRecipeListButton.Text = "Get Recipes";
-            this.GetRecipeListButton.UseVisualStyleBackColor = true;
-            this.GetRecipeListButton.Click += new System.EventHandler(this.GetRecipeListButton_Click);
+            this.RecipesGetRecipeListButton.Location = new System.Drawing.Point(232, 50);
+            this.RecipesGetRecipeListButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.RecipesGetRecipeListButton.Name = "RecipesGetRecipeListButton";
+            this.RecipesGetRecipeListButton.Size = new System.Drawing.Size(144, 28);
+            this.RecipesGetRecipeListButton.TabIndex = 7;
+            this.RecipesGetRecipeListButton.Text = "Get Recipes";
+            this.RecipesGetRecipeListButton.UseVisualStyleBackColor = true;
+            this.RecipesGetRecipeListButton.Click += new System.EventHandler(this.GetRecipeListButton_Click);
             // 
             // label4
             // 
@@ -637,16 +637,16 @@ namespace AntaresUtilsNetFramework
             this.label4.TabIndex = 6;
             this.label4.Text = "GMID";
             // 
-            // GetGMIDsButton
+            // RecipesGetGMIDsButton
             // 
-            this.GetGMIDsButton.Location = new System.Drawing.Point(232, 6);
-            this.GetGMIDsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetGMIDsButton.Name = "GetGMIDsButton";
-            this.GetGMIDsButton.Size = new System.Drawing.Size(144, 28);
-            this.GetGMIDsButton.TabIndex = 5;
-            this.GetGMIDsButton.Text = "Get GMIDs";
-            this.GetGMIDsButton.UseVisualStyleBackColor = true;
-            this.GetGMIDsButton.Click += new System.EventHandler(this.GetGMIDsButton_Click);
+            this.RecipesGetGMIDsButton.Location = new System.Drawing.Point(232, 6);
+            this.RecipesGetGMIDsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.RecipesGetGMIDsButton.Name = "RecipesGetGMIDsButton";
+            this.RecipesGetGMIDsButton.Size = new System.Drawing.Size(144, 28);
+            this.RecipesGetGMIDsButton.TabIndex = 5;
+            this.RecipesGetGMIDsButton.Text = "Get GMIDs";
+            this.RecipesGetGMIDsButton.UseVisualStyleBackColor = true;
+            this.RecipesGetGMIDsButton.Click += new System.EventHandler(this.GetGMIDsButton_Click);
             // 
             // label3
             // 
@@ -670,14 +670,14 @@ namespace AntaresUtilsNetFramework
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.WoStatusComboBox);
-            this.tabPage1.Controls.Add(this.WOUpdateDbButton);
-            this.tabPage1.Controls.Add(this.WOManufacturedBox);
-            this.tabPage1.Controls.Add(this.WOExpiryBox);
-            this.tabPage1.Controls.Add(this.WOQuantityBox);
-            this.tabPage1.Controls.Add(this.WOLineInfoBox);
-            this.tabPage1.Controls.Add(this.WOLotBox);
-            this.tabPage1.Controls.Add(this.WODescriptionBox);
+            this.tabPage1.Controls.Add(this.AWOStatusComboBox);
+            this.tabPage1.Controls.Add(this.AWOUpdateDbButton);
+            this.tabPage1.Controls.Add(this.AWOManufacturedTextBox);
+            this.tabPage1.Controls.Add(this.AWOExpiryTextBox);
+            this.tabPage1.Controls.Add(this.AWOQuantityTextBox);
+            this.tabPage1.Controls.Add(this.AWOLineInfoTextBox);
+            this.tabPage1.Controls.Add(this.AWOLotTextBox);
+            this.tabPage1.Controls.Add(this.AWOWorkordersNameTextBox);
             this.tabPage1.Controls.Add(this.label21);
             this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.label19);
@@ -685,10 +685,10 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.WOListBox);
-            this.tabPage1.Controls.Add(this.GetWODetailButton);
+            this.tabPage1.Controls.Add(this.AWOWorkordersListComboBox);
+            this.tabPage1.Controls.Add(this.AWOGetWODetailButton);
             this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.GetWOsButton);
+            this.tabPage1.Controls.Add(this.AWOGetWOsButton);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.AWOServerComboBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -699,76 +699,76 @@ namespace AntaresUtilsNetFramework
             this.tabPage1.Text = "Active Workorders";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // WoStatusComboBox
+            // AWOStatusComboBox
             // 
-            this.WoStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.WoStatusComboBox.FormattingEnabled = true;
-            this.WoStatusComboBox.Location = new System.Drawing.Point(375, 170);
-            this.WoStatusComboBox.Name = "WoStatusComboBox";
-            this.WoStatusComboBox.Size = new System.Drawing.Size(144, 28);
-            this.WoStatusComboBox.TabIndex = 27;
+            this.AWOStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AWOStatusComboBox.FormattingEnabled = true;
+            this.AWOStatusComboBox.Location = new System.Drawing.Point(375, 170);
+            this.AWOStatusComboBox.Name = "AWOStatusComboBox";
+            this.AWOStatusComboBox.Size = new System.Drawing.Size(144, 28);
+            this.AWOStatusComboBox.TabIndex = 27;
             // 
-            // WOUpdateDbButton
+            // AWOUpdateDbButton
             // 
-            this.WOUpdateDbButton.Location = new System.Drawing.Point(605, 433);
-            this.WOUpdateDbButton.Name = "WOUpdateDbButton";
-            this.WOUpdateDbButton.Size = new System.Drawing.Size(144, 28);
-            this.WOUpdateDbButton.TabIndex = 26;
-            this.WOUpdateDbButton.Text = "Update DB";
-            this.WOUpdateDbButton.UseVisualStyleBackColor = true;
-            this.WOUpdateDbButton.Click += new System.EventHandler(this.WOUpdateDbButton_Click);
+            this.AWOUpdateDbButton.Location = new System.Drawing.Point(605, 433);
+            this.AWOUpdateDbButton.Name = "AWOUpdateDbButton";
+            this.AWOUpdateDbButton.Size = new System.Drawing.Size(144, 28);
+            this.AWOUpdateDbButton.TabIndex = 26;
+            this.AWOUpdateDbButton.Text = "Update DB";
+            this.AWOUpdateDbButton.UseVisualStyleBackColor = true;
+            this.AWOUpdateDbButton.Click += new System.EventHandler(this.WOUpdateDbButton_Click);
             // 
-            // WOManufacturedBox
+            // AWOManufacturedTextBox
             // 
-            this.WOManufacturedBox.Location = new System.Drawing.Point(375, 214);
-            this.WOManufacturedBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOManufacturedBox.Name = "WOManufacturedBox";
-            this.WOManufacturedBox.Size = new System.Drawing.Size(144, 26);
-            this.WOManufacturedBox.TabIndex = 25;
+            this.AWOManufacturedTextBox.Location = new System.Drawing.Point(375, 214);
+            this.AWOManufacturedTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AWOManufacturedTextBox.Name = "AWOManufacturedTextBox";
+            this.AWOManufacturedTextBox.Size = new System.Drawing.Size(144, 26);
+            this.AWOManufacturedTextBox.TabIndex = 25;
             // 
-            // WOExpiryBox
+            // AWOExpiryTextBox
             // 
-            this.WOExpiryBox.Location = new System.Drawing.Point(77, 214);
-            this.WOExpiryBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOExpiryBox.Name = "WOExpiryBox";
-            this.WOExpiryBox.Size = new System.Drawing.Size(144, 26);
-            this.WOExpiryBox.TabIndex = 24;
+            this.AWOExpiryTextBox.Location = new System.Drawing.Point(77, 214);
+            this.AWOExpiryTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AWOExpiryTextBox.Name = "AWOExpiryTextBox";
+            this.AWOExpiryTextBox.Size = new System.Drawing.Size(144, 26);
+            this.AWOExpiryTextBox.TabIndex = 24;
             // 
-            // WOQuantityBox
+            // AWOQuantityTextBox
             // 
-            this.WOQuantityBox.Location = new System.Drawing.Point(645, 172);
-            this.WOQuantityBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOQuantityBox.Name = "WOQuantityBox";
-            this.WOQuantityBox.ReadOnly = true;
-            this.WOQuantityBox.Size = new System.Drawing.Size(100, 26);
-            this.WOQuantityBox.TabIndex = 23;
+            this.AWOQuantityTextBox.Location = new System.Drawing.Point(645, 172);
+            this.AWOQuantityTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AWOQuantityTextBox.Name = "AWOQuantityTextBox";
+            this.AWOQuantityTextBox.ReadOnly = true;
+            this.AWOQuantityTextBox.Size = new System.Drawing.Size(100, 26);
+            this.AWOQuantityTextBox.TabIndex = 23;
             // 
-            // WOLineInfoBox
+            // AWOLineInfoTextBox
             // 
-            this.WOLineInfoBox.Location = new System.Drawing.Point(77, 130);
-            this.WOLineInfoBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOLineInfoBox.Name = "WOLineInfoBox";
-            this.WOLineInfoBox.ReadOnly = true;
-            this.WOLineInfoBox.Size = new System.Drawing.Size(299, 26);
-            this.WOLineInfoBox.TabIndex = 21;
+            this.AWOLineInfoTextBox.Location = new System.Drawing.Point(77, 130);
+            this.AWOLineInfoTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AWOLineInfoTextBox.Name = "AWOLineInfoTextBox";
+            this.AWOLineInfoTextBox.ReadOnly = true;
+            this.AWOLineInfoTextBox.Size = new System.Drawing.Size(299, 26);
+            this.AWOLineInfoTextBox.TabIndex = 21;
             // 
-            // WOLotBox
+            // AWOLotTextBox
             // 
-            this.WOLotBox.Location = new System.Drawing.Point(77, 172);
-            this.WOLotBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.WOLotBox.Name = "WOLotBox";
-            this.WOLotBox.ReadOnly = true;
-            this.WOLotBox.Size = new System.Drawing.Size(144, 26);
-            this.WOLotBox.TabIndex = 20;
+            this.AWOLotTextBox.Location = new System.Drawing.Point(77, 172);
+            this.AWOLotTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.AWOLotTextBox.Name = "AWOLotTextBox";
+            this.AWOLotTextBox.ReadOnly = true;
+            this.AWOLotTextBox.Size = new System.Drawing.Size(144, 26);
+            this.AWOLotTextBox.TabIndex = 20;
             // 
-            // WODescriptionBox
+            // AWOWorkordersNameTextBox
             // 
-            this.WODescriptionBox.Location = new System.Drawing.Point(78, 89);
-            this.WODescriptionBox.Margin = new System.Windows.Forms.Padding(8);
-            this.WODescriptionBox.Name = "WODescriptionBox";
-            this.WODescriptionBox.ReadOnly = true;
-            this.WODescriptionBox.Size = new System.Drawing.Size(667, 26);
-            this.WODescriptionBox.TabIndex = 19;
+            this.AWOWorkordersNameTextBox.Location = new System.Drawing.Point(78, 89);
+            this.AWOWorkordersNameTextBox.Margin = new System.Windows.Forms.Padding(8);
+            this.AWOWorkordersNameTextBox.Name = "AWOWorkordersNameTextBox";
+            this.AWOWorkordersNameTextBox.ReadOnly = true;
+            this.AWOWorkordersNameTextBox.Size = new System.Drawing.Size(667, 26);
+            this.AWOWorkordersNameTextBox.TabIndex = 19;
             // 
             // label21
             // 
@@ -833,26 +833,26 @@ namespace AntaresUtilsNetFramework
             this.label15.TabIndex = 12;
             this.label15.Text = "Line";
             // 
-            // WOListBox
+            // AWOWorkordersListComboBox
             // 
-            this.WOListBox.DropDownWidth = 144;
-            this.WOListBox.FormattingEnabled = true;
-            this.WOListBox.Location = new System.Drawing.Point(77, 50);
-            this.WOListBox.Name = "WOListBox";
-            this.WOListBox.Size = new System.Drawing.Size(144, 28);
-            this.WOListBox.TabIndex = 11;
-            this.WOListBox.TextChanged += new System.EventHandler(this.WOListBox_TextChanged);
+            this.AWOWorkordersListComboBox.DropDownWidth = 144;
+            this.AWOWorkordersListComboBox.FormattingEnabled = true;
+            this.AWOWorkordersListComboBox.Location = new System.Drawing.Point(77, 50);
+            this.AWOWorkordersListComboBox.Name = "AWOWorkordersListComboBox";
+            this.AWOWorkordersListComboBox.Size = new System.Drawing.Size(144, 28);
+            this.AWOWorkordersListComboBox.TabIndex = 11;
+            this.AWOWorkordersListComboBox.TextChanged += new System.EventHandler(this.WOListBox_TextChanged);
             // 
-            // GetWODetailButton
+            // AWOGetWODetailButton
             // 
-            this.GetWODetailButton.Location = new System.Drawing.Point(232, 50);
-            this.GetWODetailButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetWODetailButton.Name = "GetWODetailButton";
-            this.GetWODetailButton.Size = new System.Drawing.Size(144, 28);
-            this.GetWODetailButton.TabIndex = 10;
-            this.GetWODetailButton.Text = "Get Info";
-            this.GetWODetailButton.UseVisualStyleBackColor = true;
-            this.GetWODetailButton.Click += new System.EventHandler(this.GetWODetailButton_Click);
+            this.AWOGetWODetailButton.Location = new System.Drawing.Point(232, 50);
+            this.AWOGetWODetailButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.AWOGetWODetailButton.Name = "AWOGetWODetailButton";
+            this.AWOGetWODetailButton.Size = new System.Drawing.Size(144, 28);
+            this.AWOGetWODetailButton.TabIndex = 10;
+            this.AWOGetWODetailButton.Text = "Get Info";
+            this.AWOGetWODetailButton.UseVisualStyleBackColor = true;
+            this.AWOGetWODetailButton.Click += new System.EventHandler(this.GetWODetailButton_Click);
             // 
             // label14
             // 
@@ -863,16 +863,16 @@ namespace AntaresUtilsNetFramework
             this.label14.TabIndex = 9;
             this.label14.Text = "WO";
             // 
-            // GetWOsButton
+            // AWOGetWOsButton
             // 
-            this.GetWOsButton.Location = new System.Drawing.Point(232, 6);
-            this.GetWOsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetWOsButton.Name = "GetWOsButton";
-            this.GetWOsButton.Size = new System.Drawing.Size(144, 28);
-            this.GetWOsButton.TabIndex = 8;
-            this.GetWOsButton.Text = "Get Workorders";
-            this.GetWOsButton.UseVisualStyleBackColor = true;
-            this.GetWOsButton.Click += new System.EventHandler(this.GetWOsButton_Click);
+            this.AWOGetWOsButton.Location = new System.Drawing.Point(232, 6);
+            this.AWOGetWOsButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.AWOGetWOsButton.Name = "AWOGetWOsButton";
+            this.AWOGetWOsButton.Size = new System.Drawing.Size(144, 28);
+            this.AWOGetWOsButton.TabIndex = 8;
+            this.AWOGetWOsButton.Text = "Get Workorders";
+            this.AWOGetWOsButton.UseVisualStyleBackColor = true;
+            this.AWOGetWOsButton.Click += new System.EventHandler(this.GetWOsButton_Click);
             // 
             // label13
             // 
@@ -897,10 +897,10 @@ namespace AntaresUtilsNetFramework
             // CaseCounterPage
             // 
             this.CaseCounterPage.Controls.Add(this.CountedAggregationTreeView);
-            this.CaseCounterPage.Controls.Add(this.CountedWorkorderListBox);
-            this.CaseCounterPage.Controls.Add(this.CountButton);
+            this.CaseCounterPage.Controls.Add(this.CCWorkordersListComboBox);
+            this.CaseCounterPage.Controls.Add(this.CCCountCasesButton);
             this.CaseCounterPage.Controls.Add(this.label23);
-            this.CaseCounterPage.Controls.Add(this.GetWorkorderButton);
+            this.CaseCounterPage.Controls.Add(this.CCGetWorkordersButton);
             this.CaseCounterPage.Controls.Add(this.label22);
             this.CaseCounterPage.Controls.Add(this.CCServerComboBox);
             this.CaseCounterPage.Location = new System.Drawing.Point(4, 29);
@@ -920,27 +920,27 @@ namespace AntaresUtilsNetFramework
             this.CountedAggregationTreeView.Size = new System.Drawing.Size(746, 368);
             this.CountedAggregationTreeView.TabIndex = 15;
             // 
-            // CountedWorkorderListBox
+            // CCWorkordersListComboBox
             // 
-            this.CountedWorkorderListBox.DropDownWidth = 144;
-            this.CountedWorkorderListBox.FormattingEnabled = true;
-            this.CountedWorkorderListBox.Location = new System.Drawing.Point(77, 50);
-            this.CountedWorkorderListBox.Margin = new System.Windows.Forms.Padding(8);
-            this.CountedWorkorderListBox.Name = "CountedWorkorderListBox";
-            this.CountedWorkorderListBox.Size = new System.Drawing.Size(144, 28);
-            this.CountedWorkorderListBox.TabIndex = 14;
-            this.CountedWorkorderListBox.TextChanged += new System.EventHandler(this.CountedWorkorderListBox_TextChanged);
+            this.CCWorkordersListComboBox.DropDownWidth = 144;
+            this.CCWorkordersListComboBox.FormattingEnabled = true;
+            this.CCWorkordersListComboBox.Location = new System.Drawing.Point(77, 50);
+            this.CCWorkordersListComboBox.Margin = new System.Windows.Forms.Padding(8);
+            this.CCWorkordersListComboBox.Name = "CCWorkordersListComboBox";
+            this.CCWorkordersListComboBox.Size = new System.Drawing.Size(144, 28);
+            this.CCWorkordersListComboBox.TabIndex = 14;
+            this.CCWorkordersListComboBox.TextChanged += new System.EventHandler(this.CountedWorkorderListBox_TextChanged);
             // 
-            // CountButton
+            // CCCountCasesButton
             // 
-            this.CountButton.Location = new System.Drawing.Point(232, 50);
-            this.CountButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.CountButton.Name = "CountButton";
-            this.CountButton.Size = new System.Drawing.Size(144, 28);
-            this.CountButton.TabIndex = 13;
-            this.CountButton.Text = "Count";
-            this.CountButton.UseVisualStyleBackColor = true;
-            this.CountButton.Click += new System.EventHandler(this.CountButton_Click);
+            this.CCCountCasesButton.Location = new System.Drawing.Point(232, 50);
+            this.CCCountCasesButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.CCCountCasesButton.Name = "CCCountCasesButton";
+            this.CCCountCasesButton.Size = new System.Drawing.Size(144, 28);
+            this.CCCountCasesButton.TabIndex = 13;
+            this.CCCountCasesButton.Text = "Count";
+            this.CCCountCasesButton.UseVisualStyleBackColor = true;
+            this.CCCountCasesButton.Click += new System.EventHandler(this.CountButton_Click);
             // 
             // label23
             // 
@@ -951,16 +951,16 @@ namespace AntaresUtilsNetFramework
             this.label23.TabIndex = 12;
             this.label23.Text = "WO";
             // 
-            // GetWorkorderButton
+            // CCGetWorkordersButton
             // 
-            this.GetWorkorderButton.Location = new System.Drawing.Point(232, 6);
-            this.GetWorkorderButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.GetWorkorderButton.Name = "GetWorkorderButton";
-            this.GetWorkorderButton.Size = new System.Drawing.Size(144, 28);
-            this.GetWorkorderButton.TabIndex = 11;
-            this.GetWorkorderButton.Text = "Get WO List";
-            this.GetWorkorderButton.UseVisualStyleBackColor = true;
-            this.GetWorkorderButton.Click += new System.EventHandler(this.GetWorkorderListButton_Click);
+            this.CCGetWorkordersButton.Location = new System.Drawing.Point(232, 6);
+            this.CCGetWorkordersButton.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.CCGetWorkordersButton.Name = "CCGetWorkordersButton";
+            this.CCGetWorkordersButton.Size = new System.Drawing.Size(144, 28);
+            this.CCGetWorkordersButton.TabIndex = 11;
+            this.CCGetWorkordersButton.Text = "Get WO List";
+            this.CCGetWorkordersButton.UseVisualStyleBackColor = true;
+            this.CCGetWorkordersButton.Click += new System.EventHandler(this.GetWorkorderListButton_Click);
             // 
             // label22
             // 
@@ -999,7 +999,7 @@ namespace AntaresUtilsNetFramework
             ((System.ComponentModel.ISupportInitialize)(this.CGDataMatrixPictureBox)).EndInit();
             this.GeometriesPage.ResumeLayout(false);
             this.GeometriesPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GeometryGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AGGridView)).EndInit();
             this.RecipePage.ResumeLayout(false);
             this.RecipePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecipesGridView)).EndInit();
@@ -1016,24 +1016,24 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.TabPage GeometriesPage;
         private System.Windows.Forms.TabPage RecipePage;
-        private System.Windows.Forms.ComboBox RecipesBox;
-        private System.Windows.Forms.Button GetAgregationGeometryButton;
+        private System.Windows.Forms.ComboBox AGRecipesComboBox;
+        private System.Windows.Forms.Button AGGetAgregationGeometryButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button GetRecipesButton;
+        private System.Windows.Forms.Button AGGetRecipesButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox AGServerComboBox;
-        private System.Windows.Forms.DataGridView GeometryGridView;
-        private System.Windows.Forms.Button SendAgregationToDbButton;
+        private System.Windows.Forms.DataGridView AGGridView;
+        private System.Windows.Forms.Button AGSendAgregationToDbButton;
         private System.Windows.Forms.DataGridView RecipesGridView;
-        private System.Windows.Forms.ComboBox GMIDBox;
-        private System.Windows.Forms.Button GetRecipeListButton;
+        private System.Windows.Forms.ComboBox RecipesGMIDComboBox;
+        private System.Windows.Forms.Button RecipesGetRecipeListButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button GetGMIDsButton;
+        private System.Windows.Forms.Button RecipesGetGMIDsButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox RecipesServerComboBox;
-        private System.Windows.Forms.Button UpdateDbButton;
-        private System.Windows.Forms.Button LoadFromFileButton;
-        private System.Windows.Forms.Button SaveToFileButton;
+        private System.Windows.Forms.Button RecipesUpdateDbButton;
+        private System.Windows.Forms.Button RecipesLoadFromFileButton;
+        private System.Windows.Forms.Button RecipesSaveToFileButton;
         private System.Windows.Forms.TabPage CryptoGetter;
         private System.Windows.Forms.TextBox CGSerialTextBox;
         private System.Windows.Forms.Label label8;
@@ -1054,17 +1054,17 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.TextBox RecipeNameTextBox;
+        private System.Windows.Forms.TextBox AGRecipeNameTextBox;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox MaterialNameTextBox;
+        private System.Windows.Forms.TextBox RecipesMaterialNameTextBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox WOManufacturedBox;
-        private System.Windows.Forms.TextBox WOExpiryBox;
-        private System.Windows.Forms.TextBox WOQuantityBox;
-        private System.Windows.Forms.TextBox WOLineInfoBox;
-        private System.Windows.Forms.TextBox WOLotBox;
-        private System.Windows.Forms.TextBox WODescriptionBox;
+        private System.Windows.Forms.TextBox AWOManufacturedTextBox;
+        private System.Windows.Forms.TextBox AWOExpiryTextBox;
+        private System.Windows.Forms.TextBox AWOQuantityTextBox;
+        private System.Windows.Forms.TextBox AWOLineInfoTextBox;
+        private System.Windows.Forms.TextBox AWOLotTextBox;
+        private System.Windows.Forms.TextBox AWOWorkordersNameTextBox;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
@@ -1072,19 +1072,19 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox WOListBox;
-        private System.Windows.Forms.Button GetWODetailButton;
+        private System.Windows.Forms.ComboBox AWOWorkordersListComboBox;
+        private System.Windows.Forms.Button AWOGetWODetailButton;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button GetWOsButton;
+        private System.Windows.Forms.Button AWOGetWOsButton;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox AWOServerComboBox;
-        private System.Windows.Forms.Button WOUpdateDbButton;
+        private System.Windows.Forms.Button AWOUpdateDbButton;
         private System.Windows.Forms.TabPage CaseCounterPage;
         private System.Windows.Forms.TreeView CountedAggregationTreeView;
-        private System.Windows.Forms.ComboBox CountedWorkorderListBox;
-        private System.Windows.Forms.Button CountButton;
+        private System.Windows.Forms.ComboBox CCWorkordersListComboBox;
+        private System.Windows.Forms.Button CCCountCasesButton;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button GetWorkorderButton;
+        private System.Windows.Forms.Button CCGetWorkordersButton;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox CCServerComboBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineId;
@@ -1093,7 +1093,7 @@ namespace AntaresUtilsNetFramework
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
-        private System.Windows.Forms.ComboBox WoStatusComboBox;
+        private System.Windows.Forms.ComboBox AWOStatusComboBox;
     }
 }
 
