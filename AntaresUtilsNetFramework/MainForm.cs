@@ -20,17 +20,17 @@ namespace AntaresUtilsNetFramework
             //заполняем список серверов
             foreach (string s in au.ServerNames)
             {
-                CryptoServerBox.Items.Add(s);
-                GeometryServerBox.Items.Add(s);
-                RecipesServerBox.Items.Add(s);
-                WOServerBox.Items.Add(s);
-                CounterServerBox.Items.Add(s);
+                CGServerComboBox.Items.Add(s);
+                AGServerComboBox.Items.Add(s);
+                RecipesServerComboBox.Items.Add(s);
+                AWOServerComboBox.Items.Add(s);
+                CCServerComboBox.Items.Add(s);
             }
-            CryptoServerBox.SelectedIndex = 0;
-            GeometryServerBox.SelectedIndex = 0;
-            RecipesServerBox.SelectedIndex = 0;
-            WOServerBox.SelectedIndex = 0;
-            CounterServerBox.SelectedIndex = 0;
+            CGServerComboBox.SelectedIndex = 0;
+            AGServerComboBox.SelectedIndex = 0;
+            RecipesServerComboBox.SelectedIndex = 0;
+            AWOServerComboBox.SelectedIndex = 0;
+            CCServerComboBox.SelectedIndex = 0;
         }
 
         //очистка при переключении вкладок
@@ -38,9 +38,9 @@ namespace AntaresUtilsNetFramework
         {
             //Crypto
             ClearCryptoResultFields();
-            SgtinBox.Text = "";
-            GtinBox.Text = "";
-            SerialBox.Text = "";
+            CGSgtinTextBox.Text = "";
+            CGGtinTextBox.Text = "";
+            CGSerialTextBox.Text = "";
 
             //Geometry
             RecipesBox.Items.Clear();
@@ -79,13 +79,13 @@ namespace AntaresUtilsNetFramework
             {
                 Package package = new Package()
                 {
-                    GTIN = GtinBox.Text,
-                    Serial = SerialBox.Text
+                    GTIN = CGGtinTextBox.Text,
+                    Serial = CGSerialTextBox.Text
                 };
 
                 Package result = au.GetCrypto(package);
-                CryptoKeyBox.Text = result.CryptoKey;
-                CryptoCodeBox.Text = result.CryptoCode;
+                CGCryptoKeyTextBox.Text = result.CryptoKey;
+                CGCryptoCodeTextBox.Text = result.CryptoCode;
                 ShowDM("01" + result.GTIN + "21" + result.Serial + char.ConvertFromUtf32(29) + "91" + result.CryptoKey +
                     char.ConvertFromUtf32(29) + "92" + result.CryptoCode);
             }
@@ -105,70 +105,70 @@ namespace AntaresUtilsNetFramework
                 MarginSize = 4
             };
             Bitmap encodedBitmap = encoder.EncodeImage(dataMatrixString, options);
-            DMPictureBox.Image = encodedBitmap;
+            CGDataMatrixPictureBox.Image = encodedBitmap;
         }
 
         //Очищает поля вывода криптоданный
         private void ClearCryptoResultFields()
         {
-            CryptoKeyBox.Text = "";
-            CryptoCodeBox.Text = "";
-            if (DMPictureBox.Image != null) DMPictureBox.Image.Dispose();
-            DMPictureBox.Image = null;
+            CGCryptoKeyTextBox.Text = "";
+            CGCryptoCodeTextBox.Text = "";
+            if (CGDataMatrixPictureBox.Image != null) CGDataMatrixPictureBox.Image.Dispose();
+            CGDataMatrixPictureBox.Image = null;
         }
 
         // Метод при изменении SGTIN меняет поля GTIN и серийного номера
         private void SgtinBox_TextChanged(object sender, EventArgs e)
         {
-            if (SgtinBox.Text.Length == 27)
+            if (CGSgtinTextBox.Text.Length == 27)
             {
                 //странная переменная, но без неё не работает
-                string text = SgtinBox.Text;
-                GtinBox.Text = text.Substring(0, 14);
-                SerialBox.Text = text.Substring(14, 13);
+                string text = CGSgtinTextBox.Text;
+                CGGtinTextBox.Text = text.Substring(0, 14);
+                CGSerialTextBox.Text = text.Substring(14, 13);
             }
         }
 
         // Метод при изменении поля GTIN меняет поле SGTIN
         private void GtinBox_TextChanged(object sender, EventArgs e)
         {
-            if (GtinBox.Text.Length > 14) GtinBox.Text = GtinBox.Text.Substring(0, 13);
-            if (GtinBox.Text.Length == 14)
+            if (CGGtinTextBox.Text.Length > 14) CGGtinTextBox.Text = CGGtinTextBox.Text.Substring(0, 13);
+            if (CGGtinTextBox.Text.Length == 14)
             {
-                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+                CGSgtinTextBox.Text = CGGtinTextBox.Text + CGSerialTextBox.Text;
             }
         }
 
         // Метод при изменении поля cерийного номера меняет SGTIN
         private void SerialBox_TextChanged(object sender, EventArgs e)
         {
-            if (SerialBox.Text.Length > 13) SerialBox.Text = SerialBox.Text.Substring(0, 13);
-            if (SerialBox.Text.Length == 13)
+            if (CGSerialTextBox.Text.Length > 13) CGSerialTextBox.Text = CGSerialTextBox.Text.Substring(0, 13);
+            if (CGSerialTextBox.Text.Length == 13)
             {
-                SgtinBox.Text = GtinBox.Text + SerialBox.Text;
+                CGSgtinTextBox.Text = CGGtinTextBox.Text + CGSerialTextBox.Text;
             }
         }
 
         //Метод сохраняет картинку в файл
         private void SaveImageButton_Click(object sender, EventArgs e)
         {
-            if (DMPictureBox.Image == null) return;
+            if (CGDataMatrixPictureBox.Image == null) return;
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 DefaultExt = "bmp",
-                FileName = SgtinBox.Text
+                FileName = CGSgtinTextBox.Text
             };
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string path = saveFileDialog.FileName;
-            DMPictureBox.Image.Save(path);
+            CGDataMatrixPictureBox.Image.Save(path);
         }
 
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void CryptoServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            au.SelectServer(CryptoServerBox.SelectedItem.ToString());
+            au.SelectServer(CGServerComboBox.SelectedItem.ToString());
         }
 
         
@@ -385,13 +385,13 @@ namespace AntaresUtilsNetFramework
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void GeometryServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            au.SelectServer(GeometryServerBox.SelectedItem.ToString());
+            au.SelectServer(AGServerComboBox.SelectedItem.ToString());
         }
 
         //При изменении выбранного сервера вызывает метод смены выбранного сервера
         private void RecipesServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            au.SelectServer(RecipesServerBox.SelectedItem.ToString());
+            au.SelectServer(RecipesServerComboBox.SelectedItem.ToString());
         }
 
 
@@ -471,7 +471,7 @@ namespace AntaresUtilsNetFramework
 
         private void WOServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            au.SelectServer(WOServerBox.SelectedItem.ToString());
+            au.SelectServer(AWOServerComboBox.SelectedItem.ToString());
         }
 
 
@@ -504,7 +504,7 @@ namespace AntaresUtilsNetFramework
 
         private void CounterServerBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            au.SelectServer(CounterServerBox.SelectedItem.ToString());
+            au.SelectServer(CCServerComboBox.SelectedItem.ToString());
         }
 
         private void CountButton_Click(object sender, EventArgs e)
