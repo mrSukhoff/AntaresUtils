@@ -149,24 +149,45 @@ namespace AntaresUtilities
         public TreeNode GetLotTree(string _workorder)
         {
             string lot = _dm.GetLotFromWO(_workorder);
-            TreeNode root = new TreeNode($"Lot: {lot}");
+            TreeNode root = new TreeNode{Text = $"Lot: {lot}", Tag = lot};
+
+            TreeNode tempNode;
             
-            List<string> workorders = _dm.GetWorkOrdersByLot(lot);
+            //Add Workorders
+            List<string> workorders = _dm.GetWorkOrdersByLot(lot, _workorder);
             foreach(string workorder in workorders)
             {
-                root.Nodes.Add("Workorder",workorder);
+                tempNode = new TreeNode { Text = $"Workorder:{workorder}", Tag = workorder };
+                root.Nodes.Add(tempNode);
             }
-            
-            /*
-            foreach(TreeNode node in root.Nodes)
+
+            //Add Pallets
+            foreach (TreeNode node in root.Nodes)
             {
-                node.Nodes.Add("Pallet", _dm.GetPalletsByWorkorder(node.Tag));
+                List<string> pallets = _dm.GetPalletsByWorkorder(node.Tag.ToString());
+                foreach (var p in pallets)
+                {
+                    tempNode = new TreeNode { Text = $"Pallet: {p}", Tag = p };
+                    node.Nodes.Add(tempNode);
+                }
             }
-            */
-            
-            
+
+            //Add Caseses
+            foreach(TreeNode wo in root.Nodes)
+                {
+                    foreach (TreeNode pallet in wo.Nodes)
+                    {
+                        List<string> cases = _dm.GetCasesbyPallets(pallet.Tag.ToString());
+                        foreach (var c in cases)
+                        {
+                            int amount = _dm.CalculetaPackagesInCase(c);
+
+                            tempNode = new TreeNode { Text = $"Case: {c} - {amount}", Tag = c };
+                            pallet.Nodes.Add(tempNode);
+                        }
+                    }
+                }
             return root;
         }
-
     }
 }
