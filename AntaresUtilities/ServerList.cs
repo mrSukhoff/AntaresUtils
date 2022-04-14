@@ -9,39 +9,13 @@ namespace AntaresUtilities
     //Формат списка серверов
     internal class ServerList
     {
-        public List<string> ServerNameList
-        {
-            get
-            {
-                return _serverNameList;
-            }
-        }
+        public List<string> ServerNameList => _serverNameList;
 
+        public string SelectedServerName => _selectedServer.Name;
 
-        public string SelectedServerName
-        {
-            get
-            {
-                return _selectedServer.Name;
-            }
-        }
+        public string SelectedServerFQN => _selectedServer.FQN;
 
-        public string SelectedServerFQN
-        {
-            get
-            {
-                return _selectedServer.FQN;
-            }
-        }
-
-        public string SelectedServerDBName
-        {
-            get
-            {
-                return _selectedServer.DBName;
-            }
-        }
-
+        public string SelectedServerDBName => _selectedServer.DBName;
 
         private readonly List<Server> _serverList;
         private readonly List<string> _serverNameList;
@@ -95,7 +69,7 @@ namespace AntaresUtilities
             _selectedServer = selectedServer;
         }
 
-        class Server
+        internal class Server
         {
             public string Name { get; set; }
             public string FQN { get; set; }
