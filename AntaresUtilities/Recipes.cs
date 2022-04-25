@@ -95,13 +95,6 @@ namespace AntaresUtilities
             UpdateRecipeGeometryInDb(_currentGMIDRecipesGeometry);
         }
 
-        public void UpdateRecipeGeometryInDb(List<RecipeGeometry> list)
-        {
-            foreach (RecipeGeometry r in list)
-            {
-                _dm.UpdateGeometryInDb(r);
-            }
-        }
 
         /// <summary>
         /// Возвращает список материалов из БД

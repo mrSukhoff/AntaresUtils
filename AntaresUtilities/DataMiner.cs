@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace AntaresUtilities
@@ -36,43 +35,52 @@ namespace AntaresUtilities
         //выполняет команду и возвращает результат
         internal string SelectValueFromDb(string cmdString)
         {
-            //Формируем запрос
-            SqlCommand cmd = new SqlCommand(cmdString, connection);
-
-            //И выполняем его
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            string result = "";
-            //Читаем по порядку все ответы
-            while (reader.Read())
-            {
-                result = reader.GetValue(0).ToString();
-            }
-            reader.Close();
-            cmd.Dispose();
-
-            return result;
+            return SelectValuesFromDb(cmdString)[0];
         }
 
-        //выполняет команду и возвращает список результатов
-        internal List<string> SelectListFromDb(string cmdString)
+        
+        internal List<string> SelectValuesFromDb(string cmdString)
         {
             List<string> results = new List<string>();
             SqlCommand cmd = new SqlCommand(cmdString, connection);
-            // И выполняем его
             SqlDataReader reader = cmd.ExecuteReader();
-            //Читаем все результаты
             while (reader.Read())
             {
                 results.Add(reader.GetValue(0).ToString());
             }
-
-            //Всё закрываем
             reader.Close();
             cmd.Dispose();
 
             results.Sort();
             return results;
         }
+    
+        internal List<string[]> SelectTableFromDb (string cmdString, int numberOfColumn)
+        {
+            List<string[]> results = new List<string[]>();
+
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string[] row = new string[numberOfColumn];
+                for (int i = 0; i < numberOfColumn; i++)
+                {
+                    row[i] = reader.GetValue(i).ToString();
+                }
+                results.Add(row);           
+            }
+            reader.Close();
+            cmd.Dispose();
+            return results;
+        }
+    
+        internal void UpdateValueInDb(string cmdString)
+        {
+            SqlCommand cmd = new SqlCommand(cmdString, connection);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
     }
 }
