@@ -30,7 +30,7 @@ namespace AntaresUtilities
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
 
-            string cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z " +
+            var cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z " +
                 "FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id " +
                 "where r.GMID = '{1}' and g.LineId <> -1 order by r.Id, g.LineId", _listOfServers.SelectedServerDBName, gMID);
             

@@ -8,28 +8,43 @@ namespace AntaresUtilities
         public List<string> GetClosedWorkorderList()
         {
             _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
-            return _dm.GetClosedWorkorderList();
+            var cmdString = string.Format("SELECT [Id] FROM [{0}].[dbo].[Workorder] where Status = 31", _listOfServers.SelectedServerDBName);
+
+            return _dm.SelectValuesFromDb(cmdString);
         }
+        
 
         public TreeNode GetLotTree(string _workorder)
         {
-            string lot = _dm.GetLotFromWO(_workorder);
+            var db = _listOfServers.SelectedServerDBName;
+
+            // Get Lot
+            var cmdString = string.Format("SELECT [lot] FROM [{0}].[dbo].[Workorder] where Id = '{1}'", 
+                db, _workorder);
+            string lot = _dm.SelectValuesFromDb(cmdString)[0];
+                        
             TreeNode root = new TreeNode { Text = $"Lot: {lot}", Tag = lot };
 
             TreeNode tempNode;
 
-            //Add Workorders
-            List<string> workorders = _dm.GetWorkOrdersByLot(lot, _workorder);
+            // Get Workorders by Lot
+            cmdString = string.Format("SELECT [Id] FROM [{0}].[dbo].[Workorder] where Lot = '{1}' and Id like('{2}%')", 
+                db, lot, _workorder) ;
+            List<string> workorders = _dm.SelectValuesFromDb(cmdString);
+                         
             foreach (string workorder in workorders)
             {
                 tempNode = new TreeNode { Text = $"Workorder:{workorder}", Tag = workorder };
                 root.Nodes.Add(tempNode);
             }
 
-            //Add Pallets
+            // Get Pallets by Workorder
             foreach (TreeNode node in root.Nodes)
             {
-                List<string> pallets = _dm.GetPalletsByWorkorder(node.Tag.ToString());
+                cmdString = string.Format("SELECT [Serial] FROM [{0}].[dbo].[Item] where WorkOrderID = '{1}' and Type = 400",
+                    db, node.Tag.ToString());
+                List<string> pallets = _dm.SelectValuesFromDb(cmdString);
+
                 foreach (var p in pallets)
                 {
                     tempNode = new TreeNode { Text = $"Pallet: {p}", Tag = p };
@@ -37,15 +52,24 @@ namespace AntaresUtilities
                 }
             }
 
-            //Add Caseses
+            // Get Caseses on Pallets
             foreach (TreeNode wo in root.Nodes)
             {
                 foreach (TreeNode pallet in wo.Nodes)
                 {
-                    List<string> cases = _dm.GetCasesbyPallets(pallet.Tag.ToString());
+                    cmdString = string.Format("SELECT [Serial] FROM [{0}].[dbo].[Item] where Type = 300 and ParentSerial = '{1}'",
+                       db, pallet.Tag.ToString());
+
+                    List<string> cases = _dm.SelectValuesFromDb(cmdString);
+                    
                     foreach (var c in cases)
                     {
-                        int amount = _dm.CalculetaPackagesInCase(c);
+
+                        cmdString = string.Format("SELECT count(*) FROM [{0}].[dbo].[Item] " +
+                            "where Type = 100 and ParentSerial = '{_caseSerial}'", db, c);
+
+
+                        int amount = int.Parse(_dm.SelectValuesFromDb(cmdString)[0]);
 
                         tempNode = new TreeNode { Text = $"Case: {c} - {amount}", Tag = c };
                         pallet.Nodes.Add(tempNode);
@@ -53,36 +77,6 @@ namespace AntaresUtilities
                 }
             }
             return root;
-        }
-
-        internal List<string> GetWorkOrdersByLot(string lot, string wo)
-        {
-            string cmdString = $"SELECT [Id] FROM [{_DBname}].[dbo].[Workorder] where Lot = '{lot}' and Id like('{wo}%')";
-            return SelectListFromDb(cmdString);
-        }
-
-        internal string GetLotFromWO(string workorder)
-        {
-            string cmdString = $"SELECT [lot] FROM [{_DBname}].[dbo].[Workorder] where Id = '{workorder}'";
-            return SelectValueFromDb(cmdString);
-        }
-
-        internal List<string> GetPalletsByWorkorder(string _wo)
-        {
-            string cmdString = $"SELECT [Serial] FROM [{_DBname}].[dbo].[Item] where WorkOrderID = '{_wo}' and Type = 400";
-            return SelectListFromDb(cmdString);
-        }
-
-        internal List<string> GetCasesbyPallets(string _ser)
-        {
-            string cmdString = $"SELECT [Serial] FROM [{_DBname}].[dbo].[Item] where Type = 300 and ParentSerial = '{_ser}'";
-            return SelectListFromDb(cmdString);
-        }
-
-        internal int CalculetaPackagesInCase(string _caseSerial)
-        {
-            string cmdString = $"SELECT count(*) FROM [{_DBname}].[dbo].[Item] where Type = 100 and ParentSerial = '{_caseSerial}'";
-            return int.Parse(SelectValueFromDb(cmdString));
         }
     }
 }
