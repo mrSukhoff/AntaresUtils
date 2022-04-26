@@ -18,16 +18,15 @@ namespace AntaresUtilities
         {
             _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
             
-            var cmdString = string.Format("SELECT [Id] FROM [{0}].[dbo].[WorkOrder] where Status in (1,3,9,11)", 
-                _listOfServers.SelectedServerDBName);
+            var cmdString = $"SELECT [Id] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[WorkOrder] where Status in (1,3,9,11)";
             return _dm.SelectValuesFromDb(cmdString);
         }
 
         public WorkOrder GetWorOrderDetails(string woName)
         {
-            var cmdString = string.Format("SELECT [Id],[LineId],[RecipeId],[QuantityToProduce],[Lot],[Expiry]," +
+            var cmdString = "SELECT [Id],[LineId],[RecipeId],[QuantityToProduce],[Lot],[Expiry]," +
                 "[Manufactured],[ProductDescription],[UserName],[Status],[OpenTime],[CloseTime] " +
-                "FROM [{0}].[dbo].[WorkOrder] where Id = '{1}'", _listOfServers.SelectedServerDBName, woName);
+                $"FROM [{_listOfServers.SelectedServerDBName}].[dbo].[WorkOrder] where Id = '{woName}'";
             
             WorkOrder wo = new WorkOrder();
 
@@ -51,8 +50,9 @@ namespace AntaresUtilities
 
         public void UpdateWoInDb(WorkOrder wo)
         {
-            var cmdString = string.Format("Update [{0}].[dbo].[WorkOrder] set Expiry={1}, Manufactured={2} where Id='{3}'",
-                _listOfServers.SelectedServerDBName, wo.Expiry, wo.Manufactured, wo.Id);
+            var cmdString = $"Update [{_listOfServers.SelectedServerDBName}].[dbo].[WorkOrder] " +
+                $"set Expiry={wo.Expiry}, Manufactured={wo.Manufactured} where Id='{wo.Id}'";
+            
             /* требуется проверка
             var cmdString = string.Format("Update [{0}].[dbo].[WorkOrder] set Expiry={1}, Manufactured={2}, Staus = {3} where Id='{4}'",
                 _listOfServers.SelectedServerDBName, wo.Expiry, wo.Manufactured,wo.Status, wo.Id);

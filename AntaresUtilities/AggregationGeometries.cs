@@ -8,16 +8,17 @@ namespace AntaresUtilities
         public List<string> GetRecipeList()
         {
             _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
-            string cmdString = "SELECT [Id] FROM [" + _listOfServers.SelectedServerDBName + "].[dbo].[Recipe]";
+            var cmdString = $"SELECT [Id] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[Recipe]";
             return _dm.SelectValuesFromDb(cmdString);
         }
 
         public List<RecipeGeometry> GetRecipeGeometriesList(string recipeID)
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
+            
+            var cmdString = $"SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[ItemTypeGeometry] " +
+                $"where RecipeId = '{recipeID}' and LineId <> -1";
 
-            var cmdString = string.Format("SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{0}].[dbo].[ItemTypeGeometry] " +
-                "where RecipeId = '{1}' and LineId <> -1", _listOfServers.SelectedServerDBName, recipeID);
             var values = _dm.SelectTableFromDb (cmdString, 5);
 
             foreach (var row in values)
@@ -35,8 +36,8 @@ namespace AntaresUtilities
 
         public string GetRecipeDescription(string recipeName)
         {
-            string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] " +
-                "Where Id='{1}'", _listOfServers.SelectedServerDBName, recipeName);
+            var cmdString = $"SELECT [RecipeDescription] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[Recipe] " +
+                $"Where Id='{ recipeName}'";
             return _dm.SelectValuesFromDb(cmdString)[0];
         }
 
@@ -45,9 +46,8 @@ namespace AntaresUtilities
             string cmdString;
             foreach (RecipeGeometry r in list)
             {
-                cmdString = string.Format("Update [{0}].[dbo].[ItemTypeGeometry] set x={1},y={2},z={3} " +
-                    "where RecipeId='{4}' and LineId={5} and ItemType={6}", _listOfServers.SelectedServerDBName, 
-                    r.X, r.Y, r.Z, r.RecipeId, r.LineId, r.ItemType);
+                cmdString = $"Update [{ _listOfServers.SelectedServerDBName}].[dbo].[ItemTypeGeometry] set x={r.X},y={r.Y},z={r.Z} " +
+                    $"where RecipeId='{r.RecipeId}' and LineId={r.LineId} and ItemType={r.ItemType}";
                 _dm.UpdateValueInDb(cmdString);
             }
         }

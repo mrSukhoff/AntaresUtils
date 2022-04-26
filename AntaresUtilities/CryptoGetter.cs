@@ -7,11 +7,11 @@ namespace AntaresUtilities
 
         public Package GetCrypto(Package package)
         {
-            _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
+            var db = _listOfServers.SelectedServerDBName;
+            _dm.Connect(_listOfServers.SelectedServerFQN, db);
 
             //Получаем по GTIN его идентификатор.
-            var cmdString = String.Format("SELECT [Id] FROM [{0}].[dbo].[NtinDefinition] WHERE Ntin = '{1}'", 
-                _listOfServers.SelectedServerDBName, package.GTIN);
+            var cmdString = $"SELECT [Id] FROM [{db}].[dbo].[NtinDefinition] WHERE Ntin = '{package.GTIN}'";
             var gTINid = _dm.SelectValuesFromDb(cmdString)[0];
 
             //Проверяем найден ли GTIN
@@ -20,12 +20,12 @@ namespace AntaresUtilities
                 throw new Exception("GTIN не найден!");
             }
 
-            cmdString = String.Format("SELECT [VariableValue] FROM [{0}].[dbo].[ItemDetails] where Serial='{1}' " +
-                "and NtinId={2} and VariableName='cryptocode'", _listOfServers.SelectedServerDBName, package.Serial, gTINid);
+            cmdString = $"SELECT [VariableValue] FROM [{db}].[dbo].[ItemDetails] " +
+                $"where Serial='{package.Serial}' and NtinId={gTINid} and VariableName='cryptocode'";
             var cryptoCode = _dm.SelectValuesFromDb(cmdString)[0]; ;
 
-            cmdString = String.Format("SELECT [VariableValue] FROM [{0}].[dbo].[ItemDetails] where Serial='{1}' " +
-                "and NtinId={2} and VariableName='cryptokey'", _listOfServers.SelectedServerDBName, package.Serial, gTINid);
+            cmdString = $"SELECT [VariableValue] FROM [{db}].[dbo].[ItemDetails] " +
+                $"where Serial='{package.Serial}'and NtinId={gTINid} and VariableName='cryptokey'";
             var cryptoKey = _dm.SelectValuesFromDb(cmdString)[0]; ;
 
             Package result;

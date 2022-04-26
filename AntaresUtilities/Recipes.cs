@@ -15,14 +15,13 @@ namespace AntaresUtilities
         public List<string> GetMaterialsList()
         {
             _dm.Connect(_listOfServers.SelectedServerFQN, _listOfServers.SelectedServerDBName);
-            var cmdString = string.Format("SELECT [Id] FROM [{0}].[dbo].[Material]", _listOfServers.SelectedServerDBName);
+            var cmdString = $"SELECT [Id] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[Material]";
             return _dm.SelectValuesFromDb(cmdString);
         }
 
         public string GetMaterialDescription(string materialName)
         {
-            var str = string.Format($"SELECT [Description] FROM [{0}].[dbo].[Material] Where Id='{1}'",
-                _listOfServers.SelectedServerDBName, materialName);
+            var str = $"SELECT [Description] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[Material] Where Id='{materialName}'";
             return _dm.SelectValuesFromDb(str)[0];
         }
 
@@ -30,9 +29,9 @@ namespace AntaresUtilities
         {
             List<RecipeGeometry> results = new List<RecipeGeometry>();
 
-            var cmdString = string.Format("use [{0}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z " +
+            var cmdString = $"use [{_listOfServers.SelectedServerDBName}]; SELECT r.Id,g.LineId,g.ItemType,g.X,g.Y,g.Z,g.X*g.Y*g.Z " +
                 "FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id " +
-                "where r.GMID = '{1}' and g.LineId <> -1 order by r.Id, g.LineId", _listOfServers.SelectedServerDBName, gMID);
+                $"where r.GMID = '{gMID}' and g.LineId <> -1 order by r.Id, g.LineId";
             
             var values = _dm.SelectTableFromDb(cmdString, 7);
             
