@@ -19,7 +19,7 @@ namespace AntaresUtilities
             var cmdString = $"SELECT [LineId],[ItemType],[X],[Y],[Z] FROM [{_listOfServers.SelectedServerDBName}].[dbo].[ItemTypeGeometry] " +
                 $"where RecipeId = '{recipeID}' and LineId <> -1";
 
-            var values = _dm.SelectTableFromDb (cmdString, 5);
+            List<string[]> values = _dm.SelectTableFromDb (cmdString, 5);
 
             foreach (var row in values)
             {

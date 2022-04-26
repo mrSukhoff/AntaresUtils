@@ -33,7 +33,7 @@ namespace AntaresUtilities
                 "FROM [Material] as m join [Recipe] as r on r.GMID = m.Id join [ItemTypeGeometry] as g on g.RecipeId = r.Id " +
                 $"where r.GMID = '{gMID}' and g.LineId <> -1 order by r.Id, g.LineId";
             
-            var values = _dm.SelectTableFromDb(cmdString, 7);
+            List<string[]> values = _dm.SelectTableFromDb(cmdString, 7);
             
             foreach (var row in values)
             {

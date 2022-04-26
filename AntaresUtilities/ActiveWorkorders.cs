@@ -30,7 +30,7 @@ namespace AntaresUtilities
             
             WorkOrder wo = new WorkOrder();
 
-            var details = _dm.SelectTableFromDb(cmdString, 11)[0];
+            string[] details = _dm.SelectTableFromDb(cmdString, 11)[0];
 
             wo.Id =             details[0];
             wo.Line =           details[1];

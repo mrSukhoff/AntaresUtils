@@ -7,12 +7,12 @@ namespace AntaresUtilities
 
         public Package GetCrypto(Package package)
         {
-            var db = _listOfServers.SelectedServerDBName;
+            string db = _listOfServers.SelectedServerDBName;
             _dm.Connect(_listOfServers.SelectedServerFQN, db);
 
             //Получаем по GTIN его идентификатор.
             var cmdString = $"SELECT [Id] FROM [{db}].[dbo].[NtinDefinition] WHERE Ntin = '{package.GTIN}'";
-            var gTINid = _dm.SelectValuesFromDb(cmdString)[0];
+            string gTINid = _dm.SelectValuesFromDb(cmdString)[0];
 
             //Проверяем найден ли GTIN
             if (gTINid.Length != 4)
@@ -22,11 +22,11 @@ namespace AntaresUtilities
 
             cmdString = $"SELECT [VariableValue] FROM [{db}].[dbo].[ItemDetails] " +
                 $"where Serial='{package.Serial}' and NtinId={gTINid} and VariableName='cryptocode'";
-            var cryptoCode = _dm.SelectValuesFromDb(cmdString)[0]; ;
+            string cryptoCode = _dm.SelectValuesFromDb(cmdString)[0]; ;
 
             cmdString = $"SELECT [VariableValue] FROM [{db}].[dbo].[ItemDetails] " +
                 $"where Serial='{package.Serial}'and NtinId={gTINid} and VariableName='cryptokey'";
-            var cryptoKey = _dm.SelectValuesFromDb(cmdString)[0]; ;
+            string cryptoKey = _dm.SelectValuesFromDb(cmdString)[0]; ;
 
             Package result;
 
