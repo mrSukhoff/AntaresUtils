@@ -31,13 +31,6 @@ namespace AntaresUtilities
                 _DBname = null;
             }
         }
-
-        //выполняет команду и возвращает результат
-        internal string SelectValueFromDb(string cmdString)
-        {
-            return SelectValuesFromDb(cmdString)[0];
-        }
-
         
         internal List<string> SelectValuesFromDb(string cmdString)
         {

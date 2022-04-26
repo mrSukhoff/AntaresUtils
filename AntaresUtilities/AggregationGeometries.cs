@@ -37,7 +37,7 @@ namespace AntaresUtilities
         {
             string cmdString = String.Format("SELECT [RecipeDescription] FROM [{0}].[dbo].[Recipe] " +
                 "Where Id='{1}'", _listOfServers.SelectedServerDBName, recipeName);
-            return _dm.SelectValueFromDb(cmdString);
+            return _dm.SelectValuesFromDb(cmdString)[0];
         }
 
         public void UpdateRecipeGeometryInDb(List<RecipeGeometry> list)
