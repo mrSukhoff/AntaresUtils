@@ -6,77 +6,21 @@ namespace AntaresUtilities
 {
     public class KIZ
     {
-        private string _gtin;
-        private string _serial;
+        private readonly ServerList _serverList;
+        private readonly string _gtin;
+        private readonly string _serial;
         private string _cryptoKey;
         private string _cryptoCode;
-        private ServerList _serverList;
 
-        public string GTIN
-        {
-            get => _gtin;
-            set
-            {
-                if (value.Length == 14)
-                {
-                    _gtin = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Неверная длина GTIN!");
-                }
-            }
-        }
-        public string Serial
-        {
-            get => _serial;
-            set
-            {
-                if (value.Length == 13)
-                {
-                    _serial = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Неверная длина серийного номера!");
-                }
-            }
-        }
-        public string CryptoKey
-        {
-            get => _cryptoKey;
-            set
-            {
-                if (value.Length == 4)
-                {
-                    _cryptoKey = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Неверная длина криптоключа");
-                }
-            }
-        }
-        public string CryptoCode
-        {
-            get => _cryptoCode;
-            set
-            {
-                if (value.Length == 44)
-                {
-                    _cryptoCode = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Неверная длина криптокода!");
-                }
-            }
-        }
-
-        public KIZ() { }
+        public string GTIN { get => _gtin; }
+        public string Serial { get => _serial; }
+        public string CryptoKey { get => _cryptoKey; }
+        public string CryptoCode { get => _cryptoCode; }
 
         internal KIZ (string gtin, string serial, ServerList serverList)
         {
+            if (gtin.Length != 14) { throw new ArgumentException("Неверная длина GTIN!"); }
+            if (serial.Length != 13) { throw new ArgumentException("Неверная длина серийного номера!"); }
             _gtin = gtin;
             _serial = serial;
             _serverList = serverList;
@@ -84,17 +28,16 @@ namespace AntaresUtilities
 
         public bool GetCrypto()
         {
-            bool result = false;
             DataMiner dm = new DataMiner();
 
             string db = _serverList.SelectedServerDBName;
             dm.Connect(_serverList.SelectedServerFQN, db);
 
-            //Получаем по GTIN его идентификатор.
+            // Получаем по GTIN его идентификатор.
             var cmdString = $"SELECT [Id] FROM [{db}].[dbo].[NtinDefinition] WHERE Ntin = '{_gtin}'";
             string gTINid = dm.SelectValuesFromDb(cmdString)[0];
 
-            //Проверяем найден ли GTIN
+            // Проверяем найден ли GTIN
             if (gTINid.Length != 4)
             {
                 throw new Exception("GTIN не найден!");
@@ -108,17 +51,23 @@ namespace AntaresUtilities
                 $"where Serial='{_serial}'and NtinId={gTINid} and VariableName='cryptokey'";
             string cryptoKey = dm.SelectValuesFromDb(cmdString)[0]; ;
 
-            if (!string.IsNullOrEmpty(cryptoKey) & !string.IsNullOrEmpty(cryptoCode))
-            {
-                _cryptoCode = cryptoCode; 
-                _cryptoKey = cryptoKey ;
-                result = true;
-            }
-            else
+            if (string.IsNullOrEmpty(cryptoKey) & string.IsNullOrEmpty(cryptoCode))
             {
                 throw new Exception("Криптоданные не найдены");
             }
-            return result;
+            if (cryptoKey.Length != 4 )
+            {
+                throw new ArgumentException("Неверная длина криптоключа!");
+            }
+            if (cryptoCode.Length != 44)
+            {
+                throw new ArgumentException("Неверная длина криптокода!");
+            }
+            
+            _cryptoCode = cryptoCode;
+            _cryptoKey = cryptoKey;
+
+            return true;
         }
 
         public Bitmap GetDataMatrix()
