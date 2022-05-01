@@ -7,7 +7,7 @@ using System.Linq;
 namespace AntaresUtilities
 {
     //Формат списка серверов
-    internal class ServerList
+    public class ServerList
     {
         public List<string> ServerNameList => _serverNameList;
 

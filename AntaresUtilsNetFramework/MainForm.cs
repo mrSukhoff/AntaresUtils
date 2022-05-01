@@ -1,8 +1,6 @@
 ﻿using AntaresUtilities;
-using DataMatrix.net;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -77,35 +75,18 @@ namespace AntaresUtilsNetFramework
 
             try
             {
-                Package package = new Package()
+                KIZ package = au.KizFactory(CGGtinTextBox.Text, CGSerialTextBox.Text);
+                if (package.GetCrypto())
                 {
-                    GTIN = CGGtinTextBox.Text,
-                    Serial = CGSerialTextBox.Text
-                };
-
-                Package result = au.GetCrypto(package);
-                CGCryptoKeyTextBox.Text = result.CryptoKey;
-                CGCryptoCodeTextBox.Text = result.CryptoCode;
-                ShowDM("01" + result.GTIN + "21" + result.Serial + char.ConvertFromUtf32(29) + "91" + result.CryptoKey +
-                    char.ConvertFromUtf32(29) + "92" + result.CryptoCode);
+                    CGCryptoKeyTextBox.Text = package.CryptoKey;
+                    CGCryptoCodeTextBox.Text = package.CryptoCode;
+                    CGDataMatrixPictureBox.Image = package.GetDataMatrix();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        // По входной строке рисует DMC
-        private void ShowDM(string dataMatrixString)
-        {
-            DmtxImageEncoder encoder = new DmtxImageEncoder();
-            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions
-            {
-                ModuleSize = 5,
-                MarginSize = 4
-            };
-            Bitmap encodedBitmap = encoder.EncodeImage(dataMatrixString, options);
-            CGDataMatrixPictureBox.Image = encodedBitmap;
         }
 
         //Очищает поля вывода криптоданный
@@ -170,7 +151,6 @@ namespace AntaresUtilsNetFramework
         {
             au.SelectServer(CGServerComboBox.SelectedItem.ToString());
         }
-
 
         //****************************************************** AggregationGeometries ***********************************************
 

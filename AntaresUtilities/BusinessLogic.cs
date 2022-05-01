@@ -22,5 +22,10 @@ namespace AntaresUtilities
         {
             _listOfServers.SelectServer(serverName);
         }
+
+        public KIZ KizFactory(string gtin, string serial)
+        {
+            return new KIZ(gtin, serial, _listOfServers);
+        }
     }
 }
