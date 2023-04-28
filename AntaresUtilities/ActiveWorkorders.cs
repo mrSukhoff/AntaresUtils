@@ -9,6 +9,7 @@ namespace AntaresUtilities
         {
             { 1, "Assigned" },
             { 3, "Production" },
+            { 8, "Work completed"},
             { 9, "Suspended" },
             { 11, "Aborted" },
             { 31, "Completed" }
